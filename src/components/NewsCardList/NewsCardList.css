@@ -1,0 +1,42 @@
+.search-results {
+  padding: 80px 0;
+  box-sizing: border-box;
+  background: #f5f6f7;
+}
+
+.search-results__container {
+  width: 85.6%;
+  margin: auto;
+  /* max-width: 882px;
+  margin: 0 auto; */
+}
+
+.search-results__title {
+  font-family: "Roboto Slab", "Times New Roman", Times, serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 1.15;
+  color: #1a1b22;
+}
+
+.search-results__list {
+  padding: 64px 0;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-rows: auto;
+  grid-auto-rows: 576px;
+  list-style-type: none;
+  margin: 0;
+
+  /* display: grid;
+  grid-gap: 21px 18px;
+  margin-bottom: 66px;
+  grid-template-rows: auto;
+  grid-auto-rows: 361px;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0; */
+}

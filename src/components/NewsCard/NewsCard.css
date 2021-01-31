@@ -1,0 +1,107 @@
+.card {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  min-height: 576px;
+  max-height: 100%;
+  margin: 0 auto;
+
+}
+
+.card__img {
+  /* max-width: 100%; */
+  border-radius: 16px 16px 0 0;
+  /* width: 100%; */
+  display: block;
+  /* -o-object-fit: cover;
+  object-fit: cover; */
+  /* height: 272px; */
+  cursor: pointer;
+}
+
+.card__text-content {
+  border-radius: 0 0 16px 16px;
+  background: #fff;
+  padding: 20px 24px 24px;
+  /* min-height: 304px;
+  box-sizing: border-box; */
+}
+
+@media screen and (max-width: 768px) {
+  .card__text-content {
+    padding: 16px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card__text-content {
+    padding-top: 32px;
+  }
+}
+
+.card__date {
+  font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.3;
+  color: #b6bcbf;
+  margin: 0 0 12px;
+}
+
+.card__title {
+  font-family: "Roboto Slab", "Times New Roman", Times, serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 1.15;
+  color: #1a1b22;
+  margin: 0 0 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .card__title {
+    font-size: 22px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+}
+
+.card__description {
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 1.35;
+  color: #1a1b22;
+  margin: 0 0 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .card__description {
+    margin-bottom: 12px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card__title {
+    margin-bottom: 8px;
+  }
+}
+
+.card__source {
+  font-family: "Roboto Slab", "Times New Roman", Times, serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #b6bcbf;
+}
