@@ -1,8 +1,9 @@
 .about-author__img {
   object-fit: contain;
+  width: 100%;
 }
 
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1024px) {
   .about-author__img {
     max-width: 348px;
   }
@@ -12,15 +13,17 @@
   .about-author__img {
     max-width: 232px;
   }
-}
+} */
 
 .about-author__description {
   padding-left: 56px;
+  max-width: 600px;
 }
 
 @media screen and (max-width: 768px) {
   .about-author__description {
     padding-left: 32px;
+    max-width: 424px;
   }
 }
 
@@ -50,6 +53,8 @@
   .about-author__title {
     font-size: 22px;
     line-height: 1.2;
+    margin-top: 24px;
+    margin-bottom: 16px;
   }
 }
 
@@ -60,4 +65,8 @@
   font-size: 18px;
   line-height: 1.33;
   margin: 0 0 24px;
+}
+
+.about-author__text:last-child {
+  margin-bottom: 0;
 }
