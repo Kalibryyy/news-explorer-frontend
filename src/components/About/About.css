@@ -1,0 +1,63 @@
+.about-author__img {
+  object-fit: contain;
+}
+
+@media screen and (max-width: 1024px) {
+  .about-author__img {
+    max-width: 348px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about-author__img {
+    max-width: 232px;
+  }
+}
+
+.about-author__description {
+  padding-left: 56px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-author__description {
+    padding-left: 32px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .about-author__description {
+    padding-left: 0;
+  }
+}
+
+.about-author__title {
+  font-family: "Roboto Slab", "Times New Roman", Times, serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 1.15;
+  margin: 51px 0 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-author__title {
+    font-size: 30px;
+    line-height: 1.33;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .about-author__title {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+}
+
+.about-author__text {
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.33;
+  margin: 0 0 24px;
+}

@@ -8,23 +8,11 @@
   background-size: cover;
   background-position: center;
   position: absolute;
-  height: 77%;
+  height: 40%;
   width: 100%;
   top: 0;
   left: 0;
   z-index: -1;
-}
-
-@media screen and (max-width: 768px) {
-  .search__img {
-    height: 84%;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .search__img {
-    height: 74%;
-  }
 }
 
 .search__container {
@@ -115,5 +103,25 @@
   .search-results {
     padding-top: 32px;
     padding-bottom: 32px;
+  }
+}
+
+.about-author {
+  width: 85.6%;
+  margin: auto;
+  padding: 80px 0;
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  .about-author {
+    width: 89.6%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .about-author {
+    width: 90%;
+    flex-wrap: wrap;
   }
 }

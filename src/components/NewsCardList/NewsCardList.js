@@ -3,14 +3,16 @@ import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
 
 const NewsCardList = ({ cards }) => {
-  const [quantity, setQuantity] = React.useState(6);
+  const [quantity, setQuantity] = React.useState(3);
 
   const [width, setWidth] = React.useState(window.innerWidth);
 
   React.useEffect(() => {
+    let cleanupFunction = false;
     window.addEventListener("resize", () => {
       setWidth(window.innerWidth);
     });
+    return () => cleanupFunction = true;
   }, []);
 
   let textLength;
@@ -25,6 +27,10 @@ const NewsCardList = ({ cards }) => {
   } else {
     textLength = 186;
     titleLength = 40;
+  }
+
+  function showMoreCards() {
+    setQuantity(6)
   }
 
   return (
@@ -49,7 +55,7 @@ const NewsCardList = ({ cards }) => {
           />
         ))}
       </ul>
-      <Button place={"search-results"} text={"Показать еще"} color={"white"} />
+      <Button place={"search-results"} text={"Показать еще"} color={"white"} handleBtnClick={showMoreCards}/>
     </div>
   );
 };

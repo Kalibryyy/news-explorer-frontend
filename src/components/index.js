@@ -9,6 +9,7 @@ import Button from './Button/Button';
 import NewsCard from './NewsCard/NewsCard';
 import ResultsLoading from './ResultsLoading/ResultsLoading';
 import NoResults from './NoResults/NoResults';
+import About from './About/About';
 
 export {
   Main,
@@ -21,5 +22,6 @@ export {
   Button,
   NewsCard,
   ResultsLoading,
-  NoResults
+  NoResults,
+  About
 }
