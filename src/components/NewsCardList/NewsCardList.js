@@ -4,7 +4,32 @@ import NewsCard from "../NewsCard/NewsCard";
 import Button from "../Button/Button";
 
 const NewsCardList = ({ cards }) => {
-  const [quantity, setQuantity] = React.useState(4);
+  const [quantity, setQuantity] = React.useState(6);
+
+  const [width, setWidth] = React.useState(window.innerWidth);
+
+  React.useEffect(() => {
+    window.addEventListener(
+      'resize',
+        () => {
+            setWidth(window.innerWidth)
+        },
+    );
+  }, []);
+
+  let textLength;
+  let titleLength;
+
+  if (width <= 320) {
+    textLength = 90;
+    titleLength = 30;
+  } else if (width <= 768) {
+    textLength = 75;
+    titleLength = 30;
+  } else {
+    textLength = 186;
+    titleLength = 40;
+  }
 
   return (
     <section className="search-results">
@@ -15,8 +40,8 @@ const NewsCardList = ({ cards }) => {
             <NewsCard
               key={item.id}
               img={item.img}
-              title={item.title}
-              text={item.text.substring(0, 150)}
+              title={item.title.length > titleLength ? `${item.title.substring(0, titleLength)}...` : `${item.title.substring(0, titleLength)}`}
+              text={item.text.length > textLength ? `${item.text.substring(0, textLength)}...` : `${item.text.substring(0, textLength)}`}
               source={item.source}
             />
           ))}
@@ -33,5 +58,4 @@ const NewsCardList = ({ cards }) => {
 
 export default NewsCardList;
 
-// .substring(0, 186)
 

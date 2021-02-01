@@ -8,11 +8,23 @@
   background-size: cover;
   background-position: center;
   position: absolute;
-  height: 576px;
+  height: 77%;
   width: 100%;
   top: 0;
   left: 0;
   z-index: -1;
+}
+
+@media screen and (max-width: 768px) {
+  .search__img {
+    height: 84%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .search__img {
+    height: 74%;
+  }
 }
 
 .search__container {
