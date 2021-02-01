@@ -1,7 +1,6 @@
 import React from "react";
 import "./NewsCardList.css";
-import NewsCard from "../NewsCard/NewsCard";
-import Button from "../Button/Button";
+import { NewsCard, Button } from "../index";
 
 const NewsCardList = ({ cards }) => {
   const [quantity, setQuantity] = React.useState(6);
@@ -9,12 +8,9 @@ const NewsCardList = ({ cards }) => {
   const [width, setWidth] = React.useState(window.innerWidth);
 
   React.useEffect(() => {
-    window.addEventListener(
-      'resize',
-        () => {
-            setWidth(window.innerWidth)
-        },
-    );
+    window.addEventListener("resize", () => {
+      setWidth(window.innerWidth);
+    });
   }, []);
 
   let textLength;
@@ -32,30 +28,30 @@ const NewsCardList = ({ cards }) => {
   }
 
   return (
-    <section className="search-results">
-      <div className="search-results__container">
-        <h2 className="search-results__title">Результаты поиска</h2>
-        <ul className="search-results__list">
-          {cards.slice(0, quantity).map((item) => (
-            <NewsCard
-              key={item.id}
-              img={item.img}
-              title={item.title.length > titleLength ? `${item.title.substring(0, titleLength)}...` : `${item.title.substring(0, titleLength)}`}
-              text={item.text.length > textLength ? `${item.text.substring(0, textLength)}...` : `${item.text.substring(0, textLength)}`}
-              source={item.source}
-            />
-          ))}
-        </ul>
-        <Button
-          place={"search-results"}
-          text={"Показать еще"}
-          color={"white"}
-        />
-      </div>
-    </section>
+    <div className="news-cards__container">
+      <h2 className="news-cards__title">Результаты поиска</h2>
+      <ul className="news-cards__list">
+        {cards.slice(0, quantity).map((item) => (
+          <NewsCard
+            key={item.id}
+            img={item.img}
+            title={
+              item.title.length > titleLength
+                ? `${item.title.substring(0, titleLength)}...`
+                : `${item.title.substring(0, titleLength)}`
+            }
+            text={
+              item.text.length > textLength
+                ? `${item.text.substring(0, textLength)}...`
+                : `${item.text.substring(0, textLength)}`
+            }
+            source={item.source}
+          />
+        ))}
+      </ul>
+      <Button place={"search-results"} text={"Показать еще"} color={"white"} />
+    </div>
   );
 };
 
 export default NewsCardList;
-
-

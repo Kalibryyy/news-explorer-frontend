@@ -2,9 +2,14 @@ import React from 'react';
 import './Main.css';
 import SearchForm from '../SearchForm/SearchForm';
 import data from "../../data/data";
-import { NewsCardList } from "../index";
+import { NewsCardList, ResultsLoading, NoResults } from "../index";
 
 function Main() {
+  // Нужно поменять значение стейта на false чтобы убрать секцию с найденными карточками
+  const [areThereAnyResults, setAreThereAnyResults] = React.useState(false);
+    // Нужно поменять значение стейта на true чтобы увидеть спиннер (отступ сверху будет виден при скрытой секции с карточками)
+  const [isLoading, setIsLoading] = React.useState(false);
+
     return (
       <main className="content">
       <section className="search">
@@ -15,7 +20,11 @@ function Main() {
           <SearchForm />
         </div>
       </section>
-      <NewsCardList cards={data} />
+      <section className="search-results">
+        {areThereAnyResults ? <NewsCardList cards={data} /> : <NoResults />}
+        {isLoading && <ResultsLoading />}
+      </section>
+
       </main>
     );
   }
