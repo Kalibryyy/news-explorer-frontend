@@ -3,33 +3,19 @@
   width: 100%;
 }
 
-/* @media screen and (max-width: 1024px) {
+@media screen and (max-width: 320px) {
   .about-author__img {
-    max-width: 348px;
+    margin-left: 8px;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .about-author__img {
-    max-width: 232px;
-  }
-} */
-
 .about-author__description {
-  padding-left: 56px;
   max-width: 600px;
 }
 
 @media screen and (max-width: 768px) {
   .about-author__description {
-    padding-left: 32px;
     max-width: 424px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .about-author__description {
-    padding-left: 0;
   }
 }
 
@@ -46,6 +32,7 @@
   .about-author__title {
     font-size: 30px;
     line-height: 1.33;
+    margin-top: 0;
   }
 }
 
