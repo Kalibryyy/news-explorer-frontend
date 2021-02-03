@@ -2,7 +2,7 @@ import React from "react";
 import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
 
-const NewsCardList = ({ cards }) => {
+const NewsCardList = ({ cards, title, doNeedBtn }) => {
   const [quantity, setQuantity] = React.useState(3);
 
   const [width, setWidth] = React.useState(window.innerWidth);
@@ -35,7 +35,7 @@ const NewsCardList = ({ cards }) => {
 
   return (
     <div className="news-cards__container">
-      <h2 className="news-cards__title">Результаты поиска</h2>
+      <h2 className="news-cards__title">{title}</h2>
       <ul className="news-cards__list">
         {cards.slice(0, quantity).map((item) => (
           <NewsCard
@@ -55,7 +55,7 @@ const NewsCardList = ({ cards }) => {
           />
         ))}
       </ul>
-      <Button place={"search-results"} text={"Показать еще"} color={"white"} handleBtnClick={showMoreCards}/>
+      {doNeedBtn && <Button place={"search-results"} text={"Показать еще"} color={"white"} handleBtnClick={showMoreCards} />}
     </div>
   );
 };

@@ -11,6 +11,7 @@ import ResultsLoading from './ResultsLoading/ResultsLoading';
 import NoResults from './NoResults/NoResults';
 import About from './About/About';
 import Footer from './Footer/Footer';
+import SavedNewsHeader from './SavedNewsHeader/SavedNewsHeader';
 
 export {
   Main,
@@ -25,5 +26,6 @@ export {
   ResultsLoading,
   NoResults,
   About,
-  Footer
+  Footer,
+  SavedNewsHeader
 }
