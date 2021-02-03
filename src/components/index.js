@@ -10,6 +10,7 @@ import NewsCard from './NewsCard/NewsCard';
 import ResultsLoading from './ResultsLoading/ResultsLoading';
 import NoResults from './NoResults/NoResults';
 import About from './About/About';
+import Footer from './Footer/Footer';
 
 export {
   Main,
@@ -23,5 +24,6 @@ export {
   NewsCard,
   ResultsLoading,
   NoResults,
-  About
+  About,
+  Footer
 }

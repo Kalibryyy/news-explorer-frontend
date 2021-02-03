@@ -27,7 +27,6 @@ function Main() {
       <section className="about-author">
         <About />
       </section>
-
       </main>
     );
   }

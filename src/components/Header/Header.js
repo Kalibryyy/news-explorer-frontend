@@ -43,7 +43,9 @@ function Header() {
             <button className={isWhite ? `header__btn header__btn_color_white` : `header__btn header__btn_color_black`}>Сохранённые статьи</button>
           </li>
           <li className="header__item">
-            <button className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>Грета<img className="header__auth-arrow-img" src={arrowImage}/></button>
+            <button className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>
+              Грета<img className="header__auth-arrow-img" src={arrowImage}/>
+              </button>
           </li>
         </ul>
       </nav>
