@@ -95,3 +95,9 @@
 .footer__nav-item:last-child {
   margin-right: 0;
 }
+
+@media screen and (max-width: 320px) {
+  .footer__nav-item {
+    line-height: 2.7;
+  }
+}
