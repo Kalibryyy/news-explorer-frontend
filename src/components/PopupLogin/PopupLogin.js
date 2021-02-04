@@ -17,7 +17,6 @@ const PopupLogin = ({ isOpen, onClose, title, openRegister }) => {
     <Button place={'popup'} text={'Войти'} color={'blue'} />
     </div>
     <div className="modal__auth-signin">
-                  {/* onclick=открывается попап регистер */}
       <p className="modal__auth-paragraph">или <button onClick={openRegister} className="modal__auth-btn">Зарегистрироваться</button></p>
     </div>
   </PopupWithForm>

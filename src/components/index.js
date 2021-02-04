@@ -14,6 +14,7 @@ import About from './About/About';
 import Footer from './Footer/Footer';
 import SavedNewsHeader from './SavedNewsHeader/SavedNewsHeader';
 import ModalInput from './ModalInput/ModalInput';
+import InfoToolTip from './InfoToolTip/InfoToolTip';
 
 export {
   Main,
@@ -31,5 +32,6 @@ export {
   Footer,
   SavedNewsHeader,
   ModalInput,
-  PopupLogin
+  PopupLogin,
+  InfoToolTip
 }

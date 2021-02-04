@@ -51,9 +51,6 @@
 
 .modal__title {
   margin: 0 0 22px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 900;

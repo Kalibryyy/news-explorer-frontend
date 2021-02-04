@@ -3,11 +3,12 @@ import './PopupRegister.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { ModalInput, Button } from "../index";
 
-const PopupRegister = ({ isOpen, onClose, title, openLogin }) => {
+const PopupRegister = ({ isOpen, onClose, title, openLogin, onOpenInfoTooltip }) => {
   function handleSubmit(e) {
     e.preventDefault();
 
     // открывается попап пользователь успешно зарегистрирован
+    onOpenInfoTooltip();
   }
 
   return (
@@ -20,7 +21,6 @@ const PopupRegister = ({ isOpen, onClose, title, openLogin }) => {
     <Button place={'popup'} text={'Зарегистрироваться'} color={'blue'} />
     </div>
     <div className="modal__auth-signin">
-                  {/* onclick=открывается попап логин */}
       <p className="modal__auth-paragraph">или <button onClick={openLogin} className="modal__auth-btn">Войти</button></p>
     </div>
   </PopupWithForm>
