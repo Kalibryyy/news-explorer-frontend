@@ -3,6 +3,7 @@ import SavedNews from './SavedNews/SavedNews';
 import NewsCardList from './NewsCardList/NewsCardList';
 import PopupWithForm from './PopupWithForm/PopupWithForm'
 import PopupRegister from './PopupRegister/PopupRegister';
+import PopupLogin from './PopupLogin/PopupLogin';
 import Header from './Header/Header';
 import Preloader from './Preloader/Preloader';
 import Button from './Button/Button';
@@ -29,5 +30,6 @@ export {
   About,
   Footer,
   SavedNewsHeader,
-  ModalInput
+  ModalInput,
+  PopupLogin
 }

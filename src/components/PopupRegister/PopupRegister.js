@@ -3,7 +3,7 @@ import './PopupRegister.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { ModalInput, Button } from "../index";
 
-const PopupRegister = ({ isOpen, onClose, title }) => {
+const PopupRegister = ({ isOpen, onClose, title, openLogin }) => {
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -11,7 +11,7 @@ const PopupRegister = ({ isOpen, onClose, title }) => {
   }
 
   return (
-  <PopupWithForm name={'auth'} isOpen={isOpen} onSubmit={handleSubmit} onClose={onClose} title={title} >
+  <PopupWithForm isOpen={isOpen} onSubmit={handleSubmit} onClose={onClose} title={title} >
     <ModalInput title={'Email'} type={"email"} name={"email"} placeholder={"Введите почту"} minLength={"5"} maxLength={"50"} error={"Неправильный формат email"} />
     <ModalInput title={'Пароль'} type={"password"} name={"password"} placeholder={"Введите пароль"} minLength={"8"} maxLength={"5000"}/>
     <ModalInput title={'Имя'} type={"text"} name={"name"} placeholder={"Введите своё имя"} minLength={"2"} maxLength={"30"}/>
@@ -21,7 +21,7 @@ const PopupRegister = ({ isOpen, onClose, title }) => {
     </div>
     <div className="modal__auth-signin">
                   {/* onclick=открывается попап логин */}
-      <p className="modal__auth-paragraph">или <button className="modal__auth-btn">Войти</button></p>
+      <p className="modal__auth-paragraph">или <button onClick={openLogin} className="modal__auth-btn">Войти</button></p>
     </div>
   </PopupWithForm>
   );
