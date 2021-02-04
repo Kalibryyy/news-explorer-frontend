@@ -12,6 +12,7 @@ import NoResults from './NoResults/NoResults';
 import About from './About/About';
 import Footer from './Footer/Footer';
 import SavedNewsHeader from './SavedNewsHeader/SavedNewsHeader';
+import ModalInput from './ModalInput/ModalInput';
 
 export {
   Main,
@@ -27,5 +28,6 @@ export {
   NoResults,
   About,
   Footer,
-  SavedNewsHeader
+  SavedNewsHeader,
+  ModalInput
 }

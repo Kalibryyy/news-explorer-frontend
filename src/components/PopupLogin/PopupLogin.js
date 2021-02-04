@@ -1,9 +1,9 @@
 import React from 'react';
-import './PopupRegister.css';
+import './PopupLogin.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { ModalInput, Button } from "../index";
 
-const PopupRegister = ({ isOpen, onClose, title }) => {
+const PopupLogin = ({ isOpen, onClose, title }) => {
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -27,5 +27,4 @@ const PopupRegister = ({ isOpen, onClose, title }) => {
   );
 }
 
-export default PopupRegister;
-
+export default PopupLogin;

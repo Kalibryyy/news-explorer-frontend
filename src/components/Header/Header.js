@@ -7,7 +7,7 @@ import closeIcon from '../../images/close-icon.svg';
 import closeIconBlack from '../../images/close-icon-black.svg';
 import menuIconBlack from '../../images/menu-icon-black.svg';
 
-function Header({ theme }) {
+function Header({ theme, onRegister }) {
   const [isWhite, setIsWhite] = React.useState(false);
   const [width, setWidth] = React.useState(window.innerWidth);
 
@@ -52,7 +52,7 @@ function Header({ theme }) {
             <button className={isWhite ? `header__btn header__btn_color_white` : `header__btn header__btn_color_black`}>Сохранённые статьи</button>
           </li>
           <li className="header__item">
-            <button className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>
+            <button onClick={onRegister} className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>
               Грета<img className="header__auth-arrow-img" src={isWhite ? arrowImageWhite : arrowImage}/>
             </button>
           </li>

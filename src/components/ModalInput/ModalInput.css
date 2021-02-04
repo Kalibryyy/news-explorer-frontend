@@ -1,0 +1,61 @@
+.modal__input-title {
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 1.25;
+  color: #2f71e5;
+  margin: 30px 0 0;
+}
+/* не работает? */
+.modal__input-title:first-child {
+  margin-top: 22px;
+}
+
+.modal__error-container {
+  position: relative;
+}
+
+.modal__input {
+  font-size: 14px;
+  line-height: 1.2;
+  padding: 10px 0;
+  margin: 0;
+  border: 0;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #000000;
+}
+
+.form__input::-webkit-input-placeholder,
+.form__input::-moz-placeholder,
+.form__input::-ms-input-placeholder,
+.form__input::placeholder {
+  opacity: 0.2;
+}
+
+.modal__input:focus {
+  outline: none;
+  border-bottom: 1px solid #000000;
+}
+
+.modal__error {
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 1.25;
+  color: #ff0000;
+  margin-top: 3px;
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+}

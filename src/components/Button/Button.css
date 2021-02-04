@@ -20,9 +20,8 @@
   border: 1px solid #59636c;
 }
 
-.button_inactive {
-  background: #e6e8eb;
-  color: #b6bcbf;
+.button_color_white {
+  background: #fff;
 }
 
 .button_color_blue {
@@ -40,8 +39,20 @@
   background: #2a65cc;
 }
 
-.button_color_white {
-  background: #fff;
+.button_color_grey {
+  background: #E6E8EB;
+}
+
+.button_inactive {
+  background: #e6e8eb;
+  color: #b6bcbf;
+  box-shadow: none;
+}
+
+.button_inactive:hover {
+  /* cursor: */
+  background: #E6E8EB;
+  opacity: 1;
 }
 
 .button_place_search-results {
@@ -66,17 +77,14 @@
 .button_place_popup {
   width: 360px;
   border-radius: 100px;
+  margin-top: 39px;
 }
 
-.button_place_popup:hover {
-  cursor: pointer;
-}
-
-@media screen and (max-width: 720px) {
+/* @media screen and (max-width: 720px) {
   .button_place_popup {
     width: 310px;
   }
-}
+} */
 
 @media screen and (max-width: 320px) {
   .button_place_popup {
