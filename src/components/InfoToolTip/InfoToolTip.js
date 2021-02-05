@@ -12,8 +12,8 @@ const InfoToolTip = ({ isOpen, onClose, title, openRegister }) => {
 
   return (
   <PopupWithForm isOpen={isOpen} onSubmit={handleSubmit} onClose={onClose} title={title} >
-    <div className="modal__auth-signin">
-      <p className="modal__auth-paragraph"><button onClick={openRegister} className="modal__auth-btn modal__auth-btn_left">Войти</button></p>
+    <div className="modal__auth-signin modal__auth-signin_left">
+      <p className="modal__auth-paragraph"><button onClick={openRegister} className="modal__auth-btn">Войти</button></p>
     </div>
   </PopupWithForm>
   );
