@@ -21,6 +21,12 @@
   top: 0;
 }
 
+@media screen and (max-width: 320px) {
+  .modal__overlay {
+    display: none;
+  }
+}
+
 .modal__container {
   max-width: 430px;
   background: #ffffff;
@@ -33,6 +39,18 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: calc(100% - 80px);
+}
+
+@media screen and (max-width: 320px) {
+  .modal__container {
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    top: 56px;
+    left: 0;
+    transform: none;
+    padding: 16px;
+  }
 }
 
 .modal__close {

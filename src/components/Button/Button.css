@@ -50,7 +50,6 @@
 }
 
 .button_inactive:hover {
-  /* cursor: */
   background: #E6E8EB;
   opacity: 1;
 }
@@ -80,15 +79,10 @@
   margin-top: 39px;
 }
 
-/* @media screen and (max-width: 720px) {
+@media screen and (max-width: 530px) {
   .button_place_popup {
-    width: 310px;
-  }
-} */
-
-@media screen and (max-width: 320px) {
-  .button_place_popup {
-    width: 288px;
+    width: 100%;
+    font-size: 16px;
   }
 }
 

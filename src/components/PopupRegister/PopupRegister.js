@@ -7,7 +7,6 @@ const PopupRegister = ({ isOpen, onClose, title, openLogin, onOpenInfoTooltip })
   function handleSubmit(e) {
     e.preventDefault();
 
-    // открывается попап пользователь успешно зарегистрирован
     onOpenInfoTooltip();
   }
 

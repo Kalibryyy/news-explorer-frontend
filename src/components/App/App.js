@@ -11,16 +11,19 @@ function App() {
   function handleRegisterClick() {
     setIsRegisterPopupOpen(!isRegisterPopupOpen);
     setIsLoginPopupOpen(false);
+    setisInfoTooltipOpen(false);
   }
 
   function handleLoginClick() {
-    setIsLoginPopupOpen(!isLoginPopupOpen);
+    setIsLoginPopupOpen(true);
     setIsRegisterPopupOpen(false);
+    setisInfoTooltipOpen(false);
   }
 
   function handleOpenInfoTooltip() {
     setisInfoTooltipOpen(!isInfoTooltipOpen);
     setIsRegisterPopupOpen(false);
+    setIsLoginPopupOpen(false);
   }
 
   function closeAllPopups() {
@@ -32,12 +35,12 @@ function App() {
   return (
     <div className="page">
       <Route exact path="/">
-        <Header theme={'dark'} onRegister={handleRegisterClick} />
+        <Header theme={'dark'} onRegister={handleRegisterClick} onOpenPopupClick={closeAllPopups} />
         <Main />
         <Footer />
         <PopupRegister openLogin={handleLoginClick} isOpen={isRegisterPopupOpen} onClose={closeAllPopups} title={'Регистрация'} onOpenInfoTooltip={handleOpenInfoTooltip} />
         <PopupLogin isOpen={isLoginPopupOpen} onClose={closeAllPopups} title={'Вход'} openRegister={handleRegisterClick} />
-        <InfoToolTip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} title={'Пользователь успешно зарегистрирован!'} />
+        <InfoToolTip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} title={'Пользователь успешно зарегистрирован!'} openLogin={handleLoginClick}/>
       </Route>
       <Route path="/saved-news">
         <Header />

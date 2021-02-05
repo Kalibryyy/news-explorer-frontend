@@ -7,9 +7,11 @@ import closeIcon from '../../images/close-icon.svg';
 import closeIconBlack from '../../images/close-icon-black.svg';
 import menuIconBlack from '../../images/menu-icon-black.svg';
 
-function Header({ theme, onRegister }) {
+function Header({ theme, onRegister, onOpenPopupClick }) {
   const [isWhite, setIsWhite] = React.useState(false);
   const [width, setWidth] = React.useState(window.innerWidth);
+  const [isMenuOpened, setIsMenuOpened] = React.useState(false);
+  const [isPopupOpened, setIsPopupOpened] = React.useState(false);
 
   React.useEffect(() => {
     if (theme === 'dark') {
@@ -26,10 +28,23 @@ function Header({ theme, onRegister }) {
     );
   }, []);
 
-  const [isMenuOpened, setIsMenuOpened] = React.useState(false);
-
   function openMenu() {
     setIsMenuOpened(!isMenuOpened);
+    setIsPopupOpened(!isPopupOpened);
+    if (isPopupOpened) {
+      onOpenPopupClick()
+      setIsMenuOpened(false);
+    }
+  }
+
+  function openRegister() {
+    setIsMenuOpened(false);
+
+    if (width <= 320) {
+      setIsPopupOpened(true);
+    };
+
+    onRegister();
   }
 
   const Wrapper = ({ children }) => width <= 320 ? isWhite ? <div className={isMenuOpened ? 'header__menu-background' : ''}>{children}</div> : <div className={isMenuOpened ? 'header__menu-background header__menu-background_white' : ''}>{children}</div> : children;
@@ -40,8 +55,8 @@ function Header({ theme, onRegister }) {
       <Wrapper>
       <div className={isWhite ? `logo__container logo__container_white` : `logo__container`}>
         <div className={isWhite ? `logo logo_color_white` : `logo logo_color_black`}></div>
-        {isWhite ? <img className="header__icon" src={isMenuOpened ? closeIcon : menuIcon} onClick={openMenu} /> :
-        <img className="header__icon" src={isMenuOpened ? closeIconBlack : menuIconBlack} onClick={openMenu} />}
+        {isWhite ? <img className="header__icon" src={isMenuOpened || isPopupOpened ? closeIcon : menuIcon} onClick={openMenu} /> :
+        <img className="header__icon" src={isMenuOpened || isPopupOpened ? closeIconBlack : menuIconBlack} onClick={openMenu} />}
       </div>
       <nav>
         <ul className={isMenuOpened ? `header__list header__list_opened` : `header__list header__list_closed`}>
@@ -52,7 +67,7 @@ function Header({ theme, onRegister }) {
             <button className={isWhite ? `header__btn header__btn_color_white` : `header__btn header__btn_color_black`}>Сохранённые статьи</button>
           </li>
           <li className="header__item">
-            <button onClick={onRegister} className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>
+            <button onClick={openRegister} className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>
               Грета<img className="header__auth-arrow-img" src={isWhite ? arrowImageWhite : arrowImage}/>
             </button>
           </li>
