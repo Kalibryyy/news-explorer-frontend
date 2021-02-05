@@ -68,13 +68,18 @@
 }
 
 .modal__title {
-  margin: 0 0 22px;
+  margin: 0;
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
   line-height: 1.15;
   color: #1a1b22;
+}
+
+.modal__title+
+.modal__input-title {
+  margin-top: 22px;
 }
 
 .modal__auth-signin {

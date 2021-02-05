@@ -32,6 +32,19 @@ function App() {
     setisInfoTooltipOpen(false);
   }
 
+  React.useEffect(() => {
+    // if (isRegisterPopupOpen) {
+      const onKeypress = e => {
+        if (e.key === "Escape") {
+          console.log(e)
+          closeAllPopups();
+        }
+      }
+
+      document.addEventListener('keydown', onKeypress);
+    // }
+  }, []);
+
   return (
     <div className="page">
       <Route exact path="/">
