@@ -33,6 +33,10 @@
   cursor: pointer;
 }
 
+.bookmark__icon_active:hover {
+  background-image: url(../../images/bookmark-icon-visited.svg);
+}
+
 .bookmark__icon:focus {
   outline: none;
 }

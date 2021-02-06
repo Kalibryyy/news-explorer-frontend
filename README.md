@@ -70,3 +70,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 https://visitor-badge.laobi.icu/badge?page_id=Kalibryyy.news-explorer-frontend
+
+
+В компоненте NewsCard нужно поменять стейт на true чтобы увидеть версию карточки на странице залогинненого пользователя
+const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+

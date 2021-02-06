@@ -21,7 +21,7 @@ function Main() {
         </div>
       </section>
       <section className="search-results">
-        {areThereAnyResults ? <NewsCardList cards={data} title={'Результаты поиска'} doNeedBtn={true} /> : <NoResults />}
+        {areThereAnyResults ? <NewsCardList cards={data} title={'Результаты поиска'} doNeedBtn={true} main={true} /> : <NoResults />}
         {isLoading && <ResultsLoading />}
       </section>
       <section className="about-author">

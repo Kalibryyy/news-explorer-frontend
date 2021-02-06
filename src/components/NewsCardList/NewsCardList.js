@@ -2,7 +2,7 @@ import React from "react";
 import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
 
-const NewsCardList = ({ cards, title, doNeedBtn }) => {
+const NewsCardList = ({ cards, title, doNeedBtn, main }) => {
   const [quantity, setQuantity] = React.useState(3);
 
   const [width, setWidth] = React.useState(window.innerWidth);
@@ -52,6 +52,9 @@ const NewsCardList = ({ cards, title, doNeedBtn }) => {
                 : `${item.text.substring(0, textLength)}`
             }
             source={item.source}
+            date={item.date}
+            keyword={item.keyword}
+            main={main}
           />
         ))}
       </ul>
