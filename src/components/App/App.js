@@ -13,6 +13,7 @@ function App() {
     setIsLoginPopupOpen(false);
     setisInfoTooltipOpen(false);
   }
+  console.log(isRegisterPopupOpen)
 
   function handleLoginClick() {
     setIsLoginPopupOpen(true);
@@ -50,16 +51,15 @@ function App() {
       <Route exact path="/">
         <Header theme={'dark'} onRegister={handleRegisterClick} onOpenPopupClick={closeAllPopups} />
         <Main />
-        <Footer />
-        <PopupRegister openLogin={handleLoginClick} isOpen={isRegisterPopupOpen} onClose={closeAllPopups} title={'Регистрация'} onOpenInfoTooltip={handleOpenInfoTooltip} />
-        <PopupLogin isOpen={isLoginPopupOpen} onClose={closeAllPopups} title={'Вход'} openRegister={handleRegisterClick} />
-        <InfoToolTip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} title={'Пользователь успешно зарегистрирован!'} openLogin={handleLoginClick}/>
       </Route>
       <Route path="/saved-news">
-        <Header />
+        <Header onRegister={handleRegisterClick} onOpenPopupClick={closeAllPopups} />
         <SavedNews />
-        <Footer />
       </Route>
+      <Footer />
+        <PopupRegister onPopupClick={handleLoginClick} isOpen={isRegisterPopupOpen} onClose={closeAllPopups} title={'Регистрация'} onOpenInfoTooltip={handleOpenInfoTooltip} />
+        <PopupLogin isOpen={isLoginPopupOpen} onClose={closeAllPopups} title={'Вход'} onPopupClick={handleRegisterClick} />
+        <InfoToolTip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} title={'Пользователь успешно зарегистрирован!'} onPopupClick={handleLoginClick}/>
     </div>
   );
 }

@@ -2,7 +2,8 @@ import React from 'react';
 import './PopupWithForm.css';
 import closeIcon from '../../images/close-icon.svg';
 
-function PopupWithForm({ isOpen, onSubmit, onClose, title, children }) {
+function PopupWithForm({ isOpen, onSubmit, onClose, title, children, onPopupClick, text }) {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   return (
         <div className={isOpen ? `modal modal_opened` : `modal`}>
@@ -11,6 +12,9 @@ function PopupWithForm({ isOpen, onSubmit, onClose, title, children }) {
                 <img src={closeIcon} alt="закрывающая иконка" className="modal__close hover" onClick={onClose} />
                 <h2 className="modal__title">{title}</h2>
                 {children}
+                <div className={isLoggedIn ? `modal__auth-signin modal__auth-signin_left` : `modal__auth-signin`}>
+                  <p className="modal__auth-paragraph">или <button onClick={onPopupClick} className="modal__auth-btn">{text}</button></p>
+                </div>
             </form>
         </div>
   );

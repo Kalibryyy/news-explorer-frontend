@@ -1,4 +1,4 @@
-.modal__input-title {
+.modal-input__title {
   font-family: "Inter", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -7,16 +7,12 @@
   color: #2f71e5;
   margin: 30px 0 0;
 }
-/* не работает? */
-.modal__input-title:first-child {
-  margin-top: 22px;
-}
 
-.modal__error-container {
+.modal-input__error-container {
   position: relative;
 }
 
-.modal__input {
+.modal-input {
   font-size: 14px;
   line-height: 1.2;
   padding: 10px 0;
@@ -35,19 +31,19 @@
   color: #000000;
 }
 
-.form__input::-webkit-input-placeholder,
-.form__input::-moz-placeholder,
-.form__input::-ms-input-placeholder,
-.form__input::placeholder {
+.modal-input::-webkit-input-placeholder,
+.modal-input::-moz-placeholder,
+.modal-input::-ms-input-placeholder,
+.modal-input::placeholder {
   opacity: 0.2;
 }
 
-.modal__input:focus {
+.modal-input:focus {
   outline: none;
   border-bottom: 1px solid #000000;
 }
 
-.modal__error {
+.modal-input__error {
   font-family: "Inter", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;

@@ -1,3 +1,7 @@
+.modal__error-container {
+  position: relative;
+}
+
 .modal__server-error {
   font-family: "Inter", Helvetica, Arial, sans-serif;
   font-style: normal;

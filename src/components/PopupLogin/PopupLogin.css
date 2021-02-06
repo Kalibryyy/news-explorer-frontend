@@ -1,0 +1,24 @@
+.modal__error-container {
+  position: relative;
+}
+
+.modal__server-error {
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 1.25;
+  color: #ff0000;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  top: 17px;
+}
+
+
+@media screen and (max-width: 375px) {
+  .modal__server-error {
+    top: 7px;
+  }
+}
