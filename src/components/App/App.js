@@ -1,70 +1,101 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import "./App.css";
-import { Main, SavedNews, PopupRegister, Header, Footer, PopupLogin, InfoToolTip } from "../index";
+import { Main, SavedNews, PopupRegister, Header, Footer, PopupLogin, InfoToolTip, } from "../index";
 
 function App() {
-  const [isRegisterPopupOpened, setIsRegisterPopupOpened] = React.useState(false);
-  const [isLoginPopupOpened, setIsLoginPopupOpened] = React.useState(false);
-  const [isInfoTooltipOpened, setisInfoTooltipOpened] = React.useState(false);
+  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+  const [isAnyPopupOpen, setIsAnyPopupOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    if (isRegisterPopupOpen || isLoginPopupOpen || isInfoTooltipOpen) {
+      setIsAnyPopupOpen(true);
+    } else {
+      setIsAnyPopupOpen(false);
+    }
+  }, [isRegisterPopupOpen, isLoginPopupOpen, isInfoTooltipOpen])
 
   function handleRegisterClick() {
-    setIsRegisterPopupOpened(!isRegisterPopupOpened);
-    setIsLoginPopupOpened(false);
-    setisInfoTooltipOpened(false);
+    setIsRegisterPopupOpen(!isRegisterPopupOpen);
+    setIsLoginPopupOpen(false);
+    setIsInfoTooltipOpen(false);
   }
 
   function handleLoginClick() {
-    setIsLoginPopupOpened(!isLoginPopupOpened);
-    setIsRegisterPopupOpened(false);
-    setisInfoTooltipOpened(false);
+    setIsLoginPopupOpen(!isLoginPopupOpen);
+    setIsRegisterPopupOpen(false);
+    setIsInfoTooltipOpen(false);
   }
 
   function handleOpenInfoTooltip() {
-    console.log(123, isInfoTooltipOpened)
-    setIsRegisterPopupOpened(false);
-
-    setIsLoginPopupOpened(false);
-    setisInfoTooltipOpened(!isInfoTooltipOpened);
+    setIsInfoTooltipOpen(!isInfoTooltipOpen);
+    setIsRegisterPopupOpen(false);
+    setIsLoginPopupOpen(false);
   }
 
   function closeAllPopups() {
-    setIsRegisterPopupOpened(false);
-    setIsLoginPopupOpened(false);
-    setisInfoTooltipOpened(false);
+    setIsRegisterPopupOpen(false);
+    setIsLoginPopupOpen(false);
+    setIsInfoTooltipOpen(false);
   }
 
   React.useEffect(() => {
-    if (isRegisterPopupOpened || isLoginPopupOpened || isInfoTooltipOpened) {
-      const onKeypress = e => {
+    if (isRegisterPopupOpen || isLoginPopupOpen || isInfoTooltipOpen) {
+      const onKeypress = (e) => {
         if (e.key === "Escape") {
           closeAllPopups();
         }
-      }
+      };
 
-      document.addEventListener('keydown', onKeypress);
+      document.addEventListener("keydown", onKeypress);
 
       return () => {
-          document.removeEventListener('keydown', onKeypress);
-        };
-
+        document.removeEventListener("keydown", onKeypress);
+      };
     }
-  }, [isRegisterPopupOpened, isLoginPopupOpened, isInfoTooltipOpened]);
+  }, [isRegisterPopupOpen, isLoginPopupOpen, isInfoTooltipOpen]);
 
   return (
     <div className="page">
       <Route exact path="/">
-        <Header theme={'dark'} onRegister={handleRegisterClick} onOpenPopupClick={closeAllPopups} isRegisterPopupOpened={isRegisterPopupOpened} isLoginPopupOpened={isLoginPopupOpened} isInfoTooltipOpened={isInfoTooltipOpened} />
+        <Header
+          theme={"dark"}
+          onRegister={handleRegisterClick}
+          onOpenPopupClick={closeAllPopups}
+          isAnyPopupOpen={isAnyPopupOpen}
+        />
         <Main />
       </Route>
       <Route path="/saved-news">
-        <Header onRegister={handleRegisterClick} onOpenPopupClick={closeAllPopups} isRegisterPopupOpened={isRegisterPopupOpened} isLoginPopupOpened={isLoginPopupOpened} isInfoToolTipOpened={isInfoTooltipOpened} />
+        <Header
+          onRegister={handleRegisterClick}
+          onOpenPopupClick={closeAllPopups}
+          isAnyPopupOpen={isAnyPopupOpen}
+        />
         <SavedNews />
       </Route>
       <Footer />
-        <PopupRegister onPopupClick={handleLoginClick} isOpen={isRegisterPopupOpened} onClose={closeAllPopups} title={'Регистрация'} onOpenInfoTooltip={handleOpenInfoTooltip} />
-        <PopupLogin isOpen={isLoginPopupOpened} onClose={closeAllPopups} title={'Вход'} onPopupClick={handleRegisterClick} />
-        <InfoToolTip isOpen={isInfoTooltipOpened} onClose={closeAllPopups} title={'Пользователь успешно зарегистрирован!'} onPopupClick={handleLoginClick}/>
+      <PopupRegister
+        onPopupClick={handleLoginClick}
+        isOpen={isRegisterPopupOpen}
+        onClose={closeAllPopups}
+        title={"Регистрация"}
+        onOpenInfoTooltip={handleOpenInfoTooltip}
+      />
+      <PopupLogin
+        isOpen={isLoginPopupOpen}
+        onClose={closeAllPopups}
+        title={"Вход"}
+        onPopupClick={handleRegisterClick}
+      />
+      <InfoToolTip
+        isOpen={isInfoTooltipOpen}
+        onClose={closeAllPopups}
+        title={"Пользователь успешно зарегистрирован!"}
+        onPopupClick={handleLoginClick}
+      />
     </div>
   );
 }

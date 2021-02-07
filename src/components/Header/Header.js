@@ -8,23 +8,20 @@ import closeIcon from '../../images/close-icon.svg';
 import closeIconBlack from '../../images/close-icon-black.svg';
 import menuIconBlack from '../../images/menu-icon-black.svg';
 
-function Header({ theme, onRegister, onOpenPopupClick, isRegisterPopupOpened, isLoginPopupOpened, isInfoTooltipOpened }) {
+function Header({ theme, onRegister, onOpenPopupClick, isAnyPopupOpen, }) {
   const [isWhite, setIsWhite] = React.useState(false);
   const [width, setWidth] = React.useState(window.innerWidth);
-  const [isMenuOpened, setIsMenuOpened] = React.useState(false);
-  const [isPopupOpened, setIsPopupOpened] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isPopupOpen, setIsPopupOpen] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
-    console.log('isRegisterPopupOpened', isRegisterPopupOpened, 'isLoginPopupOpened', isLoginPopupOpened, 'isInfoTooltipOpened', isInfoTooltipOpened);
-    if (isRegisterPopupOpened || isLoginPopupOpened || isInfoTooltipOpened) {
-      setIsPopupOpened(true);
+    if (isAnyPopupOpen) {
+      setIsPopupOpen(true);
     } else {
-      setIsPopupOpened(false);
+      setIsPopupOpen(false);
     }
-  }, [isRegisterPopupOpened, isLoginPopupOpened, isInfoTooltipOpened])
-
-  console.log('isPopupOpened', isPopupOpened)
+  }, [isAnyPopupOpen])
 
   React.useEffect(() => {
     if (theme === 'dark') {
@@ -42,46 +39,62 @@ function Header({ theme, onRegister, onOpenPopupClick, isRegisterPopupOpened, is
   }, []);
 
   function openMenu() {
-    setIsMenuOpened(!isMenuOpened);
+    setIsMenuOpen(!isMenuOpen);
 
-    if (isPopupOpened) {
+    if (isPopupOpen) {
       onOpenPopupClick()
-      setIsMenuOpened(false);
+      setIsMenuOpen(false);
     }
   }
 
   function openRegister() {
-    setIsMenuOpened(false);
+    setIsMenuOpen(false);
 
     if (width <= 375) {
-      setIsPopupOpened(true);
+      setIsPopupOpen(true);
     };
 
     onRegister();
   }
 
-  const Wrapper = ({ children }) => width <= 375 ? isWhite ? <div className={isMenuOpened ? 'header__menu-background' : ''}>{children}</div> : <div className={isMenuOpened ? 'header__menu-background header__menu-background_white' : ''}>{children}</div> : children;
+  const Wrapper = ({ children }) => width <= 375 ? isWhite ? <div className={isMenuOpen ? 'header__menu-background' : ''}>{children}</div>
+  : <div className={isMenuOpen ? 'header__menu-background header__menu-background_white' : ''}>{children}</div> : children;
 
   return (
     <header className={isWhite ? `header header_color_white` : `header`}>
-      {isMenuOpened && <div className="header__overlay"></div>}
+      {isMenuOpen && <div className="header__overlay"></div>}
       <Wrapper>
-      <div className={isWhite ? `logo__container logo__container_white` : `logo__container`}>
-        <div className={isWhite ? `logo logo_color_white` : `logo logo_color_black`}></div>
-        {isWhite ? <img className="header__icon" src={isMenuOpened || isPopupOpened ? closeIcon : menuIcon} onClick={openMenu} /> :
-        <img className="header__icon" src={isMenuOpened || isPopupOpened ? closeIconBlack : menuIconBlack} onClick={openMenu} />}
+      <div className={isWhite
+      ? `logo__container logo__container_white`
+      : `logo__container`}>
+        <div className={isWhite
+          ? `logo logo_color_white`
+          : `logo logo_color_black`}></div>
+        {isWhite
+        ? <img className="header__icon" src={isMenuOpen || isPopupOpen ? closeIcon : menuIcon} onClick={openMenu} />
+        : <img className="header__icon" src={isMenuOpen || isPopupOpen ? closeIconBlack : menuIconBlack} onClick={openMenu} />}
       </div>
       <nav>
-        <ul className={isMenuOpened ? `header__list header__list_opened` : `header__list header__list_closed`}>
+        <ul className={isMenuOpen
+          ? `header__list header__list_opened`
+          : `header__list header__list_closed`}>
           <li className="header__item">
-          <Link to={''} className={isWhite ? `header__btn header__btn_color_white` : `header__btn header__btn_color_black`}>Главная</Link>
+          <Link to={''} className={isWhite
+            ? `header__btn header__btn_color_white`
+            : `header__btn header__btn_color_black`}>Главная</Link>
           </li>
-          <li className={isWhite ? `header__item header__item_chosen header__item_color_white` : `header__item header__item_chosen header__item_color_black`}>
-          <Link to={'saved-news'} className={isWhite ? `header__btn header__btn_color_white` : `header__btn header__btn_color_black`}>Сохранённые статьи</Link>
+          <li className={isWhite
+            ? `header__item header__item_chosen header__item_color_white`
+            : `header__item header__item_chosen header__item_color_black`}>
+          <Link to={'saved-news'} className={isWhite
+            ? `header__btn header__btn_color_white`
+            : `header__btn header__btn_color_black`}>Сохранённые статьи</Link>
           </li>
           <li className="header__item">
             <button onClick={openRegister} className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>
-              {isLoggedIn? `Грета` : `Авторизоваться`}{isLoggedIn && <img className="header__auth-arrow-img" src={isWhite ? arrowImageWhite : arrowImage}/>}
+              {isLoggedIn
+              ? `Грета`
+              : `Авторизоваться`}{isLoggedIn && <img className="header__auth-arrow-img" src={isWhite ? arrowImageWhite : arrowImage}/>}
             </button>
           </li>
         </ul>
