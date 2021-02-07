@@ -31,9 +31,6 @@
   color: #000000;
 }
 
-.modal-input::-webkit-input-placeholder,
-.modal-input::-moz-placeholder,
-.modal-input::-ms-input-placeholder,
 .modal-input::placeholder {
   opacity: 0.2;
 }

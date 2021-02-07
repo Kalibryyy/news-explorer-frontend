@@ -8,12 +8,23 @@ import closeIcon from '../../images/close-icon.svg';
 import closeIconBlack from '../../images/close-icon-black.svg';
 import menuIconBlack from '../../images/menu-icon-black.svg';
 
-function Header({ theme, onRegister, onOpenPopupClick }) {
+function Header({ theme, onRegister, onOpenPopupClick, isRegisterPopupOpened, isLoginPopupOpened, isInfoTooltipOpened }) {
   const [isWhite, setIsWhite] = React.useState(false);
   const [width, setWidth] = React.useState(window.innerWidth);
   const [isMenuOpened, setIsMenuOpened] = React.useState(false);
   const [isPopupOpened, setIsPopupOpened] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  React.useEffect(() => {
+    console.log('isRegisterPopupOpened', isRegisterPopupOpened, 'isLoginPopupOpened', isLoginPopupOpened, 'isInfoTooltipOpened', isInfoTooltipOpened);
+    if (isRegisterPopupOpened || isLoginPopupOpened || isInfoTooltipOpened) {
+      setIsPopupOpened(true);
+    } else {
+      setIsPopupOpened(false);
+    }
+  }, [isRegisterPopupOpened, isLoginPopupOpened, isInfoTooltipOpened])
+
+  console.log('isPopupOpened', isPopupOpened)
 
   React.useEffect(() => {
     if (theme === 'dark') {
@@ -32,7 +43,7 @@ function Header({ theme, onRegister, onOpenPopupClick }) {
 
   function openMenu() {
     setIsMenuOpened(!isMenuOpened);
-    setIsPopupOpened(!isPopupOpened);
+
     if (isPopupOpened) {
       onOpenPopupClick()
       setIsMenuOpened(false);
@@ -42,14 +53,14 @@ function Header({ theme, onRegister, onOpenPopupClick }) {
   function openRegister() {
     setIsMenuOpened(false);
 
-    if (width <= 320) {
+    if (width <= 375) {
       setIsPopupOpened(true);
     };
 
     onRegister();
   }
 
-  const Wrapper = ({ children }) => width <= 320 ? isWhite ? <div className={isMenuOpened ? 'header__menu-background' : ''}>{children}</div> : <div className={isMenuOpened ? 'header__menu-background header__menu-background_white' : ''}>{children}</div> : children;
+  const Wrapper = ({ children }) => width <= 375 ? isWhite ? <div className={isMenuOpened ? 'header__menu-background' : ''}>{children}</div> : <div className={isMenuOpened ? 'header__menu-background header__menu-background_white' : ''}>{children}</div> : children;
 
   return (
     <header className={isWhite ? `header header_color_white` : `header`}>

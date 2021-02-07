@@ -18,14 +18,20 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, cardsNumber }) => {
   let textLength;
   let titleLength;
 
-  if (width <= 320) {
+  if (width <= 480) {
     textLength = 90;
     titleLength = 30;
   } else if (width <= 768) {
     textLength = 75;
-    titleLength = 30;
+    titleLength = 17;
+  } else if (width <= 1024) {
+    textLength = 90;
+    titleLength = 17;
+  }else if (width <= 1280) {
+    textLength = 115;
+    titleLength = 25;
   } else {
-    textLength = 186;
+    textLength = 157;
     titleLength = 40;
   }
 

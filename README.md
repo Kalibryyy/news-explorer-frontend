@@ -1,6 +1,23 @@
-# Getting Started with Create React App
+В компоненте Main нужно поменять значение стейта на false чтобы убрать секцию с найденными карточками
+const [areThereAnyResults, setAreThereAnyResults] = React.useState(1);
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+нужно поменять значение стейта на true чтобы увидеть секцию результат не найден (отступ сверху будет виден при скрытых секции с карточками и секции со спиннером)
+const [isNoResults, setIsNoResults] = React.useState(false);
+
+нужно поменять значение стейта на true чтобы увидеть спиннер (отступ сверху будет виден при скрытых секции с карточками и секции результат не найден)
+const [isLoading, setIsLoading] = React.useState(false);
+
+В компоненте NewsCard нужно поменять стейт на true чтобы увидеть версию карточки на странице залогинненого пользователя
+const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+В компоненте Header нужно поменять стейт на true чтобы увидеть версию кнопки авторизации залогинненого пользователя
+const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+В компоненте Button yужно поменять значение стейта на true чтобы увидеть залоченную кнопку
+const [isBtnInactive, setIsBtnInactive] = React.useState(false);
+
+В компоненте PopupWithForm нужно поменять значение стейта на true чтобы увидеть корректную версию InfoTooltip
+const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
 ## Available Scripts
 
@@ -22,16 +39,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
 https://visitor-badge.laobi.icu/badge?page_id=Kalibryyy.news-explorer-frontend
 
 
-В компоненте NewsCard нужно поменять стейт на true чтобы увидеть версию карточки на странице залогинненого пользователя
-const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
-В компоненте Header нужно поменять стейт на true чтобы увидеть версию кнопки авторизации залогинненого пользователя
-const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
-В компоненте Button yужно поменять значение стейта на true чтобы увидеть залоченную кнопку
-const [isBtnInactive, setIsBtnInactive] = React.useState(false);

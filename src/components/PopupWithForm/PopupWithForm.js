@@ -3,6 +3,7 @@ import './PopupWithForm.css';
 import closeIcon from '../../images/close-icon.svg';
 
 function PopupWithForm({ isOpen, onSubmit, onClose, title, children, onPopupClick, text }) {
+  // Нужно поменять значение стейта на true чтобы увидеть корректную версию InfoTooltip
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   return (
@@ -13,7 +14,7 @@ function PopupWithForm({ isOpen, onSubmit, onClose, title, children, onPopupClic
                 <h2 className="modal__title">{title}</h2>
                 {children}
                 <div className={isLoggedIn ? `modal__auth-signin modal__auth-signin_left` : `modal__auth-signin`}>
-                  <p className="modal__auth-paragraph">или <button onClick={onPopupClick} className="modal__auth-btn">{text}</button></p>
+                  <p className="modal__auth-paragraph">{!isLoggedIn && `или `}<button onClick={onPopupClick} className="modal__auth-btn">{text}</button></p>
                 </div>
             </form>
         </div>

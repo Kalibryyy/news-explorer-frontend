@@ -22,7 +22,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .footer {
     width: 90%;
   }
@@ -85,7 +85,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .footer__nav-list {
     margin-right: 18px;
   }
@@ -104,7 +104,7 @@
   margin-right: 0;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .footer__nav-item {
     line-height: 2.7;
   }

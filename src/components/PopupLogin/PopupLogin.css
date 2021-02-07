@@ -15,10 +15,3 @@
   justify-content: center;
   top: 17px;
 }
-
-
-@media screen and (max-width: 375px) {
-  .modal__server-error {
-    top: 7px;
-  }
-}

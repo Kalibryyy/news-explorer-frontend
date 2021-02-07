@@ -67,7 +67,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .button_place_search-results {
     width: 288px;
   }
@@ -114,9 +114,9 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .button_place_input {
-    width: 288px;
+    width: 100%;
     position: static;
   }
 }

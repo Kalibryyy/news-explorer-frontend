@@ -7,7 +7,8 @@ import { NewsCardList, ResultsLoading, NoResults, About } from "../index";
 function Main() {
   // Нужно поменять значение стейта на false чтобы убрать секцию с найденными карточками
   const [areThereAnyResults, setAreThereAnyResults] = React.useState(1);
-    // Нужно поменять значение стейта на true чтобы увидеть спиннер (отступ сверху будет виден при скрытой секции с карточками)
+  const [isNoResults, setIsNoResults] = React.useState(false);
+    // Нужно поменять значение стейта на true чтобы увидеть спиннер (отступ сверху будет виден при скрытых секции с карточками и секции с результатом ненайденных карточек)
   const [isLoading, setIsLoading] = React.useState(false);
 
     return (
@@ -21,7 +22,8 @@ function Main() {
         </div>
       </section>
       <section className="search-results">
-        {areThereAnyResults ? <NewsCardList cards={data} title={'Результаты поиска'} doNeedBtn={true} main={true} cardsNumber={3} /> : <NoResults />}
+        {areThereAnyResults && <NewsCardList cards={data} title={'Результаты поиска'} doNeedBtn={true} main={true} cardsNumber={3} />}
+        {isNoResults && <NoResults />}
         {isLoading && <ResultsLoading />}
       </section>
       <section className="about-author">

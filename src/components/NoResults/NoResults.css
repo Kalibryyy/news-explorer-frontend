@@ -12,7 +12,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .no-results {
     width: 90%;
   }

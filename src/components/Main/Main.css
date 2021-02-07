@@ -43,7 +43,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .search__container {
     width: 90%;
   }
@@ -80,7 +80,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .search__subtitle {
     margin: 0 0 122px 0;
   }
@@ -99,7 +99,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .search-results {
     padding-top: 32px;
     padding-bottom: 32px;
@@ -131,7 +131,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .about-author {
     width: 90%;
     padding-top: 32px;

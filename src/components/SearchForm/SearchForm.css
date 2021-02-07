@@ -9,7 +9,6 @@
   border: 1px solid #d1d2d6;
   box-sizing: border-box;
   padding: 0 180px 0 24px;
-  /* backdrop-filter: blur(8px); */
   border-radius: 100px;
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-style: normal;
@@ -32,9 +31,8 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .input {
-    width: 288px;
     margin-bottom: 16px;
     padding-left: 16px;
     padding-right: 16px;
@@ -46,9 +44,6 @@
   border: 1px solid #59636c;
 }
 
-.input::-webkit-input-placeholder,
-.form__input::-moz-placeholder,
-.form__input::-ms-input-placeholder,
 .form__input::placeholder {
   color: #b6bcbf;
   font-family: "Roboto", Helvetica, Arial, sans-serif;
