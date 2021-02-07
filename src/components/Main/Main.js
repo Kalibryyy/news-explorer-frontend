@@ -11,7 +11,7 @@ function Main() {
   const [isLoading, setIsLoading] = React.useState(false);
 
     return (
-      <main className="content">
+      <main>
       <section className="search">
         <div className="search__img"></div>
         <div className="search__container">
@@ -21,7 +21,7 @@ function Main() {
         </div>
       </section>
       <section className="search-results">
-        {areThereAnyResults ? <NewsCardList cards={data} title={'Результаты поиска'} doNeedBtn={true} main={true} /> : <NoResults />}
+        {areThereAnyResults ? <NewsCardList cards={data} title={'Результаты поиска'} doNeedBtn={true} main={true} cardsNumber={3} /> : <NoResults />}
         {isLoading && <ResultsLoading />}
       </section>
       <section className="about-author">

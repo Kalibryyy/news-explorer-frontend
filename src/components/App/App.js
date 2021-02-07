@@ -13,10 +13,9 @@ function App() {
     setIsLoginPopupOpen(false);
     setisInfoTooltipOpen(false);
   }
-  console.log(isRegisterPopupOpen)
 
   function handleLoginClick() {
-    setIsLoginPopupOpen(true);
+    setIsLoginPopupOpen(!isLoginPopupOpen);
     setIsRegisterPopupOpen(false);
     setisInfoTooltipOpen(false);
   }
@@ -34,17 +33,21 @@ function App() {
   }
 
   React.useEffect(() => {
-    // if (isRegisterPopupOpen) {
+    if (isRegisterPopupOpen || isLoginPopupOpen || isInfoTooltipOpen) {
       const onKeypress = e => {
         if (e.key === "Escape") {
-          console.log(e)
           closeAllPopups();
         }
       }
 
       document.addEventListener('keydown', onKeypress);
-    // }
-  }, []);
+
+      return () => {
+          document.removeEventListener('keydown', onKeypress);
+        };
+
+    }
+  }, [isRegisterPopupOpen, isLoginPopupOpen, isInfoTooltipOpen]);
 
   return (
     <div className="page">

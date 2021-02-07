@@ -2,9 +2,9 @@ import React from 'react';
 import './NewsCard.css';
 import Bookmark from '../Bookmark/Bookmark';
 
-const NewsCard = ({ title, img, date, text, source, keyword, main }) => {
+const NewsCard = ({ title, img, date, text, source, keyword, main, link }) => {
   // нужно поменять стейт на true чтобы увидеть версию карточки на странице залогинненого пользователя
-  const [isLoggedIn, setIsLoggedIn] = React.useState(1);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const [isBookmarkChosen, setIsBookmarkChosen] = React.useState(false);
 
@@ -20,12 +20,12 @@ const NewsCard = ({ title, img, date, text, source, keyword, main }) => {
 
  return (
   <li className="card">
-    <img className="card__img" src={img} />
+    <a href={link} target="_blank" className="card__link"><img className="card__img" src={img} /></a>
     <div className="card__text-content">
       <p className="card__date">{date}</p>
-      <h3 className="card__title">{title}</h3>
+      <a href={link} target="_blank" className="card__link"><h3 className="card__title">{title}</h3></a>
       <p className="card__description">{text}</p>
-      <cite className="card__source">{source}</cite>
+      <a href={link} target="_blank" className="card__link"><cite className="card__source">{source}</cite></a>
     </div>
     {isLoggedIn && !main ? <button className="card__garbage-bin" onMouseOver={handleDeleteMsg} onMouseLeave={handleDeleteMsg} /> : <Bookmark handleSaveMsg={handleSaveMsg} isLoggedIn={isLoggedIn} />}
     {isLoggedIn && !main && <div className="card__keyword-label">{keyword}</div>}

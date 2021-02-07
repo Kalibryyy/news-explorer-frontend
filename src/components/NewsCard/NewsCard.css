@@ -6,6 +6,10 @@
   margin: 0 auto;
 }
 
+.card__link {
+  text-decoration: none;
+}
+
 @media screen and (max-width: 768px) {
   .card {
     max-width: 224px;
@@ -14,6 +18,7 @@
 
 @media screen and (max-width: 320px) {
   .card {
+    width: 288px;
     max-width: 288px;
   }
 }
@@ -116,6 +121,14 @@
   letter-spacing: 0.4px;
   text-transform: uppercase;
   color: #b6bcbf;
+  position: absolute;
+  bottom: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .card__source {
+    bottom: 16px;
+  }
 }
 
 .card__garbage-bin {
@@ -128,6 +141,13 @@
   border: 0;
   padding: 0;
   border-radius: 8px;
+}
+
+.card__garbage-bin:hover {
+  background-image: url(../../images/garbage-bin-hover.svg);
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity 0.3s linear;
 }
 
 .card__keyword-label {

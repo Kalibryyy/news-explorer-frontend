@@ -3,8 +3,12 @@ import "./SearchForm.css";
 import Button from '../Button/Button';
 
 function SearchForm() {
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
   return (
-    <div className="search-form">
+    <form onSubmit={handleSubmit} className="search-form">
     <input
       className="input"
       type="text"
@@ -15,8 +19,9 @@ function SearchForm() {
       required
     />
     <Button place={'input'} text={'Искать'} color={'blue'} />
-    </div>
+    </form>
   );
 }
 
 export default SearchForm;
+

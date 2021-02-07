@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import './Header.css';
 import arrowImage from '../../images/arrow.svg';
 import arrowImageWhite from '../../images/arrow-white.svg';
@@ -12,6 +13,7 @@ function Header({ theme, onRegister, onOpenPopupClick }) {
   const [width, setWidth] = React.useState(window.innerWidth);
   const [isMenuOpened, setIsMenuOpened] = React.useState(false);
   const [isPopupOpened, setIsPopupOpened] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
     if (theme === 'dark') {
@@ -61,14 +63,14 @@ function Header({ theme, onRegister, onOpenPopupClick }) {
       <nav>
         <ul className={isMenuOpened ? `header__list header__list_opened` : `header__list header__list_closed`}>
           <li className="header__item">
-            <button className={isWhite ? `header__btn header__btn_color_white` : `header__btn header__btn_color_black`}>Главная</button>
+          <Link to={''} className={isWhite ? `header__btn header__btn_color_white` : `header__btn header__btn_color_black`}>Главная</Link>
           </li>
           <li className={isWhite ? `header__item header__item_chosen header__item_color_white` : `header__item header__item_chosen header__item_color_black`}>
-            <button className={isWhite ? `header__btn header__btn_color_white` : `header__btn header__btn_color_black`}>Сохранённые статьи</button>
+          <Link to={'saved-news'} className={isWhite ? `header__btn header__btn_color_white` : `header__btn header__btn_color_black`}>Сохранённые статьи</Link>
           </li>
           <li className="header__item">
             <button onClick={openRegister} className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>
-              Грета<img className="header__auth-arrow-img" src={isWhite ? arrowImageWhite : arrowImage}/>
+              {isLoggedIn? `Грета` : `Авторизоваться`}{isLoggedIn && <img className="header__auth-arrow-img" src={isWhite ? arrowImageWhite : arrowImage}/>}
             </button>
           </li>
         </ul>

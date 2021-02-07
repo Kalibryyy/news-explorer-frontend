@@ -7,7 +7,7 @@ function SavedNews() {
     return (
       <main className="saved-news">
         <SavedNewsHeader />
-        <NewsCardList cards={data} title={''} doNeedBtn={false} />
+        <NewsCardList cards={data} title={''} doNeedBtn={false} cardsNumber={5} />
       </main>
     );
   }

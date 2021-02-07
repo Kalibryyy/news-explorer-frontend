@@ -42,6 +42,12 @@
   display: flex;
 }
 
+@media screen and (max-width: 620px) {
+  .footer__links {
+    width: 100%;
+  }
+}
+
 .footer__nav {
   display: flex;
 }
@@ -49,6 +55,8 @@
 @media screen and (max-width: 620px) {
   .footer__nav {
     margin-bottom: 35px;
+    width: 100%;
+    justify-content: space-between;
   }
 }
 
@@ -100,4 +108,15 @@
   .footer__nav-item {
     line-height: 2.7;
   }
+}
+
+.footer__link {
+  text-decoration: none;
+  color: #1A1B22;
+}
+
+.footer__link:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s linear;
 }

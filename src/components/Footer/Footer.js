@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 import github from '../../images/github.svg';
 import fb from '../../images/fb.svg';
@@ -10,12 +11,12 @@ function Footer() {
         <div className="footer__links">
           <nav className="footer__nav">
             <ul className="footer__nav-list">
-              <li className="footer__nav-item">Главная</li>
-              <li className="footer__nav-item">Яндекс.Практикум</li>
+              <li className="footer__nav-item"><Link to={''} className="footer__link">Главная</Link></li>
+              <li className="footer__nav-item"><a href="https://praktikum.yandex.ru/" target="_blank" className="footer__link">Яндекс.Практикум</a></li>
             </ul>
             <ul className="footer__nav-list">
-              <li className="footer__nav-item"><img src={github} /></li>
-              <li className="footer__nav-item"><img src={fb} /></li>
+              <li className="footer__nav-item"><a href="https://github.com/Kalibryyy" target="_blank" className="footer__link"><img src={github}/></a></li>
+              <li className="footer__nav-item"><a href="https://www.facebook.com/" target="_blank" className="footer__link"><img src={fb}/></a></li>
             </ul>
           </nav>
         </div>
