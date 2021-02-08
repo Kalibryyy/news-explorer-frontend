@@ -16,6 +16,14 @@ function Header({ theme, onRegister, onOpenPopupClick, isAnyPopupOpen, }) {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
+    let cleanupFunction = false;
+    window.addEventListener("resize", () => {
+      setWidth(window.innerWidth);
+    });
+    return () => cleanupFunction = true;
+  }, []);
+
+  React.useEffect(() => {
     if (isAnyPopupOpen) {
       setIsPopupOpen(true);
     } else {
@@ -61,19 +69,19 @@ function Header({ theme, onRegister, onOpenPopupClick, isAnyPopupOpen, }) {
   : <div className={isMenuOpen ? 'header__menu-background header__menu-background_white' : ''}>{children}</div> : children;
 
   return (
-    <header className={isWhite ? `header header_color_white` : `header`}>
+    <header className={isWhite ? `header header_color_white` : `header header_color_black`}>
       {isMenuOpen && <div className="header__overlay"></div>}
       <Wrapper>
-      <div className={isWhite
+      <Link to={''}  className={isWhite
       ? `logo__container logo__container_white`
       : `logo__container`}>
         <div className={isWhite
           ? `logo logo_color_white`
           : `logo logo_color_black`}></div>
         {isWhite
-        ? <img className="header__icon" src={isMenuOpen || isPopupOpen ? closeIcon : menuIcon} onClick={openMenu} />
-        : <img className="header__icon" src={isMenuOpen || isPopupOpen ? closeIconBlack : menuIconBlack} onClick={openMenu} />}
-      </div>
+        ? <button type="button" className="header__menu-btn"><img className="header__icon" alt="кнопка управления меню" src={isMenuOpen || isPopupOpen ? closeIcon : menuIcon} onClick={openMenu} /></button>
+        : <button type="button" className="header__menu-btn"><img className="header__icon" alt="кнопка управления меню" src={isMenuOpen || isPopupOpen ? closeIconBlack : menuIconBlack} onClick={openMenu} /></button>}
+      </Link>
       <nav>
         <ul className={isMenuOpen
           ? `header__list header__list_opened`

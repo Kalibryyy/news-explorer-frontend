@@ -10,8 +10,6 @@
 }
 
 .button:hover {
-  opacity: 0.9;
-  transition: opacity 0.3s linear;
   cursor: pointer;
 }
 
@@ -40,7 +38,7 @@
 }
 
 .button_color_grey {
-  background: #E6E8EB;
+  background: #e6e8eb;
 }
 
 .button_inactive {
@@ -50,7 +48,7 @@
 }
 
 .button_inactive:hover {
-  background: #E6E8EB;
+  background: #e6e8eb;
   opacity: 1;
 }
 
@@ -59,6 +57,11 @@
   width: 288px;
   display: block;
   margin: auto;
+}
+
+.button_place_search-results:hover {
+  opacity: 0.9;
+  transition: opacity 0.3s linear;
 }
 
 @media screen and (max-width: 768px) {

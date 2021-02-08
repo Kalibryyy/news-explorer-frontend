@@ -11,6 +11,13 @@
   align-items: center;
 }
 
+@media screen and (max-width: 768px) {
+  .bookmark {
+    right: 8px;
+    top: 8px;
+  }
+}
+
 .bookmark__icon {
   border: 0;
   background: #ffffff;
@@ -39,4 +46,5 @@
 
 .bookmark__icon:focus {
   outline: none;
+  border: 1px solid #59636c;
 }

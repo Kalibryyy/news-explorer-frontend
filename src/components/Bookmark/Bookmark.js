@@ -15,7 +15,8 @@ const [isBookmarkMarked, setIsBookmarkActive] = React.useState(false);
 
   return (
     <div className="bookmark">
-      <button type="button" onClick={handleBookmarkClick} onMouseOver={handleShowSaveMsg} onMouseLeave={handleShowSaveMsg} className={isBookmarkMarked && isLoggedIn ? `bookmark__icon bookmark__icon_active` : `bookmark__icon`}></button>
+      <button type="button" onClick={handleBookmarkClick} onMouseOver={handleShowSaveMsg} onMouseLeave={handleShowSaveMsg}
+      className={isBookmarkMarked && isLoggedIn ? `bookmark__icon bookmark__icon_active` : `bookmark__icon`}></button>
     </div>
   );
 }
