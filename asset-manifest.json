@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "./static/css/main.38e04606.chunk.css",
+    "main.js": "./static/js/main.54243ee9.chunk.js",
+    "main.js.map": "./static/js/main.54243ee9.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.0adecd93.js",
+    "runtime-main.js.map": "./static/js/runtime-main.0adecd93.js.map",
+    "static/js/2.aeb13fd6.chunk.js": "./static/js/2.aeb13fd6.chunk.js",
+    "static/js/2.aeb13fd6.chunk.js.map": "./static/js/2.aeb13fd6.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.38e04606.chunk.css.map": "./static/css/main.38e04606.chunk.css.map",
+    "static/js/2.aeb13fd6.chunk.js.LICENSE.txt": "./static/js/2.aeb13fd6.chunk.js.LICENSE.txt",
+    "static/media/arrow-white.966a44a6.svg": "./static/media/arrow-white.966a44a6.svg",
+    "static/media/arrow.b6b72534.svg": "./static/media/arrow.b6b72534.svg",
+    "static/media/author.1e618893.png": "./static/media/author.1e618893.png",
+    "static/media/Main.css": "./static/media/background.48e24a88.jpg",
+    "static/media/Bookmark.css": "./static/media/bookmark-icon.d30032d6.svg",
+    "static/media/card-forest-lights.921c4ea2.jpg": "./static/media/card-forest-lights.921c4ea2.jpg",
+    "static/media/card-nature.f30d3403.jpg": "./static/media/card-nature.f30d3403.jpg",
+    "static/media/card-plant.3a30c440.jpg": "./static/media/card-plant.3a30c440.jpg",
+    "static/media/card-plants.de9d87ac.jpg": "./static/media/card-plants.de9d87ac.jpg",
+    "static/media/card-taiga-plant.6ee0f17b.jpg": "./static/media/card-taiga-plant.6ee0f17b.jpg",
+    "static/media/card-taiga.cb81b0f6.jpg": "./static/media/card-taiga.cb81b0f6.jpg",
+    "static/media/close-icon-black.308e0551.svg": "./static/media/close-icon-black.308e0551.svg",
+    "static/media/close-icon.90a8751d.svg": "./static/media/close-icon.90a8751d.svg",
+    "static/media/fb.4c3c64e4.svg": "./static/media/fb.4c3c64e4.svg",
+    "static/media/NewsCard.css": "./static/media/garbage-bin.1f113e04.svg",
+    "static/media/github.0f290413.svg": "./static/media/github.0f290413.svg",
+    "static/media/index.css": "./static/media/sourcesanspro-regular.95f3ed41.woff",
+    "static/media/Header.css": "./static/media/logo-white.cefc7494.svg",
+    "static/media/menu-icon-black.e2c58fbe.svg": "./static/media/menu-icon-black.e2c58fbe.svg",
+    "static/media/menu-icon.576727e9.svg": "./static/media/menu-icon.576727e9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0adecd93.js",
+    "static/js/2.aeb13fd6.chunk.js",
+    "static/css/main.38e04606.chunk.css",
+    "static/js/main.54243ee9.chunk.js"
+  ]
+}
