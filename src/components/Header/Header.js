@@ -58,14 +58,14 @@ function Header({ theme, onRegister, onOpenPopupClick, isAnyPopupOpen, }) {
   function openRegister() {
     setIsMenuOpen(false);
 
-    if (width <= 375) {
+    if (width <= 720) {
       setIsPopupOpen(true);
     };
 
     onRegister();
   }
 
-  const Wrapper = ({ children }) => width <= 375 ? isWhite ? <div className={isMenuOpen ? 'header__menu-background' : ''}>{children}</div>
+  const Wrapper = ({ children }) => width <= 720 ? isWhite ? <div className={isMenuOpen ? 'header__menu-background' : ''}>{children}</div>
   : <div className={isMenuOpen ? 'header__menu-background header__menu-background_white' : ''}>{children}</div> : children;
 
   return (
