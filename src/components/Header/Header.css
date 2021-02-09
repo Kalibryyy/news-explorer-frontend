@@ -121,6 +121,7 @@
 @media screen and (max-width: 375px) {
   .header__list_opened {
     padding-left: 16px;
+    padding-right: 16px;
   }
 }
 
@@ -244,7 +245,6 @@
     display: inline;
     margin: 22px 0;
     height: 56px;
-    max-width: 288px;
   }
 }
 
