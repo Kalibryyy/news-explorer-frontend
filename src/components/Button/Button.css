@@ -107,18 +107,6 @@
 
 @media screen and (max-width: 720px) {
   .button_place_input {
-    width: 150px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .button_place_input {
-    width: 110px;
-  }
-}
-
-@media screen and (max-width: 375px) {
-  .button_place_input {
     width: 100%;
     position: static;
   }

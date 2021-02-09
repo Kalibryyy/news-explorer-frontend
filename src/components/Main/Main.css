@@ -46,14 +46,21 @@
 
 @media screen and (max-width: 720px) {
   .search__container {
-    width: 75%;
+    width: 70%;
+    padding: 30px 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .search__container {
+    width: 85%;
+    padding: 30px 0;
   }
 }
 
 @media screen and (max-width: 375px) {
   .search__container {
     width: 90%;
-    padding: 30px 0;
   }
 }
 

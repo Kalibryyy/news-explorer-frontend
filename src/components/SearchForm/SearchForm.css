@@ -25,13 +25,7 @@
   }
 }
 
-@media screen and (max-width: 480px) {
-  .input {
-    padding-right: 120px;
-  }
-}
-
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 720px) {
   .input {
     margin-bottom: 16px;
     padding-left: 16px;
