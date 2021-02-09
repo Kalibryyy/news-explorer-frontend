@@ -1,0 +1,113 @@
+.button {
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.3;
+  height: 64px;
+  border: 0;
+  padding: 0;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: none;
+  border: 1px solid #59636c;
+}
+
+.button_color_white {
+  background: #fff;
+}
+
+.button_color_blue {
+  background: #2f71e5;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  color: #ffffff;
+}
+
+.button_color_blue:hover {
+  background: #347eff;
+  transition: background 0.3s linear;
+}
+
+.button_color_blue:active {
+  background: #2a65cc;
+}
+
+.button_color_grey {
+  background: #e6e8eb;
+}
+
+.button_inactive {
+  background: #e6e8eb;
+  color: #b6bcbf;
+  box-shadow: none;
+}
+
+.button_inactive:hover {
+  background: #e6e8eb;
+  opacity: 1;
+}
+
+.button_place_search-results {
+  border-radius: 80px;
+  width: 288px;
+  display: block;
+  margin: auto;
+}
+
+.button_place_search-results:hover {
+  opacity: 0.9;
+  transition: opacity 0.3s linear;
+}
+
+@media screen and (max-width: 768px) {
+  .button_place_search-results {
+    width: 240px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .button_place_search-results {
+    width: 288px;
+  }
+}
+
+.button_place_popup {
+  width: 360px;
+  border-radius: 100px;
+  margin-top: 39px;
+}
+
+@media screen and (max-width: 530px) {
+  .button_place_popup {
+    width: 100%;
+    font-size: 16px;
+  }
+}
+
+.button_place_input {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-radius: 100px;
+  width: 168px;
+  height: 64px;
+}
+
+@media screen and (max-width: 768px) {
+  .button_place_input {
+    width: 160px;
+    height: 56px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .button_place_input {
+    width: 100%;
+    position: static;
+  }
+}

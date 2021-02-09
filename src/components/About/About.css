@@ -1,0 +1,59 @@
+.about-author__img {
+  object-fit: contain;
+  width: 100%;
+}
+
+@media screen and (max-width: 320px) {
+  .about-author__img {
+    margin-left: 8px;
+  }
+}
+
+.about-author__description {
+  max-width: 600px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-author__description {
+    max-width: 424px;
+  }
+}
+
+.about-author__title {
+  font-family: "Roboto Slab", "Times New Roman", Times, serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 1.15;
+  margin: 51px 0 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-author__title {
+    font-size: 30px;
+    line-height: 1.33;
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .about-author__title {
+    font-size: 22px;
+    line-height: 1.2;
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+}
+
+.about-author__text {
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.33;
+  margin: 0 0 24px;
+}
+
+.about-author__text:last-child {
+  margin-bottom: 0;
+}

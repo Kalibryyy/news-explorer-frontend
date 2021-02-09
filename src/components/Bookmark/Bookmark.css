@@ -1,0 +1,50 @@
+.bookmark {
+  background: #ffffff;
+  border-radius: 8px;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .bookmark {
+    right: 8px;
+    top: 8px;
+  }
+}
+
+.bookmark__icon {
+  border: 0;
+  background: #ffffff;
+  padding: 0;
+  background-image: url(../../images/bookmark-icon.svg);
+  background-repeat: no-repeat;
+  height: 19px;
+  width: 14px;
+}
+
+.bookmark__icon:hover {
+  background-image: url(../../images/bookmark-icon-hover.svg);
+  transition: background-image .3s linear;
+  cursor: pointer;
+}
+
+.bookmark__icon_active {
+  background-image: url(../../images/bookmark-icon-visited.svg);
+  transition: background-image .3s linear;
+  cursor: pointer;
+}
+
+.bookmark__icon_active:hover {
+  background-image: url(../../images/bookmark-icon-visited.svg);
+}
+
+.bookmark__icon:focus {
+  outline: none;
+  border: 1px solid #59636c;
+}
