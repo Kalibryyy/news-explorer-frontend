@@ -16,12 +16,12 @@ function Main() {
       <section className="search">
         <div className="search__img"></div>
         <div className="search__container">
-          <h1 className="search__title">Что творится в мире?</h1>
-          <h3 className="search__subtitle">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</h3>
+          <h1 className="search__title">Что творится в&nbsp;мире?</h1>
+          <h3 className="search__subtitle">Находите самые свежие статьи на&nbsp;любую тему и&nbsp;сохраняйте в&nbsp;своём личном кабинете.</h3>
           <SearchForm />
         </div>
       </section>
-      <section className="search-results">
+      <section className={(areThereAnyResults || isNoResults || isLoading) && `search-results`}>
         {areThereAnyResults && <NewsCardList cards={data} title={'Результаты поиска'} doNeedBtn={true} main={true} cardsNumber={3} />}
         {isNoResults && <NoResults />}
         {isLoading && <ResultsLoading />}
