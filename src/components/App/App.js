@@ -12,9 +12,9 @@ function App() {
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isAnyPopupOpen, setIsAnyPopupOpen] = React.useState(false);
 
-  function handleShowResults() {
+  function handleShowResults({ query }) {
     newsApi
-      .getArticles({ fromDate, tillDate })
+      .getArticles({ fromDate, tillDate, query })
       .then((data) => {
         console.log(data);
       })
@@ -22,8 +22,6 @@ function App() {
         console.log(err)
       });
   }
-
-  console.log(handleShowResults())
 
   React.useEffect(() => {
     if (isRegisterPopupOpen || isLoginPopupOpen || isInfoTooltipOpen) {
@@ -82,7 +80,7 @@ function App() {
           onOpenPopupClick={closeAllPopups}
           isAnyPopupOpen={isAnyPopupOpen}
         />
-        <Main />
+        <Main onFormSubmit={handleShowResults} />
       </Route>
       <Route path="/saved-news">
         <Header

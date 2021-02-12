@@ -4,7 +4,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import data from "../../data/data";
 import { NewsCardList, ResultsLoading, NoResults, About } from "../index";
 
-function Main() {
+function Main({ onFormSubmit }) {
   // Нужно поменять значение стейта на false чтобы убрать секцию с найденными карточками
   const [areThereAnyResults, setAreThereAnyResults] = React.useState(1);
   const [isNoResults, setIsNoResults] = React.useState(false);
@@ -18,7 +18,7 @@ function Main() {
         <div className="search__container">
           <h1 className="search__title">Что творится в&nbsp;мире?</h1>
           <h3 className="search__subtitle">Находите самые свежие статьи на&nbsp;любую тему и&nbsp;сохраняйте в&nbsp;своём личном кабинете.</h3>
-          <SearchForm />
+          <SearchForm onFormSubmit={onFormSubmit}/>
         </div>
       </section>
       <section className={(areThereAnyResults || isNoResults || isLoading) && `search-results`}>

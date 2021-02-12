@@ -21,6 +21,7 @@ function SearchForm({ onFormSubmit }) {
       minLength: true,
     },
   });
+  const { search } = formValues;
   // const [showError, setShowError] = React.useState(false);
 
   console.log('errors', errors.search.required)
@@ -59,9 +60,9 @@ function SearchForm({ onFormSubmit }) {
     //   setShowError(true);
     // }
 
-    // onFormSubmit({
-    //   // search: search,
-    // });
+    onFormSubmit({
+      query: search,
+    });
   }
 
   function handleFocusOut(e) {

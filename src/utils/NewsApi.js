@@ -5,8 +5,8 @@ class NewsApi {
     this._url = options.baseUrl;
   }
 
-  getArticles({fromDate, tillDate}) {
-    return fetch(`${this._url}q=Apple&from=${fromDate}&to=${tillDate}&pageSize=100&sortBy=popularity&apiKey=1dc7974583a849188a7eb3520383b84a`)
+  getArticles({fromDate, tillDate, query}) {
+    return fetch(`${this._url}q=${query}&from=${fromDate}&to=${tillDate}&pageSize=100&sortBy=popularity&apiKey=1dc7974583a849188a7eb3520383b84a`)
       .then(checkStatus);
   }
 }
