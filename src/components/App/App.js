@@ -2,12 +2,28 @@ import React from "react";
 import { Route } from "react-router-dom";
 import "./App.css";
 import { Main, SavedNews, PopupRegister, Header, Footer, PopupLogin, InfoToolTip, } from "../index";
+import newsApi from '../../utils/NewsApi';
+import { fromDate, tillDate } from '../../utils/utils';
+
 
 function App() {
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isAnyPopupOpen, setIsAnyPopupOpen] = React.useState(false);
+
+  function handleShowResults() {
+    newsApi
+      .getArticles({ fromDate, tillDate })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  }
+
+  console.log(handleShowResults())
 
   React.useEffect(() => {
     if (isRegisterPopupOpen || isLoginPopupOpen || isInfoTooltipOpen) {

@@ -21,6 +21,7 @@ function SearchForm({ onFormSubmit }) {
       minLength: true,
     },
   });
+  // const [showError, setShowError] = React.useState(false);
 
   console.log('errors', errors.search.required)
 
@@ -53,6 +54,10 @@ function SearchForm({ onFormSubmit }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    // if (searchDirty) {
+    //   setShowError(true);
+    // }
 
     // onFormSubmit({
     //   // search: search,
