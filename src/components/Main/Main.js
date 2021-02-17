@@ -4,12 +4,10 @@ import SearchForm from '../SearchForm/SearchForm';
 import data from "../../data/data";
 import { NewsCardList, ResultsLoading, NoResults, About } from "../index";
 
-function Main({ onFormSubmit, cards }) {
+function Main({ onFormSubmit, cards, isLoading }) {
   // Нужно поменять значение стейта на false чтобы убрать секцию с найденными карточками
   const [areThereAnyResults, setAreThereAnyResults] = React.useState(1);
   const [isNoResults, setIsNoResults] = React.useState(false);
-    // Нужно поменять значение стейта на true чтобы увидеть спиннер (отступ сверху будет виден при скрытых секции с карточками и секции с результатом ненайденных карточек)
-  const [isLoading, setIsLoading] = React.useState(false);
 
     return (
       <main>

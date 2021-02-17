@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import "./App.css";
 import { Main, SavedNews, PopupRegister, Header, Footer, PopupLogin, InfoToolTip, } from "../index";
 import newsApi from '../../utils/NewsApi';
 import { fromDate, tillDate } from '../../utils/utils';
-
 
 function App() {
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
@@ -12,16 +11,31 @@ function App() {
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isAnyPopupOpen, setIsAnyPopupOpen] = React.useState(false);
   const [cards, setCards] = React.useState([]);
-console.log('cards', cards)
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  console.log('cards', cards)
+
+  React.useEffect(() => {
+    const articles = JSON.parse(localStorage.getItem('cardsArray'));
+    console.log('useEffect', articles)
+    setCards(articles);
+  }, []);
+
   function handleShowResults({ query }) {
+    setIsLoading(true);
     newsApi
       .getArticles({ fromDate, tillDate, query })
       .then((cardsArray) => {
-        console.log(cardsArray.articles); // data передать в локал сторидж и в NewsCardList
+        if (cardsArray.articles) {
+          localStorage.setItem('cardsArray', JSON.stringify(cardsArray.articles));
+        }
         setCards(cardsArray.articles);
       })
       .catch((err) => {
         console.log(err)
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
@@ -82,7 +96,7 @@ console.log('cards', cards)
           onOpenPopupClick={closeAllPopups}
           isAnyPopupOpen={isAnyPopupOpen}
         />
-        <Main onFormSubmit={handleShowResults} cards={cards} />
+        <Main onFormSubmit={handleShowResults} cards={cards} isLoading={isLoading} />
       </Route>
       <Route path="/saved-news">
         <Header
