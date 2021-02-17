@@ -4,7 +4,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import data from "../../data/data";
 import { NewsCardList, ResultsLoading, NoResults, About } from "../index";
 
-function Main({ onFormSubmit }) {
+function Main({ onFormSubmit, cards }) {
   // Нужно поменять значение стейта на false чтобы убрать секцию с найденными карточками
   const [areThereAnyResults, setAreThereAnyResults] = React.useState(1);
   const [isNoResults, setIsNoResults] = React.useState(false);
@@ -22,7 +22,7 @@ function Main({ onFormSubmit }) {
         </div>
       </section>
       <section className={(areThereAnyResults || isNoResults || isLoading) && `search-results`}>
-        {areThereAnyResults && <NewsCardList cards={data} title={'Результаты поиска'} doNeedBtn={true} main={true} cardsNumber={3} />}
+        {areThereAnyResults && <NewsCardList cards={data} data={cards} title={'Результаты поиска'} doNeedBtn={true} main={true} cardsNumber={3} />}
         {isNoResults && <NoResults />}
         {isLoading && <ResultsLoading />}
       </section>

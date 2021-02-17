@@ -11,12 +11,14 @@ function App() {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isAnyPopupOpen, setIsAnyPopupOpen] = React.useState(false);
-
+  const [cards, setCards] = React.useState([]);
+console.log('cards', cards)
   function handleShowResults({ query }) {
     newsApi
       .getArticles({ fromDate, tillDate, query })
-      .then((data) => {
-        console.log(data);
+      .then((cardsArray) => {
+        console.log(cardsArray.articles); // data передать в локал сторидж и в NewsCardList
+        setCards(cardsArray.articles);
       })
       .catch((err) => {
         console.log(err)
@@ -80,7 +82,7 @@ function App() {
           onOpenPopupClick={closeAllPopups}
           isAnyPopupOpen={isAnyPopupOpen}
         />
-        <Main onFormSubmit={handleShowResults} />
+        <Main onFormSubmit={handleShowResults} cards={cards} />
       </Route>
       <Route path="/saved-news">
         <Header

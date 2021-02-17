@@ -2,10 +2,11 @@ import React from "react";
 import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
 
-const NewsCardList = ({ cards, title, doNeedBtn, main, cardsNumber }) => {
+const NewsCardList = ({ cards, title, doNeedBtn, main, cardsNumber, data }) => {
   const [quantity, setQuantity] = React.useState(cardsNumber);
 
   const [width, setWidth] = React.useState(window.innerWidth);
+  console.log('NewsCardList', data)
 
   React.useEffect(() => {
     let cleanupFunction = false;
