@@ -3,7 +3,19 @@ import './Main.css';
 import SearchForm from '../SearchForm/SearchForm';
 import { NewsCardList, ResultsLoading, NoResults, About } from "../index";
 
-function Main({ onFormSubmit, cards, isLoading, isNoResults, areThereAnyResults }) {
+function Main({ onFormSubmit, cards, isLoading, }) {
+  const [areThereAnyResults, setAreThereAnyResults] = React.useState(false);
+  const [isNoResults, setIsNoResults] = React.useState(false);
+
+  React.useEffect(() => {
+    if (cards !== null && cards.length > 0) {
+      setIsNoResults(false);
+      setAreThereAnyResults(true);
+    } else if (cards !==null && cards.length === 0) {
+      setAreThereAnyResults(false);
+      setIsNoResults(true);
+    }
+  }, [cards])
 
   return (
     <main>
@@ -16,8 +28,8 @@ function Main({ onFormSubmit, cards, isLoading, isNoResults, areThereAnyResults 
       </div>
     </section>
     <section className={(areThereAnyResults || isNoResults || isLoading) ? `search-results` : undefined}>
-      {areThereAnyResults && <NewsCardList cards={cards} title={'Результаты поиска'} doNeedBtn={true} main={true} />}
-      {isNoResults && <NoResults />}
+      {!isLoading && areThereAnyResults && <NewsCardList cards={cards} title={'Результаты поиска'} doNeedBtn={true} main={true} />}
+      {!isLoading && isNoResults && <NoResults />}
       {isLoading && <ResultsLoading />}
     </section>
     <section className="about-author">

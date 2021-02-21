@@ -10,10 +10,8 @@ function App() {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isAnyPopupOpen, setIsAnyPopupOpen] = React.useState(false);
-  const [cards, setCards] = React.useState([]);
+  const [cards, setCards] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [areThereAnyResults, setAreThereAnyResults] = React.useState(false);
-  const [isNoResults, setIsNoResults] = React.useState(false);
 
   React.useEffect(() => {
     const articles = JSON.parse(localStorage.getItem('cardsArray'));
@@ -25,20 +23,11 @@ function App() {
 
   function handleShowResults({ query }) {
     setIsLoading(true);
-    setIsNoResults(false);
     newsApi
       .getArticles({ fromDate, tillDate, query })
       .then((cardsArray) => {
-        console.log(cardsArray.articles.length)
-        if (cardsArray.articles.length > 0) {
-          localStorage.setItem('cardsArray', JSON.stringify(cardsArray.articles));
-          setCards(cardsArray.articles);
-          setAreThereAnyResults(true);
-          setIsNoResults(false);
-        } else {
-          setIsNoResults(true);
-          setAreThereAnyResults(false);
-        }
+        localStorage.setItem('cardsArray', JSON.stringify(cardsArray.articles));
+        setCards(cardsArray.articles);
       })
       .catch((err) => {
         console.log(err)
@@ -105,7 +94,7 @@ function App() {
           onOpenPopupClick={closeAllPopups}
           isAnyPopupOpen={isAnyPopupOpen}
         />
-        <Main onFormSubmit={handleShowResults} cards={cards} isLoading={isLoading} areThereAnyResults={areThereAnyResults} isNoResults={isNoResults} />
+        <Main onFormSubmit={handleShowResults} cards={cards} isLoading={isLoading} />
       </Route>
       <Route path="/saved-news">
         <Header
