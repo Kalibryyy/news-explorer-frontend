@@ -15,8 +15,6 @@ function App() {
   const [areThereAnyResults, setAreThereAnyResults] = React.useState(false);
   const [isNoResults, setIsNoResults] = React.useState(false);
 
-  console.log('cards', cards)
-
   React.useEffect(() => {
     const articles = JSON.parse(localStorage.getItem('cardsArray'));
     console.log('useEffect', articles)
@@ -27,15 +25,19 @@ function App() {
 
   function handleShowResults({ query }) {
     setIsLoading(true);
+    setIsNoResults(false);
     newsApi
       .getArticles({ fromDate, tillDate, query })
       .then((cardsArray) => {
-        if (cardsArray.articles) {
+        console.log(cardsArray.articles.length)
+        if (cardsArray.articles.length > 0) {
           localStorage.setItem('cardsArray', JSON.stringify(cardsArray.articles));
           setCards(cardsArray.articles);
-          setAreThereAnyResults(true)
+          setAreThereAnyResults(true);
+          setIsNoResults(false);
         } else {
           setIsNoResults(true);
+          setAreThereAnyResults(false);
         }
       })
       .catch((err) => {
