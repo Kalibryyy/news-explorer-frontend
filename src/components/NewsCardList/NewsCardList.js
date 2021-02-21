@@ -2,8 +2,8 @@ import React from "react";
 import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
 
-const NewsCardList = ({ cards, title, doNeedBtn, main, cardsNumber }) => {
-  const [quantity, setQuantity] = React.useState(cardsNumber);
+const NewsCardList = ({ cards, title, doNeedBtn, main }) => {
+  const [quantity, setQuantity] = React.useState(3);
 
   const [width, setWidth] = React.useState(window.innerWidth);
 
@@ -36,7 +36,10 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, cardsNumber }) => {
   }
 
   function showMoreCards() {
-    setQuantity(6)
+    console.log(quantity)
+    if (quantity < 10) {
+      setQuantity(quantity + 3)
+    }
   }
 
   return (

@@ -3,20 +3,17 @@ import './Main.css';
 import SearchForm from '../SearchForm/SearchForm';
 import { NewsCardList, ResultsLoading, NoResults, About } from "../index";
 
-function Main({ onFormSubmit, cards, isLoading }) {
-  // Нужно поменять значение стейта на false чтобы убрать секцию с найденными карточками
-  const [areThereAnyResults, setAreThereAnyResults] = React.useState(false);
-  const [isNoResults, setIsNoResults] = React.useState(false);
-  console.log(areThereAnyResults)
-
-  React.useEffect(() => {
-    if (cards === []) {
-      setIsNoResults(true);
-    } else if (cards.length > 0) {
-      setAreThereAnyResults(true);
-    }
-  }, [cards]);
-  console.log(cards.length)
+function Main({ onFormSubmit, cards, isLoading, isNoResults, areThereAnyResults }) {
+//   const [areThereAnyResults, setAreThereAnyResults] = React.useState(false);
+//   const [isNoResults, setIsNoResults] = React.useState(false);
+// console.log(isNoResults)
+//   React.useEffect(() => {
+//     if (cards === []) {
+//       setIsNoResults(true);
+//     } else if (cards.length > 0) {
+//       setAreThereAnyResults(true);
+//     }
+//   }, [cards]);
 
     return (
       <main>
@@ -29,7 +26,7 @@ function Main({ onFormSubmit, cards, isLoading }) {
         </div>
       </section>
       <section className={(areThereAnyResults || isNoResults || isLoading) ? `search-results` : undefined}>
-        {areThereAnyResults && <NewsCardList cards={cards} title={'Результаты поиска'} doNeedBtn={true} main={true} cardsNumber={3} />}
+        {areThereAnyResults && <NewsCardList cards={cards} title={'Результаты поиска'} doNeedBtn={true} main={true} />}
         {isNoResults && <NoResults />}
         {isLoading && <ResultsLoading />}
       </section>

@@ -12,6 +12,8 @@ function App() {
   const [isAnyPopupOpen, setIsAnyPopupOpen] = React.useState(false);
   const [cards, setCards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [areThereAnyResults, setAreThereAnyResults] = React.useState(false);
+  const [isNoResults, setIsNoResults] = React.useState(false);
 
   console.log('cards', cards)
 
@@ -30,8 +32,11 @@ function App() {
       .then((cardsArray) => {
         if (cardsArray.articles) {
           localStorage.setItem('cardsArray', JSON.stringify(cardsArray.articles));
+          setCards(cardsArray.articles);
+          setAreThereAnyResults(true)
+        } else {
+          setIsNoResults(true);
         }
-        setCards(cardsArray.articles);
       })
       .catch((err) => {
         console.log(err)
@@ -98,7 +103,7 @@ function App() {
           onOpenPopupClick={closeAllPopups}
           isAnyPopupOpen={isAnyPopupOpen}
         />
-        <Main onFormSubmit={handleShowResults} cards={cards} isLoading={isLoading} />
+        <Main onFormSubmit={handleShowResults} cards={cards} isLoading={isLoading} areThereAnyResults={areThereAnyResults} isNoResults={isNoResults} />
       </Route>
       <Route path="/saved-news">
         <Header
