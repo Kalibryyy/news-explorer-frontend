@@ -7,6 +7,8 @@ const NewsCardList = ({ cards, title, doNeedBtn, main }) => {
 
   const [width, setWidth] = React.useState(window.innerWidth);
 
+  console.log(cards);
+
   React.useEffect(() => {
     let cleanupFunction = false;
     window.addEventListener("resize", () => {
@@ -48,7 +50,7 @@ const NewsCardList = ({ cards, title, doNeedBtn, main }) => {
       <ul className="news-cards__list">
         {cards.slice(0, quantity).map((item) => (
           <NewsCard
-            // key={item.id}
+            key={item.url}
             img={item.urlToImage}
             title={
               item.title.length > titleLength
@@ -63,7 +65,7 @@ const NewsCardList = ({ cards, title, doNeedBtn, main }) => {
             source={item.source.name}
             date={item.publishedAt}
             // keyword={item.keyword}
-            // link={item.link}
+            link={item.url}
             main={main}
           />
         ))}

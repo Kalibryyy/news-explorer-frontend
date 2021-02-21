@@ -15,7 +15,6 @@ function App() {
 
   React.useEffect(() => {
     const articles = JSON.parse(localStorage.getItem('cardsArray'));
-    console.log('useEffect', articles)
     if (articles !== null) {
       setCards(articles);
     }
@@ -23,10 +22,15 @@ function App() {
 
   function handleShowResults({ query }) {
     setIsLoading(true);
+    if (localStorage.getItem('cardsArray') !== null) {
+      localStorage.removeItem('cardsArray');
+    }
     newsApi
       .getArticles({ fromDate, tillDate, query })
       .then((cardsArray) => {
-        localStorage.setItem('cardsArray', JSON.stringify(cardsArray.articles));
+        if (cardsArray.articles.length > 0){
+          localStorage.setItem('cardsArray', JSON.stringify(cardsArray.articles));
+        }
         setCards(cardsArray.articles);
       })
       .catch((err) => {
