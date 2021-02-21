@@ -2,11 +2,10 @@ import React from "react";
 import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
 
-const NewsCardList = ({ cards, title, doNeedBtn, main, cardsNumber, data }) => {
+const NewsCardList = ({ cards, title, doNeedBtn, main, cardsNumber }) => {
   const [quantity, setQuantity] = React.useState(cardsNumber);
 
   const [width, setWidth] = React.useState(window.innerWidth);
-  console.log('NewsCardList', data)
 
   React.useEffect(() => {
     let cleanupFunction = false;
@@ -46,22 +45,22 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, cardsNumber, data }) => {
       <ul className="news-cards__list">
         {cards.slice(0, quantity).map((item) => (
           <NewsCard
-            key={item.id}
-            img={item.img}
+            // key={item.id}
+            img={item.urlToImage}
             title={
               item.title.length > titleLength
                 ? `${item.title.substring(0, titleLength)}...`
                 : `${item.title.substring(0, titleLength)}`
             }
             text={
-              item.text.length > textLength
-                ? `${item.text.substring(0, textLength)}...`
-                : `${item.text.substring(0, textLength)}`
+              item.description.length > textLength
+                ? `${item.description.substring(0, textLength)}...`
+                : `${item.description.substring(0, textLength)}`
             }
-            source={item.source}
-            date={item.date}
-            keyword={item.keyword}
-            link={item.link}
+            source={item.source.name}
+            date={item.publishedAt}
+            // keyword={item.keyword}
+            // link={item.link}
             main={main}
           />
         ))}

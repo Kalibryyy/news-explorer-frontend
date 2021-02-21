@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
 import "./App.css";
 import { Main, SavedNews, PopupRegister, Header, Footer, PopupLogin, InfoToolTip, } from "../index";
@@ -18,7 +18,9 @@ function App() {
   React.useEffect(() => {
     const articles = JSON.parse(localStorage.getItem('cardsArray'));
     console.log('useEffect', articles)
-    setCards(articles);
+    if (articles !== null) {
+      setCards(articles);
+    }
   }, []);
 
   function handleShowResults({ query }) {

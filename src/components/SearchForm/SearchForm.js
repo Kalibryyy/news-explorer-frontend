@@ -24,7 +24,7 @@ function SearchForm({ onFormSubmit }) {
   const { search } = formValues;
   // const [showError, setShowError] = React.useState(false);
 
-  console.log('errors', errors.search.required)
+  // console.log('errors', errors.search.required)
 
   const handleInputChange = React.useCallback(
     (e) => {
@@ -69,7 +69,7 @@ function SearchForm({ onFormSubmit }) {
     setSearchDirty(true);
   }
 
-console.log(searchDirty)
+// console.log(searchDirty)
   return (
     <form onSubmit={handleSubmit} className="search-form">
       <div className="search-form__error-container">
