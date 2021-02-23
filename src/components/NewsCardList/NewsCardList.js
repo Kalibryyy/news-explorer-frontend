@@ -2,8 +2,9 @@ import React from "react";
 import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
 
-const NewsCardList = ({ cards, title, doNeedBtn, main }) => {
+const NewsCardList = ({ cards, title, doNeedBtn, main, onSave }) => {
   const [quantity, setQuantity] = React.useState(3);
+  const cardsToRender = cards.slice(0, quantity);
 
   const [width, setWidth] = React.useState(window.innerWidth);
 
@@ -38,10 +39,12 @@ const NewsCardList = ({ cards, title, doNeedBtn, main }) => {
   }
 
   function showMoreCards() {
-    console.log(quantity)
-    if (quantity < 10) {
-      setQuantity(quantity + 3)
-    }
+    setQuantity(quantity + 3)
+  }
+
+  function handleSave() {
+    console.log(handleSave) //MainApi.createArticle.then(res => пройти циклом по cards проверить совпадает ли url карточки с res.url
+    // если они не совпадают - карточка не меняется, если совпали, меняю cards.item на res.item isBookmarkMarked (в локалсторидж?)
   }
 
   return (
@@ -67,6 +70,7 @@ const NewsCardList = ({ cards, title, doNeedBtn, main }) => {
             // keyword={item.keyword}
             link={item.url}
             main={main}
+            onCardSave={handleSave}
           />
         ))}
       </ul>

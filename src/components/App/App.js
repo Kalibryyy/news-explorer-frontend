@@ -12,7 +12,7 @@ function App() {
   const [isAnyPopupOpen, setIsAnyPopupOpen] = React.useState(false);
   const [cards, setCards] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
-
+// при авторизации и лог ауте обнулять локал сторидж
   React.useEffect(() => {
     const articles = JSON.parse(localStorage.getItem('cardsArray'));
     if (articles !== null) {

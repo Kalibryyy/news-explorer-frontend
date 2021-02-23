@@ -4,6 +4,7 @@ import data from '../../data/data';
 import { NewsCardList, SavedNewsHeader } from '../index';
 
 function SavedNews() {
+
     return (
       <main className="saved-news">
         <SavedNewsHeader />
