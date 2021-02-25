@@ -28,6 +28,7 @@ function App() {
     .getUserArticles()
     .then((res) => {
       console.log(res);
+      // const savedCards = 
       res.forEach((card) => {
         // card.link = card.url;
         // card.image = card.urlToImage;
@@ -75,13 +76,13 @@ function App() {
     mainApi
     .createArticle(item.keyword, item.title, item.description, item.publishedAt, item.source.name, item.url, item.urlToImage)
     .then((res) => {
-      cards.forEach((card) => {
-        if (card.url === res.link) {
-          card._id = res._id;
-          console.log('card', card, 'res', res)
-        }
-      })
-      setCards(cards);
+        const newCards = cards.map((card) => {
+          if (card.url === res.link) {
+             card._id = res._id;
+          }
+          return card;
+       })
+      setCards(newCards);
       localStorage.setItem('cardsArray', JSON.stringify(cards));
     })
     .catch((err) => console.log(`Error ${err}`));
@@ -93,14 +94,15 @@ function App() {
     .deleteArticle(item._id)
     .then((res) => {
       console.log(res);
-      cards.forEach((card) => {
+      const newCards = cards.map((card) => {
         if (card._id === res._id) {
-          card._id = null;
+          card._id = undefined;
           console.log('card', card, 'res', res)
         }
-        setCards(cards);
-        localStorage.setItem('cardsArray', JSON.stringify(cards));
+        return card;
       })
+        setCards(newCards);
+        localStorage.setItem('cardsArray', JSON.stringify(cards));
     })
     .catch((err) => console.log(`Error ${err}`));
   }

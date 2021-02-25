@@ -2,15 +2,6 @@ import React from "react";
 import "./Bookmark.css";
 
 function Bookmark({ handleSaveMsg, isLoggedIn, onCardSave, id, onCardUnSave }) {
-  // const [isBookmarkMarked, setIsBookmarkMarked] = React.useState(false);
-
-  // React.useEffect(() => {
-  //   if (id) {
-  //     setIsBookmarkMarked(true);
-  //   } else {
-  //     setIsBookmarkMarked(false);
-  //   }
-  // }, []);
 
   function handleBookmarkClick() {
     console.log(id);
