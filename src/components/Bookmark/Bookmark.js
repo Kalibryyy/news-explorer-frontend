@@ -7,7 +7,7 @@ const [isBookmarkMarked, setIsBookmarkMarked] = React.useState(false);
 
   function handleBookmarkClick() {
     setIsBookmarkMarked(!isBookmarkMarked);
-    onCardSave(); //только для залогиненного
+    onCardSave();
   };
 
   function handleShowSaveMsg() {

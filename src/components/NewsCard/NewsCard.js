@@ -5,10 +5,8 @@ import { formatCardDate } from '../../utils/utils';
 
 const NewsCard = ({ title, img, date, text, source, keyword, main, link, onCardSave }) => {
   // нужно поменять стейт на true чтобы увидеть версию карточки на странице залогинненого пользователя
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
+  const [isLoggedIn, setIsLoggedIn] = React.useState(1);
   const [isBookmarkChosen, setIsBookmarkChosen] = React.useState(false);
-
   const [isGarbageBinChosen, setIsGarbageBinChosen] = React.useState(false);
 
   function handleSaveMsg() {

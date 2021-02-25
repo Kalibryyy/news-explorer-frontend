@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import "./App.css";
 import { Main, SavedNews, PopupRegister, Header, Footer, PopupLogin, InfoToolTip, } from "../index";
 import newsApi from '../../utils/NewsApi';
+import * as mainApi from '../../utils/MainApi';
 import { fromDate, tillDate } from '../../utils/utils';
 
 function App() {
@@ -28,6 +29,9 @@ function App() {
     newsApi
       .getArticles({ fromDate, tillDate, query })
       .then((cardsArray) => {
+        cardsArray.articles.forEach((item) => {
+          item.keyword = query
+        })
         if (cardsArray.articles.length > 0){
           localStorage.setItem('cardsArray', JSON.stringify(cardsArray.articles));
         }
@@ -98,7 +102,7 @@ function App() {
           onOpenPopupClick={closeAllPopups}
           isAnyPopupOpen={isAnyPopupOpen}
         />
-        <Main onFormSubmit={handleShowResults} cards={cards} isLoading={isLoading} />
+        <Main onFormSubmit={handleShowResults} cards={cards} isLoading={isLoading} setCards={setCards} />
       </Route>
       <Route path="/saved-news">
         <Header

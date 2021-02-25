@@ -3,7 +3,7 @@ import './Main.css';
 import SearchForm from '../SearchForm/SearchForm';
 import { NewsCardList, ResultsLoading, NoResults, About } from "../index";
 
-function Main({ onFormSubmit, cards, isLoading }) {
+function Main({ onFormSubmit, cards, isLoading, input, setCards }) {
   const [areThereAnyResults, setAreThereAnyResults] = React.useState(false);
   const [isNoResults, setIsNoResults] = React.useState(false);
 
@@ -24,11 +24,11 @@ function Main({ onFormSubmit, cards, isLoading }) {
       <div className="search__container">
         <h1 className="search__title">Что творится в&nbsp;мире?</h1>
         <h3 className="search__subtitle">Находите самые свежие статьи на&nbsp;любую тему и&nbsp;сохраняйте в&nbsp;своём личном кабинете.</h3>
-        <SearchForm onFormSubmit={onFormSubmit}/>
+        <SearchForm onFormSubmit={onFormSubmit} input={input} />
       </div>
     </section>
     <section className={(areThereAnyResults || isNoResults || isLoading) ? `search-results` : undefined}>
-      {!isLoading && areThereAnyResults && <NewsCardList cards={cards} title={'Результаты поиска'} doNeedBtn={true} main={true} />}
+      {!isLoading && areThereAnyResults && <NewsCardList cards={cards} title={'Результаты поиска'} doNeedBtn={true} main={true} setCards={setCards} />}
       {!isLoading && isNoResults && <NoResults />}
       {isLoading && <ResultsLoading />}
     </section>

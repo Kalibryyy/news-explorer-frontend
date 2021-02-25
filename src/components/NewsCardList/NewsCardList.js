@@ -1,8 +1,9 @@
 import React from "react";
 import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
+import * as mainApi from '../../utils/MainApi';
 
-const NewsCardList = ({ cards, title, doNeedBtn, main, onSave }) => {
+const NewsCardList = ({ cards, title, doNeedBtn, main, setCards, }) => {
   const [quantity, setQuantity] = React.useState(3);
   const cardsToRender = cards.slice(0, quantity);
 
@@ -42,16 +43,26 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, onSave }) => {
     setQuantity(quantity + 3)
   }
 
-  function handleSave() {
-    console.log(handleSave) //MainApi.createArticle.then(res => пройти циклом по cards проверить совпадает ли url карточки с res.url
-    // если они не совпадают - карточка не меняется, если совпали, меняю cards.item на res.item isBookmarkMarked (в локалсторидж?)
+  function handleSave(item) {
+    mainApi
+    .createArticle(item.keyword, item.title, item.description, item.publishedAt, item.source.name, item.url, item.urlToImage)
+    .then((res) => {
+      cards.forEach((card) => {
+        if (card.url === res.link) {
+          card._id = res._id;
+          console.log('card', card, 'res', res)
+        }
+      })
+      setCards(cards);
+      localStorage.setItem('cardsArray', JSON.stringify(cards));
+    })
   }
 
   return (
     <div className="news-cards__container">
       <h2 className="news-cards__title">{title}</h2>
       <ul className="news-cards__list">
-        {cards.slice(0, quantity).map((item) => (
+        {cardsToRender.map((item) => (
           <NewsCard
             key={item.url}
             img={item.urlToImage}
@@ -67,10 +78,10 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, onSave }) => {
             }
             source={item.source.name}
             date={item.publishedAt}
-            // keyword={item.keyword}
+            keyword={item.keyword}
             link={item.url}
             main={main}
-            onCardSave={handleSave}
+            onCardSave={handleSave.bind(null, item)}
           />
         ))}
       </ul>
