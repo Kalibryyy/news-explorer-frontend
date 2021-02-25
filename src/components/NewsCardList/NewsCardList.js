@@ -1,12 +1,10 @@
 import React from "react";
 import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
-import * as mainApi from '../../utils/MainApi';
 
-const NewsCardList = ({ cards, title, doNeedBtn, main, setCards, }) => {
+const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave }) => {
   const [quantity, setQuantity] = React.useState(3);
   const cardsToRender = cards.slice(0, quantity);
-
   const [width, setWidth] = React.useState(window.innerWidth);
 
   console.log(cards);
@@ -43,21 +41,6 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, setCards, }) => {
     setQuantity(quantity + 3)
   }
 
-  function handleSave(item) {
-    mainApi
-    .createArticle(item.keyword, item.title, item.description, item.publishedAt, item.source.name, item.url, item.urlToImage)
-    .then((res) => {
-      cards.forEach((card) => {
-        if (card.url === res.link) {
-          card._id = res._id;
-          console.log('card', card, 'res', res)
-        }
-      })
-      setCards(cards);
-      localStorage.setItem('cardsArray', JSON.stringify(cards));
-    })
-  }
-
   return (
     <div className="news-cards__container">
       <h2 className="news-cards__title">{title}</h2>
@@ -81,7 +64,10 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, setCards, }) => {
             keyword={item.keyword}
             link={item.url}
             main={main}
-            onCardSave={handleSave.bind(null, item)}
+            onCardSave={onCardSave.bind(null, item)}
+            onCardUnSave={onCardUnSave.bind(null, item)}
+            id={item._id}
+            cards={cards}
           />
         ))}
       </ul>

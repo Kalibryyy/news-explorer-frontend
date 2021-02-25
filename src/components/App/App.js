@@ -12,6 +12,7 @@ function App() {
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isAnyPopupOpen, setIsAnyPopupOpen] = React.useState(false);
   const [cards, setCards] = React.useState(null);
+  const [savedCards, setSavedCards] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
 // при авторизации и лог ауте обнулять локал сторидж
   React.useEffect(() => {
@@ -19,6 +20,30 @@ function App() {
     if (articles !== null) {
       setCards(articles);
     }
+  }, []);
+
+  React.useEffect(() => {
+    setIsLoading(true);
+    mainApi
+    .getUserArticles()
+    .then((res) => {
+      console.log(res);
+      res.forEach((card) => {
+        // card.link = card.url;
+        // card.image = card.urlToImage;
+        // card.text = card.description;
+        // card.source = {};
+        // card.source.name = card.source;
+        // card.date = card.publishedAt;
+      })
+      setSavedCards(savedCards);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    .finally(() => {
+      setIsLoading(false);
+    });
   }, []);
 
   function handleShowResults({ query }) {
@@ -43,6 +68,41 @@ function App() {
       .finally(() => {
         setIsLoading(false);
       });
+  }
+
+  function handleCardSave(item) {
+    console.log(item)
+    mainApi
+    .createArticle(item.keyword, item.title, item.description, item.publishedAt, item.source.name, item.url, item.urlToImage)
+    .then((res) => {
+      cards.forEach((card) => {
+        if (card.url === res.link) {
+          card._id = res._id;
+          console.log('card', card, 'res', res)
+        }
+      })
+      setCards(cards);
+      localStorage.setItem('cardsArray', JSON.stringify(cards));
+    })
+    .catch((err) => console.log(`Error ${err}`));
+  }
+
+  function handleCardUnSave(item) {
+    console.log(item)
+    mainApi
+    .deleteArticle(item._id)
+    .then((res) => {
+      console.log(res);
+      cards.forEach((card) => {
+        if (card._id === res._id) {
+          card._id = null;
+          console.log('card', card, 'res', res)
+        }
+        setCards(cards);
+        localStorage.setItem('cardsArray', JSON.stringify(cards));
+      })
+    })
+    .catch((err) => console.log(`Error ${err}`));
   }
 
   React.useEffect(() => {
@@ -102,7 +162,7 @@ function App() {
           onOpenPopupClick={closeAllPopups}
           isAnyPopupOpen={isAnyPopupOpen}
         />
-        <Main onFormSubmit={handleShowResults} cards={cards} isLoading={isLoading} setCards={setCards} />
+        <Main onFormSubmit={handleShowResults} cards={cards} isLoading={isLoading} setCards={setCards} onCardSave={handleCardSave} onCardUnSave={handleCardUnSave} />
       </Route>
       <Route path="/saved-news">
         <Header
@@ -110,7 +170,7 @@ function App() {
           onOpenPopupClick={closeAllPopups}
           isAnyPopupOpen={isAnyPopupOpen}
         />
-        <SavedNews />
+        {/* <SavedNews cards={savedCards} /> */}
       </Route>
       <Footer />
       <PopupRegister

@@ -3,7 +3,7 @@ import './Main.css';
 import SearchForm from '../SearchForm/SearchForm';
 import { NewsCardList, ResultsLoading, NoResults, About } from "../index";
 
-function Main({ onFormSubmit, cards, isLoading, input, setCards }) {
+function Main({ onFormSubmit, cards, isLoading, input, setCards, onCardSave, onCardUnSave }) {
   const [areThereAnyResults, setAreThereAnyResults] = React.useState(false);
   const [isNoResults, setIsNoResults] = React.useState(false);
 
@@ -28,7 +28,7 @@ function Main({ onFormSubmit, cards, isLoading, input, setCards }) {
       </div>
     </section>
     <section className={(areThereAnyResults || isNoResults || isLoading) ? `search-results` : undefined}>
-      {!isLoading && areThereAnyResults && <NewsCardList cards={cards} title={'Результаты поиска'} doNeedBtn={true} main={true} setCards={setCards} />}
+      {!isLoading && areThereAnyResults && <NewsCardList cards={cards} title={'Результаты поиска'} doNeedBtn={true} main={true} setCards={setCards} onCardSave={onCardSave} onCardUnSave={onCardUnSave} />}
       {!isLoading && isNoResults && <NoResults />}
       {isLoading && <ResultsLoading />}
     </section>
