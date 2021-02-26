@@ -106,7 +106,7 @@ const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onOpenInfoTooltip
     <ModalInput title={'Имя'} type={"text"} name={"name"} placeholder={"Введите своё имя"} onChange={handleInputChange} value={name}/>
     <div className="modal__error-container">
       <span className="modal__server-error">Такой пользователь уже есть</span>
-      <Button place={'popup'} text={'Зарегистрироваться'} color={'blue'} />
+      <Button place={'popup'} text={'Зарегистрироваться'} color={'blue'} disabled={isSubmitDisabled}/>
     </div>
   </PopupWithForm>
   );
