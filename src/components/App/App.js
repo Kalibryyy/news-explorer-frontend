@@ -44,8 +44,6 @@ function App() {
       setIsLoading(false);
     });
   }, []);
-  console.log(savedCards)
-
 
   function handleShowResults({ query }) {
     setIsLoading(true);

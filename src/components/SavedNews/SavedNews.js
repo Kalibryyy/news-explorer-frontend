@@ -7,7 +7,7 @@ console.log(savedCards)
     return (
       <main className="saved-news">
         <SavedNewsHeader />
-        <NewsCardList title={''} doNeedBtn={false} savedCards={savedCards} />
+        <NewsCardList title={''} doNeedBtn={false} cards={savedCards} showAll />
       </main>
     );
   }

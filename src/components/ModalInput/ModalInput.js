@@ -1,7 +1,7 @@
 import React from 'react';
 import './ModalInput.css';
 
-function ModalInput({ title, type, name, placeholder, minLength, maxLength, error }) {
+function ModalInput({ title, type, name, placeholder, minLength, maxLength, error, onChange }) {
   return (
     <>
     <h3 className="modal-input__title">{title}</h3>
@@ -13,6 +13,7 @@ function ModalInput({ title, type, name, placeholder, minLength, maxLength, erro
       placeholder={placeholder}
       minLength={minLength}
       maxLength={maxLength}
+      onChange={onChange}
       required
       />
       <span className="modal-input__error">{error}</span>

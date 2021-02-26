@@ -2,34 +2,9 @@ import React from "react";
 import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
 
-const NewsCardList = ({ cards, savedCards, title, doNeedBtn, main, onCardSave, onCardUnSave }) => {
+const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave, showAll }) => {
   const [quantity, setQuantity] = React.useState(3);
-  // const cardsToRender = cards.slice(0, quantity) || savedCards;
-  // const cardsToRender = cards.slice(0, quantity)
   const [width, setWidth] = React.useState(window.innerWidth);
-  console.log(cards)
-  console.log(savedCards)
-  savedCards.map((item) => {
-    console.log(item);
-  })
-
-  // let cardsToRender
-  // if (cards) {
-  //   cardsToRender = cards.slice(0, quantity)
-  //   return cardsToRender
-  // } else {
-  //   cardsToRender = savedCards;
-  //   return cardsToRender
-  // }
-  // let cardsToRender
-  // React.useEffect(() => {
-
-  //   cards
-  //   ? cardsToRender = cards.slice(0, quantity)
-  //   : cardsToRender = savedCards;
-  //   },
-  //  []);
-
 
   React.useEffect(() => {
     let cleanupFunction = false;
@@ -59,6 +34,15 @@ const NewsCardList = ({ cards, savedCards, title, doNeedBtn, main, onCardSave, o
     titleLength = 40;
   }
 
+  React.useEffect(() => {
+    if (showAll) {
+      setQuantity(cards.length);
+    }
+  }, [])
+
+  if (!cards || cards === null) { return null }
+  const cardsToRender = cards.slice(0, quantity);
+
   function showMoreCards() {
     setQuantity(quantity + 3)
   }
@@ -67,7 +51,7 @@ const NewsCardList = ({ cards, savedCards, title, doNeedBtn, main, onCardSave, o
     <div className="news-cards__container">
       <h2 className="news-cards__title">{title}</h2>
       <ul className="news-cards__list">
-        {savedCards.map((item) => (
+        {cardsToRender.map((item) => (
           <NewsCard
             key={item.url}
             img={item.urlToImage}
