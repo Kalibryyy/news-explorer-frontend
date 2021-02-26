@@ -2,12 +2,12 @@ import React from 'react';
 import './SavedNews.css';
 import { NewsCardList, SavedNewsHeader } from '../index';
 
-function SavedNews({ cards }) {
-
+function SavedNews({ savedCards }) {
+console.log(savedCards)
     return (
       <main className="saved-news">
         <SavedNewsHeader />
-        <NewsCardList cards={cards} title={''} doNeedBtn={false} cardsNumber={5} />
+        <NewsCardList title={''} doNeedBtn={false} savedCards={savedCards} />
       </main>
     );
   }

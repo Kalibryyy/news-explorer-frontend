@@ -27,15 +27,13 @@ function App() {
     mainApi
     .getUserArticles()
     .then((res) => {
-      console.log(res);
-      // const savedCards = 
-      res.forEach((card) => {
-        // card.link = card.url;
-        // card.image = card.urlToImage;
-        // card.text = card.description;
-        // card.source = {};
-        // card.source.name = card.source;
-        // card.date = card.publishedAt;
+      const savedCards = res.map((card) => {
+        card.url = card.link;
+        card.urlToImage = card.image;
+        card.description = card.text;
+        card.source = {name: card.source};
+        card.publishedAt = card.date;
+        return card;
       })
       setSavedCards(savedCards);
     })
@@ -46,6 +44,8 @@ function App() {
       setIsLoading(false);
     });
   }, []);
+  console.log(savedCards)
+
 
   function handleShowResults({ query }) {
     setIsLoading(true);
@@ -172,7 +172,7 @@ function App() {
           onOpenPopupClick={closeAllPopups}
           isAnyPopupOpen={isAnyPopupOpen}
         />
-        {/* <SavedNews cards={savedCards} /> */}
+        <SavedNews savedCards={savedCards} />
       </Route>
       <Footer />
       <PopupRegister
