@@ -3,7 +3,7 @@ import './NewsCard.css';
 import Bookmark from '../Bookmark/Bookmark';
 import { formatCardDate } from '../../utils/utils';
 
-const NewsCard = ({ title, img, date, text, source, keyword, main, link, id, onCardSave, onCardUnSave, cards }) => {
+const NewsCard = ({ title, img, date, text, source, keyword, main, link, id, onCardSave, onCardUnSave, cards, onCardDelete }) => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(1);
   const [isBookmarkChosen, setIsBookmarkChosen] = React.useState(false);
   const [isGarbageBinChosen, setIsGarbageBinChosen] = React.useState(false);
@@ -14,6 +14,10 @@ const NewsCard = ({ title, img, date, text, source, keyword, main, link, id, onC
 
   function handleDeleteMsg() {
     setIsGarbageBinChosen(!isGarbageBinChosen);
+  }
+
+  function handleDeleteClick() {
+    onCardDelete(id);
   }
 
  return (
@@ -28,7 +32,7 @@ const NewsCard = ({ title, img, date, text, source, keyword, main, link, id, onC
       </div>
     </article>
     {isLoggedIn && !main
-    ? <button className="card__garbage-bin" onMouseOver={handleDeleteMsg} onMouseLeave={handleDeleteMsg} />
+    ? <button className="card__garbage-bin" onMouseOver={handleDeleteMsg} onMouseLeave={handleDeleteMsg} onClick={handleDeleteClick} />
     : <Bookmark handleSaveMsg={handleSaveMsg} isLoggedIn={isLoggedIn} onCardSave={onCardSave} onCardUnSave={onCardUnSave} id={id} cards={cards} />}
     {isLoggedIn && !main && <div className="card__keyword-label">{keyword}</div>}
     {isBookmarkChosen && !isLoggedIn && <div className="card__save-article">Войдите, чтобы сохранять статьи</div>}

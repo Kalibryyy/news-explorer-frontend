@@ -2,10 +2,10 @@ import React from "react";
 import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
 
-const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave, showAll }) => {
+const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave, showAll, onCardDelete }) => {
   const [quantity, setQuantity] = React.useState(3);
   const [width, setWidth] = React.useState(window.innerWidth);
-
+  console.log(quantity)
   React.useEffect(() => {
     let cleanupFunction = false;
     window.addEventListener("resize", () => {
@@ -35,10 +35,10 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave,
   }
 
   React.useEffect(() => {
-    if (showAll) {
+    if (showAll && cards !== null) {
       setQuantity(cards.length);
     }
-  }, [])
+  }, [cards])
 
   if (!cards || cards === null) { return null }
   const cardsToRender = cards.slice(0, quantity);
@@ -74,6 +74,7 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave,
             onCardUnSave={main && onCardUnSave.bind(null, item)}
             id={item._id}
             cards={cards}
+            onCardDelete={onCardDelete}
           />
         ))}
       </ul>

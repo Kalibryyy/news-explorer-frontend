@@ -105,6 +105,17 @@ function App() {
     .catch((err) => console.log(`Error ${err}`));
   }
 
+  function handleCardDelete(id) {
+    // const jwt = localStorage.getItem('jwt');
+    mainApi
+      .deleteArticle(id)
+      .then(() => {
+        const newCards = savedCards.filter((c) => c._id !== id);
+        setSavedCards(newCards);
+      })
+      .catch((err) => console.log(`Error ${err}`));
+  }
+
   React.useEffect(() => {
     if (isRegisterPopupOpen || isLoginPopupOpen || isInfoTooltipOpen) {
       setIsAnyPopupOpen(true);
@@ -170,7 +181,7 @@ function App() {
           onOpenPopupClick={closeAllPopups}
           isAnyPopupOpen={isAnyPopupOpen}
         />
-        <SavedNews savedCards={savedCards} />
+        <SavedNews savedCards={savedCards} onCardDelete={handleCardDelete} />
       </Route>
       <Footer />
       <PopupRegister

@@ -39,15 +39,13 @@ const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onOpenInfoTooltip
       required: true,
     },
   });
-  const { email, password, name } = formValues;
 
-  console.log('errors', errors.email.required)
-  // , errors.password.required, errors.name.required)
+  console.log('errorsEmail', errors.email.required, 'errorsPassword', errors.password.required, 'errorsName', errors.name.required)
 
   const handleInputChange = React.useCallback(
     (e) => {
       const { name, value } = e.target;
-      setFormValues({ [name]: value });
+      setFormValues((prevState) => ({ ...prevState, [name]: value })); // объект меняется при каждом изменении, в setFormValues возвращаем этот новый объект, кот состоит из старых и нового перезаписанного поля
     },
     [setFormValues],
   );
@@ -89,6 +87,12 @@ const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onOpenInfoTooltip
     [formValues, setErrors],
   );
 
+  const { email, password, name } = formValues;
+  const isNameInvalid = Object.values(errors.name).some(Boolean);
+  const isPasswordInvalid = Object.values(errors.password).some(Boolean);
+  const isEmailInvalid = Object.values(errors.email).some(Boolean);
+  const isSubmitDisabled = isNameInvalid || isPasswordInvalid || isEmailInvalid;
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -97,9 +101,9 @@ const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onOpenInfoTooltip
 
   return (
   <PopupWithForm isOpen={isOpen} onSubmit={handleSubmit} onClose={onClose} title={title} text={'Войти'} onPopupClick={onPopupClick}>
-    <ModalInput title={'Email'} type={"email"} name={"email"} placeholder={"Введите почту"} error={"Неправильный формат email"} onChange={handleInputChange} />
-    <ModalInput title={'Пароль'} type={"password"} name={"password"} placeholder={"Введите пароль"} onChange={handleInputChange} />
-    <ModalInput title={'Имя'} type={"text"} name={"name"} placeholder={"Введите своё имя"} onChange={handleInputChange} />
+    <ModalInput title={'Email'} type={"email"} name={"email"} placeholder={"Введите почту"} error={"Неправильный формат email"} onChange={handleInputChange} value={email} />
+    <ModalInput title={'Пароль'} type={"password"} name={"password"} placeholder={"Введите пароль"} onChange={handleInputChange} value={password} />
+    <ModalInput title={'Имя'} type={"text"} name={"name"} placeholder={"Введите своё имя"} onChange={handleInputChange} value={name}/>
     <div className="modal__error-container">
       <span className="modal__server-error">Такой пользователь уже есть</span>
       <Button place={'popup'} text={'Зарегистрироваться'} color={'blue'} />
