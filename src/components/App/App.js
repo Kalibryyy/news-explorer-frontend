@@ -1,10 +1,11 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import "./App.css";
 import { Main, SavedNews, PopupRegister, Header, Footer, PopupLogin, InfoToolTip, } from "../index";
 import newsApi from '../../utils/NewsApi';
 import * as mainApi from '../../utils/MainApi';
 import { fromDate, tillDate } from '../../utils/utils';
+import ProtectedRoute from '../ProtectedRoute';
 
 function App() {
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
@@ -14,6 +15,7 @@ function App() {
   const [cards, setCards] = React.useState(null);
   const [savedCards, setSavedCards] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
+  const history = useHistory();
 // при авторизации и лог ауте обнулять локал сторидж
   React.useEffect(() => {
     const articles = JSON.parse(localStorage.getItem('cardsArray'));
@@ -136,16 +138,35 @@ function App() {
     setIsInfoTooltipOpen(false);
   }
 
-  function handleOpenInfoTooltip() {
-    setIsInfoTooltipOpen(!isInfoTooltipOpen);
-    setIsRegisterPopupOpen(false);
-    setIsLoginPopupOpen(false);
-  }
+  // function handleOpenInfoTooltip() {
+  //   setIsInfoTooltipOpen(!isInfoTooltipOpen);
+  //   setIsRegisterPopupOpen(false);
+  //   setIsLoginPopupOpen(false);
+  // }
 
   function closeAllPopups() {
     setIsRegisterPopupOpen(false);
     setIsLoginPopupOpen(false);
     setIsInfoTooltipOpen(false);
+  }
+
+  function handleFormSubmit({ name, email, password }) {
+    setIsLoading(true);
+    mainApi
+      .register(name, password, email)
+      .then((data) => {
+        console.log(data);
+        setIsInfoTooltipOpen(!isInfoTooltipOpen);
+        setIsRegisterPopupOpen(false);
+        setIsLoginPopupOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        // setIsSubmitError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   React.useEffect(() => {
@@ -166,6 +187,7 @@ function App() {
 
   return (
     <div className="page">
+      <Switch>
       <Route exact path="/">
         <Header
           theme={"dark"}
@@ -174,6 +196,7 @@ function App() {
           isAnyPopupOpen={isAnyPopupOpen}
         />
         <Main onFormSubmit={handleShowResults} cards={cards} isLoading={isLoading} setCards={setCards} onCardSave={handleCardSave} onCardUnSave={handleCardUnSave} />
+        <Footer />
       </Route>
       <Route path="/saved-news">
         <Header
@@ -181,15 +204,16 @@ function App() {
           onOpenPopupClick={closeAllPopups}
           isAnyPopupOpen={isAnyPopupOpen}
         />
-        <SavedNews savedCards={savedCards} onCardDelete={handleCardDelete} />
+        <ProtectedRoute path="/saved-news" isLoggedIn={true} component={SavedNews} savedCards={savedCards} onCardDelete={handleCardDelete} />
+        <Footer />
       </Route>
-      <Footer />
+      </Switch>
       <PopupRegister
         onPopupClick={handleLoginClick}
         isOpen={isRegisterPopupOpen}
         onClose={closeAllPopups}
         title={"Регистрация"}
-        onOpenInfoTooltip={handleOpenInfoTooltip}
+        onFormSubmit={handleFormSubmit}
       />
       <PopupLogin
         isOpen={isLoginPopupOpen}

@@ -1,7 +1,8 @@
 import React from 'react';
 import './ModalInput.css';
 
-function ModalInput({ title, type, name, placeholder, minLength, maxLength, error, onChange, value }) {
+function ModalInput({ title, type, name, placeholder, minLength, maxLength, onChange, value, nameError, passwordError, emailError, isEmailError }) {
+
   return (
     <>
     <h3 className="modal-input__title">{title}</h3>
@@ -17,7 +18,10 @@ function ModalInput({ title, type, name, placeholder, minLength, maxLength, erro
       value={value}
       required
       />
-      <span className="modal-input__error">{error}</span>
+      {nameError && <span className="modal-input__error">{nameError}</span>}
+      {passwordError && <span className="modal-input__error">{passwordError}</span>}
+      {emailError && !isEmailError && <span className="modal-input__error">{emailError}</span>}
+      {isEmailError && <span className="modal-input__error">{isEmailError}</span>}
     </div>
     </>
   );

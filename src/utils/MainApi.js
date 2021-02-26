@@ -1,6 +1,10 @@
 const BASE_URL = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`;
 
-const checkResponse = (res) => (res.ok ? res.json() : Promise.reject(new Error(`Ошибка: ${res.status}`)));
+// const checkResponse = (res) => (res.ok ? res.json() : Promise.reject(new Error(`Ошибка: ${res}`)));
+const checkResponse = (res) => new Promise((resolve, reject) => {
+  const func = res.status < 400 ? resolve : reject;
+  return func(res.json());
+});
 
 export const register = (name, password, email) => fetch(`${BASE_URL}/signup`, {
   method: 'POST',

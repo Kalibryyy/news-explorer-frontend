@@ -9,7 +9,7 @@ function PopupWithForm({ isOpen, onSubmit, onClose, title, children, onPopupClic
   return (
         <div className={isOpen ? `modal modal_opened` : `modal`}>
             <div onClick={onClose} className="modal__overlay"></div>
-            <form className={`modal__container`} onSubmit={onSubmit}>
+            <form className={`modal__container`} onSubmit={onSubmit} noValidate>
                 <img src={closeIcon} alt="закрывающая иконка" className="modal__close hover" onClick={onClose} />
                 <h2 className="modal__title">{title}</h2>
                 {children}

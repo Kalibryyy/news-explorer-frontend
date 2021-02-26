@@ -68,3 +68,24 @@ export function formatCardDate(date) {
 
   return `${dayOfMonth} ${stringMonth}, ${year}`;
 }
+
+export const validators = {
+  email: {
+    required: (value) => {
+      return value === '';
+    },
+    isEmail: (value) => {
+      return !/([a-zA-Z0-9]([-_.]?[a-zA-Z0-9]+)*)@([a-zA-Z0-9]([-]?[a-zA-Z0-9]+)*)(\.([a-zA-Z])+)+/i.test(value);
+    },
+  },
+  password: {
+    required: (value) => {
+      return value === '';
+    },
+  },
+  name: {
+    required: (value) => {
+      return value === '';
+    },
+  }
+}
