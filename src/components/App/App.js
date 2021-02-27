@@ -138,12 +138,6 @@ function App() {
     setIsInfoTooltipOpen(false);
   }
 
-  // function handleOpenInfoTooltip() {
-  //   setIsInfoTooltipOpen(!isInfoTooltipOpen);
-  //   setIsRegisterPopupOpen(false);
-  //   setIsLoginPopupOpen(false);
-  // }
-
   function closeAllPopups() {
     setIsRegisterPopupOpen(false);
     setIsLoginPopupOpen(false);

@@ -3,8 +3,6 @@ import './PopupRegister.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { ModalInput, Button } from "../index";
 import { validators } from '../../utils/utils';
-// вынести в utils
-
 
 const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onFormSubmit }) => {
   const [formValues, setFormValues] = React.useState({
@@ -12,7 +10,6 @@ const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onFormSubmit }) =
     password: '',
     name: '',
   });
-
   const [errors, setErrors] = React.useState({
     email: {
       required: true,
@@ -25,7 +22,6 @@ const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onFormSubmit }) =
       required: true,
     },
   });
-
   const [isNameDirty, setIsNameDirty] = React.useState(false);
   const [isPasswordDirty, setIsPasswordDirty] = React.useState(false);
   const [isEmailDirty, setIsEmailDirty] = React.useState(false);
@@ -101,13 +97,26 @@ const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onFormSubmit }) =
     if (errors.password.required && isPasswordDirty) {
       setPasswordError('Заполните, пожалуйста, это поле')
     }
-    if (errors.email.required && isEmailDirty) {
+    if (errors.email.required && isEmailDirty && formValues.email === '') {
       setEmailError('Заполните, пожалуйста, это поле')
     }
-    if (errors.email.isEmail && isEmailDirty) {
+    if (errors.email.isEmail && isEmailDirty && formValues.email !== '') {
       setIsEmailError('Неправильный формат email')
+    } else if (!errors.name.required && isNameDirty) {
+      setNameError(null);
+    } else if (!errors.password.required && isPasswordDirty) {
+      setPasswordError(null);
+    } else if (!errors.email.required && isEmailDirty) { // поле заполнено
+      console.log('setEmailError')
+      setEmailError(null);
+      if (!errors.email.isEmail && isEmailDirty) {
+        console.log('setIsEmailError')
+        setIsEmailError(null);
+      } else if (isEmailError && formValues.email === '') {
+        setIsEmailError(null);
+      }
     }
-  }, [errors])
+  }, [errors, formValues])
 
   function handleSubmit(e) {
     e.preventDefault();
