@@ -83,10 +83,8 @@ const PopupLogin = ({ isOpen, onClose, title, onPopupClick, onFormSubmit }) => {
     } else if (!errors.password.required && isPasswordDirty) {
       setPasswordError(null);
     } else if (!errors.email.isEmail && isEmailDirty) {
-      console.log('setIsEmailError')
       setIsEmailError(null);
       if (!errors.email.required && isEmailDirty) {
-        console.log('setEmailError')
         setEmailError(null);
       }
     } else if (isEmailError && formValues.email === '') {

@@ -107,10 +107,8 @@ const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onFormSubmit }) =
     } else if (!errors.password.required && isPasswordDirty) {
       setPasswordError(null);
     } else if (!errors.email.required && isEmailDirty) { // поле заполнено
-      console.log('setEmailError')
       setEmailError(null);
       if (!errors.email.isEmail && isEmailDirty) {
-        console.log('setIsEmailError')
         setIsEmailError(null);
       } else if (isEmailError && formValues.email === '') {
         setIsEmailError(null);

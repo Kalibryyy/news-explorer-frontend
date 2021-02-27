@@ -16,16 +16,11 @@ function App() {
   const [cards, setCards] = React.useState(null);
   const [savedCards, setSavedCards] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [userInfo, setUserInfo] = React.useState({
-    name: '',
-  });
-  const userName = userInfo.name;
-  console.log(userInfo)
-  console.log(currentUser);
   const history = useHistory();
-
+console.log(isLoggedIn)
+console.log(currentUser)
   // Регистрация и авторизация
   React.useEffect(() => {
     // if (!isLoggedIn)
@@ -36,12 +31,7 @@ function App() {
         mainApi
           .getUserInfo(jwt)
           .then((res) => {
-            console.log(res); //{email: "1234@mail.ru", name: "ya"}
-            if (res.name) {
-              setUserInfo({
-                name: res.name,
-              });
-            }
+            setCurrentUser(res);
           })
           .catch((err) => console.log(`Error ${err}`))
           .finally(() => {
@@ -56,14 +46,8 @@ function App() {
       mainApi
         .getUserInfo(jwt)
         .then((res) => {
-          console.log(res); //{email: "1234@mail.ru", name: "ya"}
-          if (res.name) {
-            setUserInfo({
-              name: res.name,
-            });
+          setCurrentUser(res);
           setIsLoggedIn(true);
-          //   // history.push('/');
-          }
         })
         .catch((err) => console.error(err));
     }
@@ -107,7 +91,6 @@ function App() {
           localStorage.removeItem('cardsArray');
         }
         setIsLoggedIn(true);
-        setCurrentUser(data);
         closeAllPopups();
       })
       .catch((err) => {
@@ -125,9 +108,7 @@ function App() {
   function handleLogOut() {
     setIsRegisterPopupOpen(false);
     localStorage.removeItem('jwt');
-    setUserInfo({
-      name: '',
-    });
+    setCurrentUser({});
     setIsLoggedIn(false);
   }
 
@@ -261,7 +242,6 @@ function App() {
     setIsInfoTooltipOpen(false);
   }
 
-
   React.useEffect(() => {
     if (isRegisterPopupOpen || isLoginPopupOpen || isInfoTooltipOpen) {
       const onKeypress = (e) => {
@@ -281,36 +261,36 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
+      <Header
+        onRegister={handleRegisterClick}
+        onOpenPopupClick={closeAllPopups}
+        isAnyPopupOpen={isAnyPopupOpen}
+        isLoggedIn={isLoggedIn}
+        onLogOut={handleLogOut}
+      />
       <Switch>
-      <Route exact path="/">
-        <Header
-          theme={"dark"}
-          onRegister={handleRegisterClick}
-          onOpenPopupClick={closeAllPopups}
-          isAnyPopupOpen={isAnyPopupOpen}
-          isLoggedIn={isLoggedIn}
-          onLogOut={handleLogOut}
-          userName={userName}
-        />
-        <Main onFormSubmit={handleShowResults} cards={cards} isLoading={isLoading} setCards={setCards} onCardSave={handleCardSave} onCardUnSave={handleCardUnSave} />
-        <Footer />
-      </Route>
-      <Route exact path="/saved-news">
-        <Header
-          onRegister={handleRegisterClick}
-          onOpenPopupClick={closeAllPopups}
-          isAnyPopupOpen={isAnyPopupOpen}
-          isLoggedIn={isLoggedIn}
-          onLogOut={handleLogOut}
-          userName={userName}
-        />
-        <ProtectedRoute path="/saved-news" isLoggedIn={isLoggedIn} component={SavedNews} savedCards={savedCards} onCardDelete={handleCardDelete} />
-        <Footer />
-      </Route>
-      <Route path="">
-            <Redirect to="/" />
+        <Route exact path="/">
+          <Main
+          onFormSubmit={handleShowResults}
+          cards={cards}
+          isLoading={isLoading}
+          setCards={setCards}
+          onCardSave={handleCardSave}
+          onCardUnSave={handleCardUnSave} />
+        </Route>
+        {isLoggedIn === null ? null : (<ProtectedRoute exact path="/saved-news"
+        isLoggedIn={isLoggedIn}
+        component={SavedNews}
+        savedCards={savedCards}
+        onCardDelete={handleCardDelete} />)}
+        <Route exact path="/saved-news">
+          {isLoggedIn ? <Redirect to="/saved-news" /> : <Redirect to="/" />}
+        </Route>
+        <Route path="">
+          <Redirect to="/" />
         </Route>
       </Switch>
+      <Footer />
       <PopupRegister
         onPopupClick={handleLoginClick}
         isOpen={isRegisterPopupOpen}

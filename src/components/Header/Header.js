@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import arrowImage from '../../images/arrow.svg';
 import arrowImageWhite from '../../images/arrow-white.svg';
@@ -7,14 +7,16 @@ import menuIcon from '../../images/menu-icon.svg'
 import closeIcon from '../../images/close-icon.svg';
 import closeIconBlack from '../../images/close-icon-black.svg';
 import menuIconBlack from '../../images/menu-icon-black.svg';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-function Header({ theme, onRegister, onLogOut, onOpenPopupClick, isAnyPopupOpen, isLoggedIn, userName }) {
+function Header({ onRegister, onLogOut, onOpenPopupClick, isAnyPopupOpen, isLoggedIn, }) {
   const [isWhite, setIsWhite] = React.useState(false);
   const [width, setWidth] = React.useState(window.innerWidth);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
-console.log(isLoggedIn)
-console.log(userName)
+  const currentUser = React.useContext(CurrentUserContext);
+  const currentPath = useLocation().pathname;
+
   React.useEffect(() => {
     let cleanupFunction = false;
     window.addEventListener("resize", () => {
@@ -32,8 +34,10 @@ console.log(userName)
   }, [isAnyPopupOpen])
 
   React.useEffect(() => {
-    if (theme === 'dark') {
+    if (currentPath === '/') {
       setIsWhite(true);
+    } else {
+      setIsWhite(false)
     }
   },)
 
@@ -100,7 +104,7 @@ console.log(userName)
           </li>
           <li className="header__item">
             {isLoggedIn ? <button onClick={handleAuthBtnClick} className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>
-           {userName}
+           {currentUser.name}
               {isLoggedIn && <img className="header__auth-arrow-img" src={isWhite ? arrowImageWhite : arrowImage}/>}
             </button> : <button onClick={handleAuthBtnClick} className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>
            Авторизоваться
