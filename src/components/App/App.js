@@ -26,6 +26,30 @@ function App() {
   console.log(currentUser);
   const history = useHistory();
 
+  // Регистрация и авторизация
+  React.useEffect(() => {
+    // if (!isLoggedIn)
+    // history.push('/');
+    const jwt = localStorage.getItem('jwt');
+      if (isLoggedIn && jwt) {
+        setIsLoading(true);
+        mainApi
+          .getUserInfo(jwt)
+          .then((res) => {
+            console.log(res); //{email: "1234@mail.ru", name: "ya"}
+            if (res.name) {
+              setUserInfo({
+                name: res.name,
+              });
+            }
+          })
+          .catch((err) => console.log(`Error ${err}`))
+          .finally(() => {
+            setIsLoading(false);
+          });
+      }
+    }, [isLoggedIn]);
+
   function tokenCheck() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
@@ -49,6 +73,65 @@ function App() {
     tokenCheck();
   }, []);
 
+  function handleFormSubmit({ name, email, password }) {
+    setIsLoading(true);
+    mainApi
+      .register(name, password, email)
+      .then((data) => {
+        console.log(data);
+        setIsInfoTooltipOpen(!isInfoTooltipOpen);
+        setIsRegisterPopupOpen(false);
+        setIsLoginPopupOpen(false);
+        if (localStorage.getItem('cardsArray') !== null) {
+          localStorage.removeItem('cardsArray');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        // setIsSubmitError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
+  function handleLogin({ password, email }) {
+    mainApi
+      .authorize(password, email)
+      .then((data) => {
+        console.log(data)
+        if (data.token) {
+          localStorage.setItem('jwt', data.token);
+        }
+        if (localStorage.getItem('cardsArray') !== null) {
+          localStorage.removeItem('cardsArray');
+        }
+        setIsLoggedIn(true);
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+        // if (err === 400) {
+        //   setMessage('Не передано одно из полей');
+        // } else if (err === 401) {
+        //   setMessage('Пользователь с email не найден');
+        // }
+        // setIsSignedUp(false);
+        // setIsAuthPopupOpen(true);
+      });
+  }
+
+  function handleLogOut() {
+    setIsRegisterPopupOpen(false);
+    localStorage.removeItem('jwt');
+    setUserInfo({
+      name: '',
+    });
+    setIsLoggedIn(false);
+  }
+
+  // Карточки
   React.useEffect(() => {
     const articles = JSON.parse(localStorage.getItem('cardsArray'));
     if (articles !== null) {
@@ -151,6 +234,7 @@ function App() {
       .catch((err) => console.log(`Error ${err}`));
   }
 
+  // Попапы
   React.useEffect(() => {
     if (isRegisterPopupOpen || isLoginPopupOpen || isInfoTooltipOpen) {
       setIsAnyPopupOpen(true);
@@ -177,82 +261,6 @@ function App() {
     setIsInfoTooltipOpen(false);
   }
 
-  function handleFormSubmit({ name, email, password }) {
-    setIsLoading(true);
-    mainApi
-      .register(name, password, email)
-      .then((data) => {
-        console.log(data);
-        setIsInfoTooltipOpen(!isInfoTooltipOpen);
-        setIsRegisterPopupOpen(false);
-        setIsLoginPopupOpen(false);
-        if (localStorage.getItem('cardsArray') !== null) {
-          localStorage.removeItem('cardsArray');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        // setIsSubmitError(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }
-
-  function handleLogin({ password, email }) {
-    mainApi
-      .authorize(password, email)
-      .then((data) => {
-        console.log(data)
-        if (data.token) {
-          localStorage.setItem('jwt', data.token);
-        }
-        if (localStorage.getItem('cardsArray') !== null) {
-          localStorage.removeItem('cardsArray');
-        }
-        setIsLoggedIn(true);
-        setCurrentUser(data);
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(err);
-        // if (err === 400) {
-        //   setMessage('Не передано одно из полей');
-        // } else if (err === 401) {
-        //   setMessage('Пользователь с email не найден');
-        // }
-        // setIsSignedUp(false);
-        // setIsAuthPopupOpen(true);
-      });
-  }
-
-  function handleLogOut() {
-    setIsRegisterPopupOpen(false);
-    localStorage.removeItem('jwt');
-    setUserInfo({
-      name: '',
-    });
-    setIsLoggedIn(false);
-  }
-
-  // React.useEffect(() => {
-  // if (!loggedIn) history.push('/');
-  // const jwt = localStorage.getItem('jwt');
-  //   if (isLoggedIn && jwt) {
-  //     setIsSpinnerLoading(true);
-  //     api
-  //       .getAppInfo('users/me', 'cards', jwt)
-  //       .then((data) => {
-  //         const [userData, cardsArray] = data;
-  //         setCards(cardsArray);
-  //         setCurrentUser(userData);
-  //       })
-  //       .catch((err) => console.log(`Error ${err}`))
-  //       .finally(() => {
-  //         setIsSpinnerLoading(false);
-  //       });
-  //   }
-  // }, [isLoggedIn]);
 
   React.useEffect(() => {
     if (isRegisterPopupOpen || isLoginPopupOpen || isInfoTooltipOpen) {
