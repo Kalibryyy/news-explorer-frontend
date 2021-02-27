@@ -18,9 +18,12 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
-  // const [userInfo, setUserInfo] = React.useState({
-  //   name: '',
-  // });
+  const [userInfo, setUserInfo] = React.useState({
+    name: '',
+  });
+  const userName = userInfo.name;
+  console.log(userInfo)
+  console.log(currentUser);
   const history = useHistory();
 
   function tokenCheck() {
@@ -29,14 +32,14 @@ function App() {
       mainApi
         .getUserInfo(jwt)
         .then((res) => {
-          console.log(res); //App.js:27 {email: "1234@mail.ru", name: "ya"}
-          // if (res.email) {
-          //   setUserInfo({
-          //     email: res.email,
-          //   });
+          console.log(res); //{email: "1234@mail.ru", name: "ya"}
+          if (res.name) {
+            setUserInfo({
+              name: res.name,
+            });
           setIsLoggedIn(true);
           //   // history.push('/');
-          // }
+          }
         })
         .catch((err) => console.error(err));
     }
@@ -210,9 +213,6 @@ function App() {
         setIsLoggedIn(true);
         setCurrentUser(data);
         closeAllPopups();
-        // setUserInfo({ // почему не setCurrentUser?
-        //   email,
-        // });
       })
       .catch((err) => {
         console.log(err);
@@ -226,14 +226,11 @@ function App() {
       });
   }
 
-  console.log(currentUser);
-
   function handleLogOut() {
     setIsRegisterPopupOpen(false);
     localStorage.removeItem('jwt');
-    setCurrentUser({
-      email: '',
-      name: ''
+    setUserInfo({
+      name: '',
     });
     setIsLoggedIn(false);
   }
@@ -285,6 +282,7 @@ function App() {
           isAnyPopupOpen={isAnyPopupOpen}
           isLoggedIn={isLoggedIn}
           onLogOut={handleLogOut}
+          userName={userName}
         />
         <Main onFormSubmit={handleShowResults} cards={cards} isLoading={isLoading} setCards={setCards} onCardSave={handleCardSave} onCardUnSave={handleCardUnSave} />
         <Footer />
@@ -296,6 +294,7 @@ function App() {
           isAnyPopupOpen={isAnyPopupOpen}
           isLoggedIn={isLoggedIn}
           onLogOut={handleLogOut}
+          userName={userName}
         />
         <ProtectedRoute path="/saved-news" isLoggedIn={isLoggedIn} component={SavedNews} savedCards={savedCards} onCardDelete={handleCardDelete} />
         <Footer />
