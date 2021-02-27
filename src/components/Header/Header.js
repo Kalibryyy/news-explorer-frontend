@@ -8,13 +8,12 @@ import closeIcon from '../../images/close-icon.svg';
 import closeIconBlack from '../../images/close-icon-black.svg';
 import menuIconBlack from '../../images/menu-icon-black.svg';
 
-function Header({ theme, onRegister, onOpenPopupClick, isAnyPopupOpen, }) {
+function Header({ theme, onRegister, onLogOut, onOpenPopupClick, isAnyPopupOpen, isLoggedIn, }) {
   const [isWhite, setIsWhite] = React.useState(false);
   const [width, setWidth] = React.useState(window.innerWidth);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
+console.log(isLoggedIn)
   React.useEffect(() => {
     let cleanupFunction = false;
     window.addEventListener("resize", () => {
@@ -55,14 +54,20 @@ function Header({ theme, onRegister, onOpenPopupClick, isAnyPopupOpen, }) {
     }
   }
 
-  function openRegister() {
+  function handleAuthBtnClick() {
     setIsMenuOpen(false);
 
     if (width <= 720) {
       setIsPopupOpen(true);
     };
 
-    onRegister();
+    if (isLoggedIn) {
+      onLogOut();
+    } else {
+      onRegister();
+    }
+
+    // isLoggedIn ? onLogOut() : onRegister();
   }
 
   const Wrapper = ({ children }) => width <= 720 ? isWhite ? <div className={isMenuOpen ? 'header__menu-background' : ''}>{children}</div>
@@ -99,7 +104,7 @@ function Header({ theme, onRegister, onOpenPopupClick, isAnyPopupOpen, }) {
             : `header__btn header__btn_color_black`}>Сохранённые статьи</Link>
           </li>
           <li className="header__item">
-            <button onClick={openRegister} className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>
+            <button onClick={handleAuthBtnClick} className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>
               {isLoggedIn
               ? `Грета`
               : `Авторизоваться`}{isLoggedIn && <img className="header__auth-arrow-img" src={isWhite ? arrowImageWhite : arrowImage}/>}

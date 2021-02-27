@@ -1,11 +1,12 @@
 import React from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 import "./App.css";
 import { Main, SavedNews, PopupRegister, Header, Footer, PopupLogin, InfoToolTip, } from "../index";
 import newsApi from '../../utils/NewsApi';
 import * as mainApi from '../../utils/MainApi';
 import { fromDate, tillDate } from '../../utils/utils';
 import ProtectedRoute from '../ProtectedRoute';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
@@ -15,8 +16,36 @@ function App() {
   const [cards, setCards] = React.useState(null);
   const [savedCards, setSavedCards] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState({});
+  // const [userInfo, setUserInfo] = React.useState({
+  //   name: '',
+  // });
   const history = useHistory();
-// при авторизации и лог ауте обнулять локал сторидж
+
+  function tokenCheck() {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      mainApi
+        .getUserInfo(jwt)
+        .then((res) => {
+          console.log(res); //App.js:27 {email: "1234@mail.ru", name: "ya"}
+          // if (res.email) {
+          //   setUserInfo({
+          //     email: res.email,
+          //   });
+          setIsLoggedIn(true);
+          //   // history.push('/');
+          // }
+        })
+        .catch((err) => console.error(err));
+    }
+  }
+
+  React.useEffect(() => {
+    tokenCheck();
+  }, []);
+
   React.useEffect(() => {
     const articles = JSON.parse(localStorage.getItem('cardsArray'));
     if (articles !== null) {
@@ -73,8 +102,9 @@ function App() {
 
   function handleCardSave(item) {
     console.log(item)
+    const jwt = localStorage.getItem('jwt');
     mainApi
-    .createArticle(item.keyword, item.title, item.description, item.publishedAt, item.source.name, item.url, item.urlToImage)
+    .createArticle(item.keyword, item.title, item.description, item.publishedAt, item.source.name, item.url, item.urlToImage, jwt)
     .then((res) => {
         const newCards = cards.map((card) => {
           if (card.url === res.link) {
@@ -89,9 +119,9 @@ function App() {
   }
 
   function handleCardUnSave(item) {
-    console.log(item)
+    const jwt = localStorage.getItem('jwt');
     mainApi
-    .deleteArticle(item._id)
+    .deleteArticle(item._id, jwt)
     .then((res) => {
       console.log(res);
       const newCards = cards.map((card) => {
@@ -108,9 +138,9 @@ function App() {
   }
 
   function handleCardDelete(id) {
-    // const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem('jwt');
     mainApi
-      .deleteArticle(id)
+      .deleteArticle(id, jwt)
       .then(() => {
         const newCards = savedCards.filter((c) => c._id !== id);
         setSavedCards(newCards);
@@ -153,6 +183,9 @@ function App() {
         setIsInfoTooltipOpen(!isInfoTooltipOpen);
         setIsRegisterPopupOpen(false);
         setIsLoginPopupOpen(false);
+        if (localStorage.getItem('cardsArray') !== null) {
+          localStorage.removeItem('cardsArray');
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -162,6 +195,67 @@ function App() {
         setIsLoading(false);
       });
   }
+
+  function handleLogin({ password, email }) {
+    mainApi
+      .authorize(password, email)
+      .then((data) => {
+        console.log(data)
+        if (data.token) {
+          localStorage.setItem('jwt', data.token);
+        }
+        if (localStorage.getItem('cardsArray') !== null) {
+          localStorage.removeItem('cardsArray');
+        }
+        setIsLoggedIn(true);
+        setCurrentUser(data);
+        closeAllPopups();
+        // setUserInfo({ // почему не setCurrentUser?
+        //   email,
+        // });
+      })
+      .catch((err) => {
+        console.log(err);
+        // if (err === 400) {
+        //   setMessage('Не передано одно из полей');
+        // } else if (err === 401) {
+        //   setMessage('Пользователь с email не найден');
+        // }
+        // setIsSignedUp(false);
+        // setIsAuthPopupOpen(true);
+      });
+  }
+
+  console.log(currentUser);
+
+  function handleLogOut() {
+    setIsRegisterPopupOpen(false);
+    localStorage.removeItem('jwt');
+    setCurrentUser({
+      email: '',
+      name: ''
+    });
+    setIsLoggedIn(false);
+  }
+
+  // React.useEffect(() => {
+  // if (!loggedIn) history.push('/');
+  // const jwt = localStorage.getItem('jwt');
+  //   if (isLoggedIn && jwt) {
+  //     setIsSpinnerLoading(true);
+  //     api
+  //       .getAppInfo('users/me', 'cards', jwt)
+  //       .then((data) => {
+  //         const [userData, cardsArray] = data;
+  //         setCards(cardsArray);
+  //         setCurrentUser(userData);
+  //       })
+  //       .catch((err) => console.log(`Error ${err}`))
+  //       .finally(() => {
+  //         setIsSpinnerLoading(false);
+  //       });
+  //   }
+  // }, [isLoggedIn]);
 
   React.useEffect(() => {
     if (isRegisterPopupOpen || isLoginPopupOpen || isInfoTooltipOpen) {
@@ -180,6 +274,7 @@ function App() {
   }, [isRegisterPopupOpen, isLoginPopupOpen, isInfoTooltipOpen]);
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
       <Switch>
       <Route exact path="/">
@@ -188,19 +283,26 @@ function App() {
           onRegister={handleRegisterClick}
           onOpenPopupClick={closeAllPopups}
           isAnyPopupOpen={isAnyPopupOpen}
+          isLoggedIn={isLoggedIn}
+          onLogOut={handleLogOut}
         />
         <Main onFormSubmit={handleShowResults} cards={cards} isLoading={isLoading} setCards={setCards} onCardSave={handleCardSave} onCardUnSave={handleCardUnSave} />
         <Footer />
       </Route>
-      <Route path="/saved-news">
+      <Route exact path="/saved-news">
         <Header
           onRegister={handleRegisterClick}
           onOpenPopupClick={closeAllPopups}
           isAnyPopupOpen={isAnyPopupOpen}
+          isLoggedIn={isLoggedIn}
+          onLogOut={handleLogOut}
         />
-        <ProtectedRoute path="/saved-news" isLoggedIn={true} component={SavedNews} savedCards={savedCards} onCardDelete={handleCardDelete} />
+        <ProtectedRoute path="/saved-news" isLoggedIn={isLoggedIn} component={SavedNews} savedCards={savedCards} onCardDelete={handleCardDelete} />
         <Footer />
       </Route>
+      <Route path="">
+            <Redirect to="/" />
+        </Route>
       </Switch>
       <PopupRegister
         onPopupClick={handleLoginClick}
@@ -214,6 +316,7 @@ function App() {
         onClose={closeAllPopups}
         title={"Вход"}
         onPopupClick={handleRegisterClick}
+        onFormSubmit={handleLogin}
       />
       <InfoToolTip
         isOpen={isInfoTooltipOpen}
@@ -222,6 +325,7 @@ function App() {
         onPopupClick={handleLoginClick}
       />
     </div>
+    </CurrentUserContext.Provider>
   );
 }
 

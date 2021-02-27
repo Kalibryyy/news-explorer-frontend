@@ -103,11 +103,6 @@ const PopupLogin = ({ isOpen, onClose, title, onPopupClick, onFormSubmit }) => {
     });
   }
 
-
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
-
   return (
   <PopupWithForm isOpen={isOpen} onSubmit={handleSubmit} onClose={onClose} title={title} text={'Зарегистрироваться'} onPopupClick={onPopupClick} >
     <ModalInput emailError={emailError} isEmailError={isEmailError} value={email} onChange={handleInputChange} title={'Email'} type={"email"} name={"email"} placeholder={"Введите почту"} error={"Неправильный формат email"} />

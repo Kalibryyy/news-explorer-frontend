@@ -42,21 +42,21 @@ export const getUserArticles = (token) => fetch(`${BASE_URL}/articles`, {
 })
 .then(checkResponse);
 
-export const createArticle = (keyword, title, text, date, source, link, image) => fetch(`${BASE_URL}/articles`, {
+export const createArticle = (keyword, title, text, date, source, link, image, token) => fetch(`${BASE_URL}/articles`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDM3ODk2NTAwZGE2ZDI5YmExNWJlZGQiLCJpYXQiOjE2MTQyNTI3MDQsImV4cCI6MTYxNDg1NzUwNH0.rAyszbETCEYJo7_UmZ8bzWSedc2oL4dbQv941eeo54o'}`,
+    'Authorization': `Bearer ${token}`,
   },
   body: JSON.stringify({ keyword, title, text, date, source, link, image, }),
 })
 .then(checkResponse);
 
-export const deleteArticle = (articleId) => fetch(`${BASE_URL}/articles/${articleId}`, {
+export const deleteArticle = (articleId, token) => fetch(`${BASE_URL}/articles/${articleId}`, {
   method: 'DELETE',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDM3ODk2NTAwZGE2ZDI5YmExNWJlZGQiLCJpYXQiOjE2MTQyNTI3MDQsImV4cCI6MTYxNDg1NzUwNH0.rAyszbETCEYJo7_UmZ8bzWSedc2oL4dbQv941eeo54o'}`,
+    'Authorization': `Bearer ${token}`,
   },
 })
 .then(checkResponse);
