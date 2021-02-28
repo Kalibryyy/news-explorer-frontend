@@ -85,13 +85,10 @@ console.log('isLoggedIn: ', isLoggedIn)
       })
       .catch((err) => {
         console.log(err);
-        if (err === 400) {
-          setMessage('Некорректно заполнено одно из полей');
-        }
-        if (err === 409) {
-          setMessage(err.message);
+        if (err.statusCode === 400) {
+          setMessage('некорректно заполнено одно из полей');
         } else {
-          setMessage('Что-то пошло не так!');
+          setMessage(err.message);
         }
       })
       .finally(() => {
@@ -114,12 +111,10 @@ console.log('isLoggedIn: ', isLoggedIn)
       })
       .catch((err) => {
         console.log(err);
-        if (err === 400) {
-          setMessage('Некорректно заполнено одно из полей');
-        } else if (err === 401) {
-          setMessage(err.message);
+        if (err.statusCode === 400) {
+          setMessage('некорректно заполнено одно из полей');
         } else {
-          setMessage('Что-то пошло не так!');
+          setMessage(err.message);
         }
       });
   }
