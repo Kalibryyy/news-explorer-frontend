@@ -1,5 +1,6 @@
-* frontend news-explorer-kalibryyy.students.nomoredomains.icu
-* backend https://api.news-explorer.students.nomoreparties.space/
+* frontend https://news-explorer-kalibryyy.students.nomoredomains.icu
+* http://news-explorer-kalibryyy.students.nomoredomains.icu
+* backend https://api.news-explorer-kalibryyy.students.nomoredomains.icu
 
 ## Available Scripts
 
