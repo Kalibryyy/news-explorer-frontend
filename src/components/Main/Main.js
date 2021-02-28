@@ -3,7 +3,7 @@ import './Main.css';
 import SearchForm from '../SearchForm/SearchForm';
 import { NewsCardList, ResultsLoading, NoResults, About } from "../index";
 
-function Main({ onFormSubmit, cards, isLoading, input, setCards, onCardSave, onCardUnSave, }) {
+function Main({ onFormSubmit, cards, isLoading, input, setCards, onCardSave, onCardUnSave, message, isSearchError }) {
   const [areThereAnyResults, setAreThereAnyResults] = React.useState(false);
   const [isNoResults, setIsNoResults] = React.useState(false);
 
@@ -12,6 +12,7 @@ function Main({ onFormSubmit, cards, isLoading, input, setCards, onCardSave, onC
       setIsNoResults(false);
       setAreThereAnyResults(true);
     } else if (cards !==null && cards.length === 0) {
+      console.log('z')
       setAreThereAnyResults(false);
       setIsNoResults(true);
     }
@@ -27,9 +28,10 @@ function Main({ onFormSubmit, cards, isLoading, input, setCards, onCardSave, onC
         <SearchForm onFormSubmit={onFormSubmit} input={input} />
       </div>
     </section>
-    <section className={(areThereAnyResults || isNoResults || isLoading) ? `search-results` : undefined}>
-      {!isLoading && areThereAnyResults && <NewsCardList cards={cards} title={'Результаты поиска'} doNeedBtn={true} main={true} setCards={setCards} onCardSave={onCardSave} onCardUnSave={onCardUnSave} />}
+    <section className={(areThereAnyResults || isNoResults || isSearchError || isLoading) ? `search-results` : undefined}>
+      {!isLoading && areThereAnyResults && !isSearchError && <NewsCardList cards={cards} title={'Результаты поиска'} doNeedBtn={true} main={true} setCards={setCards} onCardSave={onCardSave} onCardUnSave={onCardUnSave} />}
       {!isLoading && isNoResults && <NoResults />}
+      {!isLoading && isSearchError && <NoResults message={message} />}
       {isLoading && <ResultsLoading />}
     </section>
     <section className="about-author">

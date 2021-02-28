@@ -19,8 +19,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
   const [message, setMessage] = React.useState('');
+  const [isSearchError, setIsSearchError] = React.useState(false);
   const history = useHistory();
-console.log('isLoggedIn: ', isLoggedIn)
 
   function tokenCheck() {
     const jwt = localStorage.getItem('jwt');
@@ -126,14 +126,6 @@ console.log('isLoggedIn: ', isLoggedIn)
     setIsLoggedIn(false);
   }
 
-  // запрос найденных пользователем статей из localStorage при перезагрузке
-  React.useEffect(() => {
-    const articles = JSON.parse(localStorage.getItem('cardsArray'));
-    if (articles !== null) {
-      setCards(articles);
-    }
-  }, []);
-
   // поиск статей
   function handleShowResults({ query }) {
     setIsLoading(true);
@@ -143,6 +135,7 @@ console.log('isLoggedIn: ', isLoggedIn)
     newsApi
       .getArticles({ fromDate, tillDate, query })
       .then((cardsArray) => {
+        setIsSearchError(false);
         cardsArray.articles.forEach((item) => {
           item.keyword = query
         })
@@ -152,12 +145,22 @@ console.log('isLoggedIn: ', isLoggedIn)
         setCards(cardsArray.articles);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
+        setIsSearchError(true);
+        setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
       })
       .finally(() => {
         setIsLoading(false);
       });
   }
+
+  // запрос найденных пользователем статей из localStorage при перезагрузке
+  React.useEffect(() => {
+    const articles = JSON.parse(localStorage.getItem('cardsArray'));
+    if (articles !== null) {
+      setCards(articles);
+    }
+  }, []);
 
   function handleCardSave(item) {
     console.log(item)
@@ -269,6 +272,8 @@ console.log('isLoggedIn: ', isLoggedIn)
           setCards={setCards}
           onCardSave={handleCardSave}
           onCardUnSave={handleCardUnSave}
+          message={message}
+          isSearchError={isSearchError}
           />
         </Route>
         {isLoggedIn === null ? null : (
