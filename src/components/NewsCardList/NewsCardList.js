@@ -8,7 +8,7 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave,
   const [width, setWidth] = React.useState(window.innerWidth);
   const [isBtnDisabled, setIsBtnDisabled] = React.useState(false);
   const currentPath = useLocation().pathname;
-
+ console.log(cards)
   React.useEffect(() => {
     if (cards !== null && cards.length > quantity) {
       setIsBtnDisabled(false);

@@ -21,6 +21,7 @@ function App() {
   const [message, setMessage] = React.useState('');
   const [isSearchError, setIsSearchError] = React.useState(false);
   const history = useHistory();
+  console.log(cards)
 
   function tokenCheck() {
     const jwt = localStorage.getItem('jwt');
@@ -126,17 +127,18 @@ function App() {
 
   // поиск статей
   function handleShowResults({ query }) {
+    console.log(query)
     setIsLoading(true);
     if (localStorage.getItem('cardsArray') !== null) {
       localStorage.removeItem('cardsArray');
     }
     const formattedQuery = query.toLowerCase();
     newsApi
-      .getArticles({ fromDate, tillDate, formattedQuery })
+      .getArticles({ fromDate, tillDate, query })
       .then((cardsArray) => {
         setIsSearchError(false);
         cardsArray.articles.forEach((item) => {
-          item.keyword = query
+          item.keyword = formattedQuery;
         })
         if (cardsArray.articles.length > 0){
           localStorage.setItem('cardsArray', JSON.stringify(cardsArray.articles));
@@ -162,18 +164,28 @@ function App() {
   }, []);
 
   function handleCardSave(item) {
-    console.log(item)
     const jwt = localStorage.getItem('jwt');
     mainApi
     .createArticle(item.keyword, item.title, item.description, item.publishedAt, item.source.name, item.url, item.urlToImage, jwt)
     .then((res) => {
-        const newCards = cards.map((card) => {
-          if (card.url === res.link) {
-             card._id = res._id;
-          }
-          return card;
-       })
+      const newCards = cards.map((card) => {
+        if (card.url === res.link) {
+           card._id = res._id;
+        }
+        return card;
+      })
+
+      res.url = res.link;
+      res.urlToImage = res.image;
+      res.description = res.text;
+      res.source = {name: res.source};
+      res.publishedAt = res.date;
+
       setCards(newCards);
+      console.log(newCards)
+      setSavedCards([...savedCards, res]);
+      console.log(savedCards)
+      console.log('res', res)
       localStorage.setItem('cardsArray', JSON.stringify(cards));
     })
     .catch((err) => console.log(`Error ${err}`));
