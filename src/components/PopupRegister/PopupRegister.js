@@ -4,7 +4,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { ModalInput, Button } from "../index";
 import { validators } from '../../utils/utils';
 
-const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onFormSubmit, message }) => {
+const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onFormSubmit, message, isLoggedIn }) => {
   const [formValues, setFormValues] = React.useState({
     email: '',
     password: '',
@@ -127,7 +127,7 @@ const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onFormSubmit, mes
   }
 
   return (
-  <PopupWithForm isOpen={isOpen} onSubmit={handleSubmit} onClose={onClose} title={title} text={'Войти'} onPopupClick={onPopupClick}>
+  <PopupWithForm isOpen={isOpen} onSubmit={handleSubmit} onClose={onClose} title={title} text={'Войти'} onPopupClick={onPopupClick} isLoggedIn={isLoggedIn}>
     <ModalInput emailError={emailError} isEmailError={isEmailError} title={'Email'} type={"email"} name={"email"} placeholder={"Введите почту"} onChange={handleInputChange} value={email} />
     <ModalInput passwordError={passwordError} title={'Пароль'} type={"password"} name={"password"} placeholder={"Введите пароль"} onChange={handleInputChange} value={password} />
     <ModalInput nameError={nameError} title={'Имя'} type={"text"} name={"name"} placeholder={"Введите своё имя"} onChange={handleInputChange} value={name}/>

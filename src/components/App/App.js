@@ -302,6 +302,7 @@ function App() {
         title={"Регистрация"}
         onFormSubmit={handleRegister}
         message={message}
+        isLoggedIn={isLoggedIn}
       />
       <PopupLogin
         isOpen={isLoginPopupOpen}
