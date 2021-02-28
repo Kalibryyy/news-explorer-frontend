@@ -130,8 +130,9 @@ function App() {
     if (localStorage.getItem('cardsArray') !== null) {
       localStorage.removeItem('cardsArray');
     }
+    const formattedQuery = query.toLowerCase();
     newsApi
-      .getArticles({ fromDate, tillDate, query })
+      .getArticles({ fromDate, tillDate, formattedQuery })
       .then((cardsArray) => {
         setIsSearchError(false);
         cardsArray.articles.forEach((item) => {
