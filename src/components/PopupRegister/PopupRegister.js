@@ -4,7 +4,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { ModalInput, Button } from "../index";
 import { validators } from '../../utils/utils';
 
-const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onFormSubmit }) => {
+const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onFormSubmit, message }) => {
   const [formValues, setFormValues] = React.useState({
     email: '',
     password: '',
@@ -132,7 +132,7 @@ const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onFormSubmit }) =
     <ModalInput passwordError={passwordError} title={'Пароль'} type={"password"} name={"password"} placeholder={"Введите пароль"} onChange={handleInputChange} value={password} />
     <ModalInput nameError={nameError} title={'Имя'} type={"text"} name={"name"} placeholder={"Введите своё имя"} onChange={handleInputChange} value={name}/>
     <div className="modal__error-container">
-      <span className="modal__server-error">Такой пользователь уже есть</span>
+      <span className="modal__server-error">{message}</span>
       <Button place={'popup'} text={'Зарегистрироваться'} color={'blue'} disabled={isSubmitDisabled}/>
     </div>
   </PopupWithForm>

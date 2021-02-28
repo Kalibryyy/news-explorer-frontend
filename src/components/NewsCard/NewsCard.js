@@ -2,12 +2,13 @@ import React from 'react';
 import './NewsCard.css';
 import Bookmark from '../Bookmark/Bookmark';
 import { formatCardDate } from '../../utils/utils';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-const NewsCard = ({ title, img, date, text, source, keyword, main, link, id, onCardSave, onCardUnSave, cards, onCardDelete }) => {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(1);
+const NewsCard = ({ title, img, date, text, source, keyword, main, link, id, onCardSave, onCardUnSave, cards, onCardDelete, isLoggedIn }) => {
+  const currentUser = React.useContext(CurrentUserContext);
   const [isBookmarkChosen, setIsBookmarkChosen] = React.useState(false);
   const [isGarbageBinChosen, setIsGarbageBinChosen] = React.useState(false);
-
+  const isUserLoggedIn = currentUser.name;
   function handleSaveMsg() {
     setIsBookmarkChosen(!isBookmarkChosen);
   }
@@ -31,11 +32,11 @@ const NewsCard = ({ title, img, date, text, source, keyword, main, link, id, onC
         <a href={link} target="_blank" className="card__link"><cite className="card__source">{source}</cite></a>
       </div>
     </article>
-    {isLoggedIn && !main
+    {isUserLoggedIn && !main
     ? <button className="card__garbage-bin" onMouseOver={handleDeleteMsg} onMouseLeave={handleDeleteMsg} onClick={handleDeleteClick} />
-    : <Bookmark handleSaveMsg={handleSaveMsg} isLoggedIn={isLoggedIn} onCardSave={onCardSave} onCardUnSave={onCardUnSave} id={id} cards={cards} />}
-    {isLoggedIn && !main && <div className="card__keyword-label">{keyword}</div>}
-    {isBookmarkChosen && !isLoggedIn && <div className="card__save-article">Войдите, чтобы сохранять статьи</div>}
+    : <Bookmark handleSaveMsg={handleSaveMsg} isLoggedIn={isUserLoggedIn} onCardSave={onCardSave} onCardUnSave={onCardUnSave} id={id} cards={cards} />}
+    {isUserLoggedIn && !main && <div className="card__keyword-label">{keyword}</div>}
+    {isBookmarkChosen && !isUserLoggedIn && <div className="card__save-article">Войдите, чтобы сохранять статьи</div>}
     {isGarbageBinChosen && <div className="card__save-article">Убрать из сохранённых</div>}
   </li>
  );

@@ -15,6 +15,7 @@ function SearchForm({ onFormSubmit }) {
       onFormSubmit({
         query: input.current.value,
       });
+      setShowError(false);
     }
   }
 

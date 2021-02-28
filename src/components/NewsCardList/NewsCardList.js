@@ -5,7 +5,7 @@ import { NewsCard, Button } from "../index";
 const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave, showAll, onCardDelete }) => {
   const [quantity, setQuantity] = React.useState(3);
   const [width, setWidth] = React.useState(window.innerWidth);
-  console.log(quantity)
+
   React.useEffect(() => {
     let cleanupFunction = false;
     window.addEventListener("resize", () => {

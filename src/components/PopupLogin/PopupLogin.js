@@ -4,7 +4,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { ModalInput, Button } from "../index";
 import { validators } from '../../utils/utils';
 
-const PopupLogin = ({ isOpen, onClose, title, onPopupClick, onFormSubmit }) => {
+const PopupLogin = ({ isOpen, onClose, title, onPopupClick, onFormSubmit, message }) => {
   const [formValues, setFormValues] = React.useState({
     email: '',
     password: '',
@@ -106,7 +106,7 @@ const PopupLogin = ({ isOpen, onClose, title, onPopupClick, onFormSubmit }) => {
     <ModalInput emailError={emailError} isEmailError={isEmailError} value={email} onChange={handleInputChange} title={'Email'} type={"email"} name={"email"} placeholder={"Введите почту"} error={"Неправильный формат email"} />
     <ModalInput passwordError={passwordError} value={password} onChange={handleInputChange} title={'Пароль'} type={"password"} name={"password"} placeholder={"Введите пароль"} />
     <div className="modal__error-container">
-    <span className="modal__server-error">Такой пользователь уже есть</span>
+    <span className="modal__server-error">{message}</span>
     <Button disabled={isSubmitDisabled} place={'popup'} text={'Войти'} color={'blue'} />
     </div>
   </PopupWithForm>

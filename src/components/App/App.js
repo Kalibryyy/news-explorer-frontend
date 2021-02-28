@@ -18,27 +18,9 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [message, setMessage] = React.useState('');
   const history = useHistory();
-console.log(isLoggedIn)
-console.log(currentUser)
-  // Регистрация и авторизация
-  React.useEffect(() => {
-    // if (!isLoggedIn)
-    // history.push('/');
-    const jwt = localStorage.getItem('jwt');
-      if (isLoggedIn && jwt) {
-        setIsLoading(true);
-        mainApi
-          .getUserInfo(jwt)
-          .then((res) => {
-            setCurrentUser(res);
-          })
-          .catch((err) => console.log(`Error ${err}`))
-          .finally(() => {
-            setIsLoading(false);
-          });
-      }
-    }, [isLoggedIn]);
+console.log('isLoggedIn: ', isLoggedIn)
 
   function tokenCheck() {
     const jwt = localStorage.getItem('jwt');
@@ -50,6 +32,9 @@ console.log(currentUser)
           setIsLoggedIn(true);
         })
         .catch((err) => console.error(err));
+    } else {
+      setIsLoggedIn(false);
+      setCurrentUser({});
     }
   }
 
@@ -57,7 +42,35 @@ console.log(currentUser)
     tokenCheck();
   }, []);
 
-  function handleFormSubmit({ name, email, password }) {
+  //запрос первоначальных данных при логине
+  React.useEffect(() => {
+    // if (!isLoggedIn) history.push('/');
+    const jwt = localStorage.getItem('jwt');
+      if (isLoggedIn && jwt) {
+        setIsLoading(true);
+        mainApi
+          .getAppInfo(jwt)
+          .then((data) => {
+            const [userData, articlesArray] = data;
+            setCurrentUser(userData);
+            const savedCards = articlesArray.map((card) => {
+              card.url = card.link;
+              card.urlToImage = card.image;
+              card.description = card.text;
+              card.source = {name: card.source};
+              card.publishedAt = card.date;
+              return card;
+            })
+            setSavedCards(savedCards);
+          })
+          .catch((err) => console.log(`Error ${err}`))
+          .finally(() => {
+            setIsLoading(false);
+          });
+      }
+    }, [isLoggedIn]);
+
+  function handleRegister({ name, email, password }) {
     setIsLoading(true);
     mainApi
       .register(name, password, email)
@@ -72,7 +85,14 @@ console.log(currentUser)
       })
       .catch((err) => {
         console.log(err);
-        // setIsSubmitError(true);
+        if (err === 400) {
+          setMessage('Некорректно заполнено одно из полей');
+        }
+        if (err === 409) {
+          setMessage(err.message);
+        } else {
+          setMessage('Что-то пошло не так!');
+        }
       })
       .finally(() => {
         setIsLoading(false);
@@ -83,7 +103,6 @@ console.log(currentUser)
     mainApi
       .authorize(password, email)
       .then((data) => {
-        console.log(data)
         if (data.token) {
           localStorage.setItem('jwt', data.token);
         }
@@ -95,13 +114,13 @@ console.log(currentUser)
       })
       .catch((err) => {
         console.log(err);
-        // if (err === 400) {
-        //   setMessage('Не передано одно из полей');
-        // } else if (err === 401) {
-        //   setMessage('Пользователь с email не найден');
-        // }
-        // setIsSignedUp(false);
-        // setIsAuthPopupOpen(true);
+        if (err === 400) {
+          setMessage('Некорректно заполнено одно из полей');
+        } else if (err === 401) {
+          setMessage(err.message);
+        } else {
+          setMessage('Что-то пошло не так!');
+        }
       });
   }
 
@@ -112,7 +131,7 @@ console.log(currentUser)
     setIsLoggedIn(false);
   }
 
-  // Карточки
+  // запрос найденных пользователем статей из localStorage при перезагрузке
   React.useEffect(() => {
     const articles = JSON.parse(localStorage.getItem('cardsArray'));
     if (articles !== null) {
@@ -120,29 +139,7 @@ console.log(currentUser)
     }
   }, []);
 
-  React.useEffect(() => {
-    setIsLoading(true);
-    mainApi
-    .getUserArticles()
-    .then((res) => {
-      const savedCards = res.map((card) => {
-        card.url = card.link;
-        card.urlToImage = card.image;
-        card.description = card.text;
-        card.source = {name: card.source};
-        card.publishedAt = card.date;
-        return card;
-      })
-      setSavedCards(savedCards);
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    .finally(() => {
-      setIsLoading(false);
-    });
-  }, []);
-
+  // поиск статей
   function handleShowResults({ query }) {
     setIsLoading(true);
     if (localStorage.getItem('cardsArray') !== null) {
@@ -276,18 +273,19 @@ console.log(currentUser)
           isLoading={isLoading}
           setCards={setCards}
           onCardSave={handleCardSave}
-          onCardUnSave={handleCardUnSave} />
+          onCardUnSave={handleCardUnSave}
+          />
         </Route>
-        {isLoggedIn === null ? null : (<ProtectedRoute exact path="/saved-news"
+        {isLoggedIn === null ? null : (
+        <ProtectedRoute exact path="/saved-news"
         isLoggedIn={isLoggedIn}
         component={SavedNews}
         savedCards={savedCards}
-        onCardDelete={handleCardDelete} />)}
-        <Route exact path="/saved-news">
-          {isLoggedIn ? <Redirect to="/saved-news" /> : <Redirect to="/" />}
-        </Route>
+        onCardDelete={handleCardDelete}
+        />
+        )}
         <Route path="">
-          <Redirect to="/" />
+        {isLoggedIn === null ? null : <Redirect to="/" />}
         </Route>
       </Switch>
       <Footer />
@@ -296,7 +294,8 @@ console.log(currentUser)
         isOpen={isRegisterPopupOpen}
         onClose={closeAllPopups}
         title={"Регистрация"}
-        onFormSubmit={handleFormSubmit}
+        onFormSubmit={handleRegister}
+        message={message}
       />
       <PopupLogin
         isOpen={isLoginPopupOpen}
@@ -304,6 +303,7 @@ console.log(currentUser)
         title={"Вход"}
         onPopupClick={handleRegisterClick}
         onFormSubmit={handleLogin}
+        message={message}
       />
       <InfoToolTip
         isOpen={isInfoTooltipOpen}

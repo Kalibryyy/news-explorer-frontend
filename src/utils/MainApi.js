@@ -1,6 +1,6 @@
 const BASE_URL = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`;
-
-// const checkResponse = (res) => (res.ok ? res.json() : Promise.reject(new Error(`Ошибка: ${res}`)));
+// http://api.news-explorer.students.nomoreparties.space/
+// const BASE_URL = 'http://api.news-explorer.students.nomoreparties.space'
 const checkResponse = (res) => {
   return new Promise((resolve, reject) => {
     const func = res.status < 400 ? resolve : reject
@@ -39,10 +39,14 @@ export const getUserArticles = (token) => fetch(`${BASE_URL}/articles`, {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDM3ODk2NTAwZGE2ZDI5YmExNWJlZGQiLCJpYXQiOjE2MTQyNTI3MDQsImV4cCI6MTYxNDg1NzUwNH0.rAyszbETCEYJo7_UmZ8bzWSedc2oL4dbQv941eeo54o'}`,
+    'Authorization': `Bearer ${token}`,
   },
 })
 .then(checkResponse);
+
+export const getAppInfo = ((token) =>  {
+  return Promise.all([getUserInfo(token), getUserArticles(token)]);
+})
 
 export const createArticle = (keyword, title, text, date, source, link, image, token) => fetch(`${BASE_URL}/articles`, {
   method: 'POST',

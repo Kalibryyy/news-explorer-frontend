@@ -3,7 +3,7 @@ import './Main.css';
 import SearchForm from '../SearchForm/SearchForm';
 import { NewsCardList, ResultsLoading, NoResults, About } from "../index";
 
-function Main({ onFormSubmit, cards, isLoading, input, setCards, onCardSave, onCardUnSave }) {
+function Main({ onFormSubmit, cards, isLoading, input, setCards, onCardSave, onCardUnSave, }) {
   const [areThereAnyResults, setAreThereAnyResults] = React.useState(false);
   const [isNoResults, setIsNoResults] = React.useState(false);
 
