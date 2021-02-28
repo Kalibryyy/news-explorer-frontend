@@ -75,7 +75,6 @@ function App() {
     mainApi
       .register(name, password, email)
       .then((data) => {
-        console.log(data);
         setIsInfoTooltipOpen(!isInfoTooltipOpen);
         setIsRegisterPopupOpen(false);
         setIsLoginPopupOpen(false);
@@ -110,7 +109,6 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(err);
         if (err.statusCode === 400) {
           setMessage('некорректно заполнено одно из полей');
         } else {

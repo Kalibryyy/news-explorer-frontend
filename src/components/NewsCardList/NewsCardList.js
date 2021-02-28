@@ -5,6 +5,15 @@ import { NewsCard, Button } from "../index";
 const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave, showAll, onCardDelete }) => {
   const [quantity, setQuantity] = React.useState(3);
   const [width, setWidth] = React.useState(window.innerWidth);
+  const [isBtnDisabled, setIsBtnDisabled] = React.useState(false);
+
+  React.useEffect(() => {
+    if (cards.length > quantity) {
+      setIsBtnDisabled(false);
+    } else {
+      setIsBtnDisabled(true);
+    }
+  }, [quantity]);
 
   React.useEffect(() => {
     let cleanupFunction = false;
@@ -78,7 +87,7 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave,
           />
         ))}
       </ul>
-      {doNeedBtn && <Button place={"search-results"} text={"Показать еще"} color={"white"} handleBtnClick={showMoreCards} />}
+      {doNeedBtn && <Button place={"search-results"} text={"Показать еще"} color={"white"} handleBtnClick={showMoreCards} isResultsBtnDisabled={isBtnDisabled} />}
     </div>
   );
 };
