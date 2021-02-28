@@ -2,8 +2,7 @@ import React from 'react';
 import './ModalInput.css';
 
 function ModalInput({ title, type, name, placeholder, minLength, maxLength, onChange, value, nameError, passwordError, emailError, isEmailError }) {
-// console.log(isEmailError)
-// console.log(emailError)
+
   return (
     <>
     <h3 className="modal-input__title">{title}</h3>

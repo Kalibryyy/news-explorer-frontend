@@ -1,5 +1,5 @@
-// const BASE_URL = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`;
-const BASE_URL = 'https://api.news-explorer.students.nomoreparties.space';
+const BASE_URL = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`;
+// const BASE_URL = 'https://api.news-explorer.students.nomoreparties.space';
 
 const checkResponse = (res) => {
   return new Promise((resolve, reject) => {

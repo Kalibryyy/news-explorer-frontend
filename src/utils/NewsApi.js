@@ -16,9 +16,8 @@ class NewsApi {
 }
 
 const newsApi = new NewsApi({
-  baseUrl: 'https://newsapi.org/v2/everything?',
+  baseUrl: 'https://nomoreparties.co/news/v2/top-headlines?country=us',
 })
 
 export default newsApi;
 
-// https://nomoreparties.co/news/v2/top-headlines?country=us&apiKey=[ваш_ключ]

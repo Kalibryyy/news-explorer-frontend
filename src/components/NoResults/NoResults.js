@@ -3,7 +3,6 @@ import './NoResults.css';
 import notFound from '../../images/not-found.png';
 
 function NoResults({ message }) {
-  console.log(message)
     return (
       <div className="no-results">
         <img className="no-results__img" alt="лупа с грустным смайликом" src={notFound} />

@@ -3,7 +3,6 @@ import "./Bookmark.css";
 
 function Bookmark({ handleSaveMsg, isLoggedIn, onCardSave, id, onCardUnSave }) {
   function handleBookmarkClick() {
-    console.log(id);
     if (!id) {
       onCardSave();
     } else {

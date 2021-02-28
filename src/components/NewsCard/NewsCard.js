@@ -4,7 +4,7 @@ import Bookmark from '../Bookmark/Bookmark';
 import { formatCardDate } from '../../utils/utils';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-const NewsCard = ({ title, img, date, text, source, keyword, main, link, id, onCardSave, onCardUnSave, cards, onCardDelete, isLoggedIn }) => {
+const NewsCard = ({ title, img, date, text, source, keyword, main, link, id, onCardSave, onCardUnSave, cards, onCardDelete, }) => {
   const currentUser = React.useContext(CurrentUserContext);
   const [isBookmarkChosen, setIsBookmarkChosen] = React.useState(false);
   const [isGarbageBinChosen, setIsGarbageBinChosen] = React.useState(false);

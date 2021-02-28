@@ -21,7 +21,6 @@ function App() {
   const [message, setMessage] = React.useState('');
   const [isSearchError, setIsSearchError] = React.useState(false);
   const history = useHistory();
-  console.log(cards)
 
   function tokenCheck() {
     const jwt = localStorage.getItem('jwt');
@@ -45,7 +44,6 @@ function App() {
 
   //запрос первоначальных данных при логине
   React.useEffect(() => {
-    // if (!isLoggedIn) history.push('/');
     const jwt = localStorage.getItem('jwt');
       if (isLoggedIn && jwt) {
         setIsLoading(true);
@@ -127,7 +125,6 @@ function App() {
 
   // поиск статей
   function handleShowResults({ query }) {
-    console.log(query)
     setIsLoading(true);
     if (localStorage.getItem('cardsArray') !== null) {
       localStorage.removeItem('cardsArray');
@@ -182,10 +179,7 @@ function App() {
       res.publishedAt = res.date;
 
       setCards(newCards);
-      console.log(newCards)
       setSavedCards([...savedCards, res]);
-      console.log(savedCards)
-      console.log('res', res)
       localStorage.setItem('cardsArray', JSON.stringify(cards));
     })
     .catch((err) => console.log(`Error ${err}`));
@@ -196,11 +190,9 @@ function App() {
     mainApi
     .deleteArticle(item._id, jwt)
     .then((res) => {
-      console.log(res);
       const newCards = cards.map((card) => {
         if (card._id === res._id) {
           card._id = undefined;
-          console.log('card', card, 'res', res)
         }
         return card;
       })
@@ -220,7 +212,6 @@ function App() {
           const noIdCards = cards.map((card) => {
             if (card._id === res._id) {
               card._id = undefined;
-              console.log('card', card, 'res', res)
             }
             return card;
           })

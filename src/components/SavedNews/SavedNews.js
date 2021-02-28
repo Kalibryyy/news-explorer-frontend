@@ -3,7 +3,6 @@ import './SavedNews.css';
 import { NewsCardList, SavedNewsHeader } from '../index';
 
 function SavedNews({ savedCards, onCardDelete }) {
-    console.log('savedNews', savedCards)
     return (
       <main className="saved-news">
         <SavedNewsHeader cards={savedCards} />

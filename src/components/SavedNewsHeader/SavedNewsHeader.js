@@ -8,7 +8,7 @@ function SavedNewsHeader({ cards }) {
   const generalNumber = cards !== null && cards.length;
   const [textSavedArticles, setTextSavedArticles] = React.useState('сохранённых статей');
   const [keyWords, setKeyWords] = React.useState('');
-console.log(cards)
+
   React.useEffect(() => {
     if (String(generalNumber).endsWith('1') && generalNumber !== 11) {
       setTextSavedArticles('сохранённая статья');
