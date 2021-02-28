@@ -3,10 +3,10 @@ import './SavedNews.css';
 import { NewsCardList, SavedNewsHeader } from '../index';
 
 function SavedNews({ savedCards, onCardDelete }) {
-console.log(savedCards)
+
     return (
       <main className="saved-news">
-        <SavedNewsHeader />
+        <SavedNewsHeader cards={savedCards} />
         <NewsCardList title={''} doNeedBtn={false} cards={savedCards} showAll onCardDelete={onCardDelete} />
       </main>
     );
