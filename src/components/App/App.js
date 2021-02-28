@@ -117,7 +117,7 @@ function App() {
       });
   }
 
-  function handleLogOut() {
+  function handleSignOut() {
     setIsRegisterPopupOpen(false);
     localStorage.removeItem('jwt');
     setCurrentUser({});
@@ -267,7 +267,7 @@ function App() {
         onOpenPopupClick={closeAllPopups}
         isAnyPopupOpen={isAnyPopupOpen}
         isLoggedIn={isLoggedIn}
-        onLogOut={handleLogOut}
+        onSignOut={handleSignOut}
       />
       <Switch>
         <Route exact path="/">
@@ -300,7 +300,7 @@ function App() {
         isOpen={isRegisterPopupOpen}
         onClose={closeAllPopups}
         title={"Регистрация"}
-        onFormSubmit={handleRegister}
+        onRegister={handleRegister}
         message={message}
         isLoggedIn={isLoggedIn}
       />
@@ -309,7 +309,7 @@ function App() {
         onClose={closeAllPopups}
         title={"Вход"}
         onPopupClick={handleRegisterClick}
-        onFormSubmit={handleLogin}
+        onLogin={handleLogin}
         message={message}
       />
       <InfoToolTip

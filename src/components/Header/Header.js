@@ -9,7 +9,7 @@ import closeIconBlack from '../../images/close-icon-black.svg';
 import menuIconBlack from '../../images/menu-icon-black.svg';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-function Header({ onRegister, onLogOut, onOpenPopupClick, isAnyPopupOpen, }) {
+function Header({ onRegister, onSignOut, onOpenPopupClick, isAnyPopupOpen, }) {
   const [isWhite, setIsWhite] = React.useState(false);
   const [width, setWidth] = React.useState(window.innerWidth);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -67,7 +67,7 @@ function Header({ onRegister, onLogOut, onOpenPopupClick, isAnyPopupOpen, }) {
       setIsPopupOpen(true);
     };
 
-    isLoggedIn ? onLogOut() : onRegister();
+    isLoggedIn ? onSignOut() : onRegister();
   }
 
   const Wrapper = ({ children }) => width <= 720 ? isWhite ? <div className={isMenuOpen ? 'header__menu-background' : ''}>{children}</div>
@@ -91,16 +91,16 @@ function Header({ onRegister, onLogOut, onOpenPopupClick, isAnyPopupOpen, }) {
         <ul className={isMenuOpen
           ? `header__list header__list_opened`
           : `header__list header__list_closed`}>
-          <li className="header__item">
+          <li className={isWhite
+            ? `header__item header__item_chosen header__item_color_white` : `header__item`}>
           <NavLink exact to='/' className={isWhite
             ? `header__btn header__btn_color_white`
             : `header__btn header__btn_color_black`}>Главная</NavLink>
           </li>
-          {isLoggedIn && <li className={isWhite
-            ? `header__item header__item_chosen header__item_color_white`
-            : `header__item header__item_chosen header__item_color_black`}>
+          {isLoggedIn && <li className={!isWhite
+            ? `header__item header__item_chosen header__item_color_black` : `header__item`}>
           <NavLink exact to='saved-news' className={isWhite
-            ? `header__btn header__btn_color_white`
+            ? `header__btn header__btn_color_grey`
             : `header__btn header__btn_color_black`}>Сохранённые статьи</NavLink>
           </li>}
           <li className="header__item">

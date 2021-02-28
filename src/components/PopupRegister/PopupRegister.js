@@ -4,7 +4,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { ModalInput, Button } from "../index";
 import { validators } from '../../utils/utils';
 
-const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onFormSubmit, message, isLoggedIn }) => {
+const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onRegister, message, isLoggedIn }) => {
   const [formValues, setFormValues] = React.useState({
     email: '',
     password: '',
@@ -119,7 +119,7 @@ const PopupRegister = ({ isOpen, onClose, title, onPopupClick, onFormSubmit, mes
   function handleSubmit(e) {
     e.preventDefault();
 
-    onFormSubmit({
+    onRegister({
       name,
       email,
       password,

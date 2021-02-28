@@ -1,7 +1,10 @@
 import React from 'react';
 import './SavedNewsHeader.css';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-function SavedNews() {
+function SavedNewsHeader() {
+  const currentUser = React.useContext(CurrentUserContext);
+  
     return (
       <section className="saved-news-header">
         <div className="saved-news-header__container">
@@ -14,4 +17,4 @@ function SavedNews() {
     );
   }
 
-  export default SavedNews;
+  export default SavedNewsHeader;
