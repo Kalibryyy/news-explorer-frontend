@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import './Header.css';
 import arrowImage from '../../images/arrow.svg';
 import arrowImageWhite from '../../images/arrow-white.svg';
@@ -79,9 +79,9 @@ function Header({ onRegister, onLogOut, onOpenPopupClick, isAnyPopupOpen, isLogg
       <div  className={isWhite
       ? `logo__container logo__container_white`
       : `logo__container`}>
-        <Link to={''} className={isWhite
+        <NavLink exact to='/' className={isWhite
           ? `logo logo_color_white`
-          : `logo logo_color_black`}></Link>
+          : `logo logo_color_black`} />
         {isWhite
         ? <button type="button" className="header__menu-btn"><img className="header__icon" alt="кнопка управления меню" src={isMenuOpen || isPopupOpen ? closeIcon : menuIcon} onClick={openMenu} /></button>
         : <button type="button" className="header__menu-btn"><img className="header__icon" alt="кнопка управления меню" src={isMenuOpen || isPopupOpen ? closeIconBlack : menuIconBlack} onClick={openMenu} /></button>}
@@ -91,16 +91,16 @@ function Header({ onRegister, onLogOut, onOpenPopupClick, isAnyPopupOpen, isLogg
           ? `header__list header__list_opened`
           : `header__list header__list_closed`}>
           <li className="header__item">
-          <Link to={''} className={isWhite
+          <NavLink exact to='/' className={isWhite
             ? `header__btn header__btn_color_white`
-            : `header__btn header__btn_color_black`}>Главная</Link>
+            : `header__btn header__btn_color_black`}>Главная</NavLink>
           </li>
           <li className={isWhite
             ? `header__item header__item_chosen header__item_color_white`
             : `header__item header__item_chosen header__item_color_black`}>
-          <Link to={'saved-news'} className={isWhite
+          <NavLink exact to='saved-news' className={isWhite
             ? `header__btn header__btn_color_white`
-            : `header__btn header__btn_color_black`}>Сохранённые статьи</Link>
+            : `header__btn header__btn_color_black`}>Сохранённые статьи</NavLink>
           </li>
           <li className="header__item">
             {isLoggedIn ? <button onClick={handleAuthBtnClick} className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>

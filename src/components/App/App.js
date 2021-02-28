@@ -201,9 +201,17 @@ function App() {
     const jwt = localStorage.getItem('jwt');
     mainApi
       .deleteArticle(id, jwt)
-      .then(() => {
+      .then((res) => {
         const newCards = savedCards.filter((c) => c._id !== id);
+        const noIdCards = cards.map((card) => {
+          if (card._id === res._id) {
+            card._id = undefined;
+            console.log('card', card, 'res', res)
+          }
+          return card;
+        })
         setSavedCards(newCards);
+        setCards(noIdCards);
       })
       .catch((err) => console.log(`Error ${err}`));
   }

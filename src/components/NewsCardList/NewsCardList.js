@@ -1,14 +1,16 @@
 import React from "react";
 import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
+import { useLocation } from 'react-router-dom';
 
-const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave, showAll, onCardDelete }) => {
+const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave, onCardDelete }) => {
   const [quantity, setQuantity] = React.useState(3);
   const [width, setWidth] = React.useState(window.innerWidth);
   const [isBtnDisabled, setIsBtnDisabled] = React.useState(false);
+  const currentPath = useLocation().pathname;
 
   React.useEffect(() => {
-    if (cards.length > quantity) {
+    if (cards !== null && cards.length > quantity) {
       setIsBtnDisabled(false);
     } else {
       setIsBtnDisabled(true);
@@ -44,7 +46,7 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave,
   }
 
   React.useEffect(() => {
-    if (showAll && cards !== null) {
+    if (currentPath === '/saved-news' && cards !== null) {
       setQuantity(cards.length);
     }
   }, [cards])
