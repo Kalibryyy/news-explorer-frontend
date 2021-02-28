@@ -16,7 +16,7 @@ class NewsApi {
 }
 
 const newsApi = new NewsApi({
-  baseUrl: 'https://nomoreparties.co/news/v2/top-headlines?country=us',
+  baseUrl: 'https://nomoreparties.co/news/v2/everything?country=us',
 })
 
 export default newsApi;
