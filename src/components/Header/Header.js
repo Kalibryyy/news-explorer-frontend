@@ -9,13 +9,14 @@ import closeIconBlack from '../../images/close-icon-black.svg';
 import menuIconBlack from '../../images/menu-icon-black.svg';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-function Header({ onRegister, onLogOut, onOpenPopupClick, isAnyPopupOpen, isLoggedIn, }) {
+function Header({ onRegister, onLogOut, onOpenPopupClick, isAnyPopupOpen, }) {
   const [isWhite, setIsWhite] = React.useState(false);
   const [width, setWidth] = React.useState(window.innerWidth);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
   const currentUser = React.useContext(CurrentUserContext);
   const currentPath = useLocation().pathname;
+  const isLoggedIn = currentUser.name;
 
   React.useEffect(() => {
     let cleanupFunction = false;
@@ -95,13 +96,13 @@ function Header({ onRegister, onLogOut, onOpenPopupClick, isAnyPopupOpen, isLogg
             ? `header__btn header__btn_color_white`
             : `header__btn header__btn_color_black`}>Главная</NavLink>
           </li>
-          <li className={isWhite
+          {isLoggedIn && <li className={isWhite
             ? `header__item header__item_chosen header__item_color_white`
             : `header__item header__item_chosen header__item_color_black`}>
           <NavLink exact to='saved-news' className={isWhite
             ? `header__btn header__btn_color_white`
             : `header__btn header__btn_color_black`}>Сохранённые статьи</NavLink>
-          </li>
+          </li>}
           <li className="header__item">
             {isLoggedIn ? <button onClick={handleAuthBtnClick} className={isWhite ? `header__btn header__btn_color_white header__btn_type_auth header__btn_type_auth_color_white` : `header__btn header__btn_type_auth header__btn_type_auth_color_black header__btn_color_black`}>
            {currentUser.name}
