@@ -52,6 +52,7 @@ function App() {
           .then((data) => {
             const [userData, articlesArray] = data;
             setCurrentUser(userData);
+            setCards(null);
             const savedCards = articlesArray.map((card) => {
               card.url = card.link;
               card.urlToImage = card.image;
@@ -101,9 +102,6 @@ function App() {
         if (data.token) {
           localStorage.setItem('jwt', data.token);
         }
-        if (localStorage.getItem('cardsArray') !== null) {
-          localStorage.removeItem('cardsArray');
-        }
         setIsLoggedIn(true);
         closeAllPopups();
       })
@@ -119,6 +117,9 @@ function App() {
   function handleSignOut() {
     setIsRegisterPopupOpen(false);
     localStorage.removeItem('jwt');
+    if (localStorage.getItem('cardsArray') !== null) {
+      localStorage.removeItem('cardsArray');
+    }
     setCurrentUser({});
     setIsLoggedIn(false);
   }

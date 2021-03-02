@@ -56,7 +56,8 @@ function SavedNewsHeader({ cards }) {
           <h1 className="saved-news-header__title">Сохранённые статьи</h1>
           <h2 className="saved-news-header__subtitle">{`${name}, у вас ${generalNumber ? generalNumber : ''} ${textSavedArticles}`}</h2>
           <p className="saved-news-header__text">По ключевым словам: <span className="saved-news-header__bold-text saved-news-header__bold-text_capitalized">{keyWords} </span>
-          и <span className="saved-news-header__bold-text"> 2-м другим</span></p>
+          {/* и <span className="saved-news-header__bold-text"> 2-м другим</span> */}
+          </p>
         </div>
       </section>
     );

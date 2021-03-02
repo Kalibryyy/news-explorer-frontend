@@ -15,6 +15,9 @@ function Main({ onFormSubmit, cards, isLoading, input, setCards, onCardSave, onC
       console.log('z')
       setAreThereAnyResults(false);
       setIsNoResults(true);
+    } else if (cards === null) {
+      setAreThereAnyResults(false);
+      setIsNoResults(false);
     }
   }, [cards])
 
