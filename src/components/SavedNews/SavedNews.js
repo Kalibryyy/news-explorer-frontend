@@ -1,13 +1,12 @@
 import React from 'react';
 import './SavedNews.css';
-import data from '../../data/data';
 import { NewsCardList, SavedNewsHeader } from '../index';
 
-function SavedNews() {
+function SavedNews({ savedCards, onCardDelete }) {
     return (
       <main className="saved-news">
-        <SavedNewsHeader />
-        <NewsCardList cards={data} title={''} doNeedBtn={false} cardsNumber={5} />
+        <SavedNewsHeader cards={savedCards} />
+        <NewsCardList title={''} doNeedBtn={false} cards={savedCards} showAll onCardDelete={onCardDelete} />
       </main>
     );
   }

@@ -1,13 +1,14 @@
 import React from "react";
 import "./Bookmark.css";
 
-function Bookmark({ handleSaveMsg, isLoggedIn }) {
-// Нужно поменять значение стейта на true чтобы увидеть как выглядит нажатая закладка
-const [isBookmarkMarked, setIsBookmarkActive] = React.useState(false);
-
+function Bookmark({ handleSaveMsg, isLoggedIn, onCardSave, id, onCardUnSave }) {
   function handleBookmarkClick() {
-    setIsBookmarkActive(!isBookmarkMarked);
-  };
+    if (!id) {
+      onCardSave();
+    } else {
+      onCardUnSave();
+    }
+  }
 
   function handleShowSaveMsg() {
     handleSaveMsg();
@@ -15,8 +16,17 @@ const [isBookmarkMarked, setIsBookmarkActive] = React.useState(false);
 
   return (
     <div className="bookmark">
-      <button type="button" onClick={handleBookmarkClick} onMouseOver={handleShowSaveMsg} onMouseLeave={handleShowSaveMsg}
-      className={isBookmarkMarked && isLoggedIn ? `bookmark__icon bookmark__icon_active` : `bookmark__icon`}></button>
+      <button
+        type="button"
+        onClick={isLoggedIn ? handleBookmarkClick : undefined}
+        onMouseOver={handleShowSaveMsg}
+        onMouseLeave={handleShowSaveMsg}
+        className={
+          id
+            ? `bookmark__icon bookmark__icon_active`
+            : `bookmark__icon`
+        }
+      ></button>
     </div>
   );
 }

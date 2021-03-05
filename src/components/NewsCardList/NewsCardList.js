@@ -1,11 +1,21 @@
 import React from "react";
 import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
+import { useLocation } from 'react-router-dom';
 
-const NewsCardList = ({ cards, title, doNeedBtn, main, cardsNumber }) => {
-  const [quantity, setQuantity] = React.useState(cardsNumber);
-
+const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave, onCardDelete }) => {
+  const [quantity, setQuantity] = React.useState(3);
   const [width, setWidth] = React.useState(window.innerWidth);
+  const [isBtnDisabled, setIsBtnDisabled] = React.useState(false);
+  const currentPath = useLocation().pathname;
+
+  React.useEffect(() => {
+    if (cards !== null && cards.length > quantity) {
+      setIsBtnDisabled(false);
+    } else {
+      setIsBtnDisabled(true);
+    }
+  }, [quantity]);
 
   React.useEffect(() => {
     let cleanupFunction = false;
@@ -35,37 +45,51 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, cardsNumber }) => {
     titleLength = 40;
   }
 
+  React.useEffect(() => {
+    if (currentPath === '/saved-news' && cards !== null) {
+      setQuantity(cards.length);
+    }
+  }, [cards])
+
+  if (!cards || cards === null) { return null }
+  const cardsToRender = cards.slice(0, quantity);
+
   function showMoreCards() {
-    setQuantity(6)
+    setQuantity(quantity + 3)
   }
 
   return (
     <div className="news-cards__container">
       <h2 className="news-cards__title">{title}</h2>
       <ul className="news-cards__list">
-        {cards.slice(0, quantity).map((item) => (
+        {cardsToRender.map((item) => (
           <NewsCard
-            key={item.id}
-            img={item.img}
+            key={item.url}
+            img={item.urlToImage}
             title={
               item.title.length > titleLength
                 ? `${item.title.substring(0, titleLength)}...`
                 : `${item.title.substring(0, titleLength)}`
             }
             text={
-              item.text.length > textLength
-                ? `${item.text.substring(0, textLength)}...`
-                : `${item.text.substring(0, textLength)}`
+              item.description.length > textLength
+                ? `${item.description.substring(0, textLength)}...`
+                : `${item.description.substring(0, textLength)}`
             }
-            source={item.source}
-            date={item.date}
+            source={item.source.name}
+            date={item.publishedAt}
             keyword={item.keyword}
-            link={item.link}
+            link={item.url}
             main={main}
+            onCardSave={main && onCardSave.bind(null, item)}
+            onCardUnSave={main && onCardUnSave.bind(null, item)}
+            id={item._id}
+            cards={cards}
+            onCardDelete={onCardDelete}
           />
         ))}
       </ul>
-      {doNeedBtn && <Button place={"search-results"} text={"Показать еще"} color={"white"} handleBtnClick={showMoreCards} />}
+      {doNeedBtn && <Button place={"search-results"} text={"Показать еще"} color={"white"} handleBtnClick={showMoreCards} isResultsBtnDisabled={isBtnDisabled} />}
     </div>
   );
 };

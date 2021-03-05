@@ -109,5 +109,6 @@
   .button_place_input {
     width: 100%;
     position: static;
+    margin-top: 16px;
   }
 }

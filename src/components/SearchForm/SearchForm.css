@@ -2,6 +2,20 @@
   position: relative;
 }
 
+.search-form__error-container {
+  position: relative;
+}
+
+.search-form__error {
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 1.25;
+  padding-left: 24px;
+  margin-top: 30px;
+}
+
 .input {
   height: 64px;
   width: 100%;
@@ -27,7 +41,6 @@
 
 @media screen and (max-width: 720px) {
   .input {
-    margin-bottom: 16px;
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -35,7 +48,7 @@
 
 .input:focus {
   outline: none;
-  border: 1px solid #59636c;
+  border: 1px solid #2F71E5;
 }
 
 .form__input::placeholder {
