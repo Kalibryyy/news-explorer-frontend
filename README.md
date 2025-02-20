@@ -1,4 +1,4 @@
-* frontend https://kalibryyy.github.io/news-explorer-frontend/
+* frontend https://kalibryyy.inoy.dev/
 
 * backend https://api.news-explorer-kalibryyy.students.nomoredomains.icu
 
