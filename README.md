@@ -1,5 +1,5 @@
-* frontend https://news-explorer-kalibryyy.students.nomoredomains.icu
-* http://news-explorer-kalibryyy.students.nomoredomains.icu
+* frontend https://kalibryyy.github.io/news-explorer-frontend/
+
 * backend https://api.news-explorer-kalibryyy.students.nomoredomains.icu
 
 ## Available Scripts
