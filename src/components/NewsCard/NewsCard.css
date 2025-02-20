@@ -20,7 +20,6 @@
 @media screen and (max-width: 768px) {
   .card {
     max-width: 330px;
-    height: 430px;
   }
 }
 
@@ -37,10 +36,16 @@
 }
 
 .card__img {
-  border-radius: 16px 16px 0 0;
   display: block;
   max-width: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  height: 225px;
+}
+
+@media screen and (max-width: 1024px) {
+  .card__img {
+    height: 150;
+  }
 }
 
 .card__img:hover {
@@ -100,6 +105,10 @@
   line-height: 1.15;
   color: #1a1b22;
   margin: 0 0 16px;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 
 @media screen and (max-width: 1024px) {
@@ -124,11 +133,21 @@
   line-height: 1.35;
   color: #1a1b22;
   margin: 0 0 18px;
+  overflow: hidden;
+  -webkit-line-clamp: 5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 
 @media screen and (max-width: 768px) {
   .card__description {
     margin-bottom: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card__description {
+    -webkit-line-clamp: 3;
   }
 }
 
