@@ -7,7 +7,6 @@ import fb from '../../images/fb.svg';
 function Footer() {
     return (
       <footer className="footer">
-        <p className="footer__copyright">© 2020 Supersite, Powered by News API</p>
         <div className="footer__links">
           <nav className="footer__nav">
             <ul className="footer__nav-list">

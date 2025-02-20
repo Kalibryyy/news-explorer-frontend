@@ -1,6 +1,7 @@
 .about-author__img {
   object-fit: contain;
   width: 100%;
+  border-radius: 100%;
 }
 
 @media screen and (max-width: 320px) {
