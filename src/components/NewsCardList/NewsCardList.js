@@ -18,11 +18,11 @@ const NewsCardList = ({ cards, title, doNeedBtn, main, onCardSave, onCardUnSave,
   }, [quantity]);
 
   React.useEffect(() => {
-    let cleanupFunction = false;
-    window.addEventListener("resize", () => {
+    const resize = () => {
       setWidth(window.innerWidth);
-    });
-    return () => cleanupFunction = true;
+    }
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
   }, []);
 
   let textLength;
