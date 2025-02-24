@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 import "./NewsCardList.css";
 import { NewsCard, Button } from "../index";
 
-
 const NewsCardList = ({
   cards,
   title,
@@ -14,7 +13,7 @@ const NewsCardList = ({
   onCardUnSave,
   onCardDelete,
 }) => {
-  const [quantity, setQuantity] = React.useState(3);
+  const [quantity, setQuantity] = React.useState(window.innerWidth > 720 ? 3 : 2);
   const [isBtnDisabled, setIsBtnDisabled] = React.useState(false);
   const currentPath = useLocation().pathname;
 
@@ -25,7 +24,6 @@ const NewsCardList = ({
       setIsBtnDisabled(true);
     }
   }, [cards, quantity]);
-
 
   React.useEffect(() => {
     if (currentPath === "/saved-news" && cards !== null) {
@@ -39,7 +37,14 @@ const NewsCardList = ({
   const cardsToRender = cards.slice(0, quantity);
 
   function showMoreCards() {
-    setQuantity(quantity + 3);
+    const columnsAmount = window.innerWidth > 720 ? 3 : 2;
+    setQuantity(
+      quantity % columnsAmount === 0
+        ? quantity + columnsAmount
+        : quantity +
+            (columnsAmount - (quantity % columnsAmount)) +
+            columnsAmount
+    );
   }
 
   return (
