@@ -1,5 +1,6 @@
 import React from "react";
-import { Switch, Route, useHistory, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
+
 import "./App.css";
 import { Main, SavedNews, PopupRegister, Header, Footer, PopupLogin, InfoToolTip, } from "../index";
 import newsApi from '../../utils/NewsApi';
@@ -20,7 +21,6 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [message, setMessage] = React.useState('');
   const [isSearchError, setIsSearchError] = React.useState(false);
-  const history = useHistory();
 
   function tokenCheck() {
     const jwt = localStorage.getItem('jwt');
